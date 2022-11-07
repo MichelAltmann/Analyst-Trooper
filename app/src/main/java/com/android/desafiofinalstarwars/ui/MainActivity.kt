@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars
+package com.android.desafiofinalstarwars.ui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
