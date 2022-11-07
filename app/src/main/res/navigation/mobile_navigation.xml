@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_personagens">
+
+
+    <fragment
+        android:id="@+id/navigation_naves"
+        android:name="com.android.desafiofinalstarwars.ui.naves.NavesFragment"
+        android:label="@string/title_naves"
+        tools:layout="@layout/fragment_naves" />
+
+    <fragment
+        android:id="@+id/navigation_personagens"
+        android:name="com.android.desafiofinalstarwars.ui.personagens.PersonagensFragment"
+        android:label="@string/title_personagens"
+        tools:layout="@layout/fragment_personagens" />
+
+    <fragment
+        android:id="@+id/navigation_planetas"
+        android:name="com.android.desafiofinalstarwars.ui.planetas.PlanetasFragment"
+        android:label="@string/title_planetas"
+        tools:layout="@layout/fragment_planetas"
+        app:labelVisibilityMode="unlabeled"/>
+</navigation>

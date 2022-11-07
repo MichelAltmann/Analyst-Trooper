@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_naves"
+        android:icon="@drawable/ic_nave"
+        android:title="@string/title_naves" />
+
+    <item
+        android:id="@+id/navigation_personagens"
+        android:icon="@drawable/ic_stormtrooper"
+        android:title="@string/title_personagens" />
+
+
+    <item
+        android:id="@+id/navigation_planetas"
+        android:icon="@drawable/ic_planeta"
+        android:title="@string/title_planetas" />
+
+</menu>

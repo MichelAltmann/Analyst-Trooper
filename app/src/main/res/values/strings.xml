@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Desafio Final Star Wars</string>
+    <string name="title_personagens">Personagens</string>
+    <string name="title_naves">Naves</string>
+    <string name="title_planetas">Planetas</string>
+</resources>
