@@ -1,16 +1,15 @@
 package com.android.desafiofinalstarwars.ui.personagens
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
 import com.android.desafiofinalstarwars.model.Personagem
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PersonagensFragment : Fragment() {
 
@@ -22,9 +21,7 @@ class PersonagensFragment : Fragment() {
 
     private val listaPersonagens : ArrayList<Personagem> = arrayListOf()
 
-    val personagensViewModel by lazy {
-            ViewModelProvider(this).get(PersonagensViewModel::class.java)
-    }
+    private val viewModel by viewModel<PersonagensViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,21 +36,32 @@ class PersonagensFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObserver()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        personagensViewModel.getBuscaPersonagemsApi()
+        viewModel.getBuscaPersonagemsApi()
     }
 
     private fun setObserver() {
-        personagensViewModel.personagemResposta.observe(viewLifecycleOwner){
-            listaPersonagens.addAll(it.resultados!!)
-            val textView: TextView = binding.textHome
-            personagensViewModel.getBuscaPersonagemsApi()
-            textView.text = listaPersonagens.get(1).nome
+        viewModel.personagemResposta.observe(viewLifecycleOwner){
+            it?.let {
+                listaPersonagens.addAll(it.resultados!!)
+                binding.textHome.text = listaPersonagens[1].nome
+            }
+        }
+        viewModel.loadStateLiveData.observe(viewLifecycleOwner){
+            handleProgressBar(it)
+        }
+        viewModel.personagemError.observe(viewLifecycleOwner){
+
         }
     }
+
+    private fun handleProgressBar(state: PersonagensViewModel.State?) {
+        when(state){
+            PersonagensViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            PersonagensViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            else -> {}
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

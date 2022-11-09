@@ -6,32 +6,35 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.PersonagensWebClient
+import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
+import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PersonagemResposta
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class PersonagensViewModel : ViewModel() {
+class PersonagensViewModel(private val repository: RepositoryInterface) : ViewModel() {
 
-    private val _personagemResposta = MutableLiveData<PersonagemResposta>()
-    val personagemResposta: LiveData<PersonagemResposta>
-        get() = _personagemResposta
+    private val _personagemResposta = MutableLiveData<PersonagemResposta?>()
+    val personagemResposta: LiveData<PersonagemResposta?> = _personagemResposta
+    private val _personagemError = MutableLiveData<Unit>()
+    val personagemError = _personagemError as LiveData<Unit>
+    var loadStateLiveData = MutableLiveData<State>()
 
     fun getBuscaPersonagemsApi() = viewModelScope.launch {
-        try {
-            val response = PersonagensWebClient().buscaPersonagens()
-            response?.apply {
-                _personagemResposta.postValue(this)
-            }
-        } catch (e : Exception){
-            Log.e(TAG, "getBuscaPersonagemsApi: ", e)
+        loadStateLiveData.value = State.LOADING
+        when (val response = repository.buscaPersonagens()) {
+            is NetworkResponse.Success -> { _personagemResposta.value = response.data }
+            is NetworkResponse.Failed -> { _personagemError.value = Unit }
         }
+        loadStateLiveData.value = State.LOADING_FINISHED
     }
-
-
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
+
+    enum class State {
+        LOADING, LOADING_FINISHED
+    }
+
 }
