@@ -6,10 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
 import com.android.desafiofinalstarwars.model.Nave
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,6 +46,20 @@ class NavesFragment : Fragment() {
                 binding.textDashboard.text = listaNaves[1].nome
                 Log.e(TAG, "setObserver: " + listaNaves[1].nome)
             }
+        }
+        viewModel.loadStateLiveData.observe(viewLifecycleOwner){
+            handleProgressBar(it)
+        }
+        viewModel.naveError.observe(viewLifecycleOwner){
+            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleProgressBar(state: NavesViewModel.State?) {
+        when(state){
+            NavesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            NavesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            else -> {}
         }
     }
 

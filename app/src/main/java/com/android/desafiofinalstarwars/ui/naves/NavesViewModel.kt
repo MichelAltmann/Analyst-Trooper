@@ -19,16 +19,25 @@ class NavesViewModel(private val repository: RepositoryInterface) : ViewModel() 
     val naveResposta: LiveData<NaveResposta?> = _naveResposta
     private val _naveError = MutableLiveData<Unit>()
     val naveError = _naveError as LiveData<Unit>
+    var loadStateLiveData = MutableLiveData<State>()
 
     fun getBuscaNavesApi() = viewModelScope.launch {
-        when (val response = repository.buscaNaves()) {
+        loadStateLiveData.value = State.LOADING
+        val response = repository.buscaNaves()
+        Log.i(TAG, "getBuscaNavesApi: ")
+        when (response) {
             is NetworkResponse.Success -> { _naveResposta.value = response.data }
             is NetworkResponse.Failed -> { _naveError.value = Unit }
         }
+        loadStateLiveData.value = State.LOADING_FINISHED
     }
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
+
+    enum class State {
+        LOADING, LOADING_FINISHED
+    }
 }

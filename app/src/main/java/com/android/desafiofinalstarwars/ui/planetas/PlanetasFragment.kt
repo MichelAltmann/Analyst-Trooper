@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
+import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.ui.naves.NavesViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlanetasFragment : Fragment() {
 
@@ -17,22 +20,48 @@ class PlanetasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val viewModel by viewModel<PlanetasViewModel>()
+
+    private val listaPlanetas : ArrayList<Planeta> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val planetasViewModel =
-            ViewModelProvider(this).get(PlanetasViewModel::class.java)
-
         _binding = FragmentPlanetasBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textNotifications
-        planetasViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setObserver()
+
+        viewModel.getBuscaPlanetasApi()
+    }
+
+    private fun setObserver() {
+        viewModel.planetaResposta.observe(viewLifecycleOwner){
+            it?.let {
+                listaPlanetas.addAll(it.resultados!!)
+                Toast.makeText(context, "sheesh" + listaPlanetas[1].nome, Toast.LENGTH_SHORT).show()
+                binding.textNotifications.text = listaPlanetas[1].nome
+            }
         }
-        return root
+        viewModel.loadStateLiveData.observe(viewLifecycleOwner){
+            handleProgressBar(it)
+        }
+        viewModel.planetaError.observe(viewLifecycleOwner){
+            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleProgressBar(state: PlanetasViewModel.State) {
+        when(state){
+            PlanetasViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            PlanetasViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            else -> {}
+        }
     }
 
     override fun onDestroyView() {

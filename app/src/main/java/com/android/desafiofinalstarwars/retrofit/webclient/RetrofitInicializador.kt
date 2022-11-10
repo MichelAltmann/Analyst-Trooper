@@ -34,8 +34,3 @@ class RetrofitInicializador {
     }
 }
 
-//    val service : PersoService = Retrofit.Builder()
-//        .baseUrl("https://swapi.dev/api/")
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-//        .create(PersoService::class.java)

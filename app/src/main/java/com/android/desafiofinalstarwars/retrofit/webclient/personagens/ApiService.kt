@@ -9,11 +9,11 @@ interface ApiService {
     @GET("people/")
     suspend fun buscaPersonagens() : Response<PersonagemResposta>
 
-    @GET("planets/")
-    suspend fun buscaPlanetas() : Response<PlanetaResposta>
-
     @GET("starships/")
     suspend fun buscaNaves() : Response<NaveResposta>
+
+    @GET("planets/")
+    suspend fun buscaPlanetas() : Response<PlanetaResposta>
 
     @GET("species/")
     suspend fun buscaEspecies() : Response<EspecieResposta>

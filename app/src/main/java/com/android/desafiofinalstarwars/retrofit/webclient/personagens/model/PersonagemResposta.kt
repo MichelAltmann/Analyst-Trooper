@@ -10,11 +10,5 @@ class PersonagemResposta(
     @SerializedName("previous") val anterior: String?,
     @SerializedName("results") val resultados: List<Personagem>?,
 ) {
-    val resposta: PersonagemResposta
-        get() = PersonagemResposta(
-            quantia ?: 0,
-            proximo ?: "",
-            anterior ?: "",
-            resultados ?: emptyList()
-        )
+
 }

@@ -9,12 +9,4 @@ class NaveResposta(
     @SerializedName("next") val proximo: String?,
     @SerializedName("previous") val anterior: String?,
     @SerializedName("results") val resultados: List<Nave>?,
-) {
-    val resposta: NaveResposta
-        get() = NaveResposta(
-            quantia ?: 0,
-            proximo ?: "",
-            anterior ?: "",
-            resultados ?: emptyList()
-        )
-}
+)

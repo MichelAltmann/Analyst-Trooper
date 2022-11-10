@@ -12,7 +12,6 @@ import kotlin.math.log
 
 class Repository(private val apiService: ApiService) : RepositoryInterface {
 
-//    override suspend fun buscaPersonagens(): Response<PersonagemResposta> = retrofitInicializador.service.buscaPersonagens()
     override suspend fun buscaPersonagens(): NetworkResponse<PersonagemResposta> {
         return try {
             val response = apiService.buscaPersonagens()

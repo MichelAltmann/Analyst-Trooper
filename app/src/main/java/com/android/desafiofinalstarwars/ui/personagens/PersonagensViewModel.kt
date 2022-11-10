@@ -21,7 +21,9 @@ class PersonagensViewModel(private val repository: RepositoryInterface) : ViewMo
 
     fun getBuscaPersonagemsApi() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.buscaPersonagens()) {
+        val response = repository.buscaPersonagens()
+        Log.i(TAG, "getBuscaPersonagensApi: $response")
+        when (response) {
             is NetworkResponse.Success -> { _personagemResposta.value = response.data }
             is NetworkResponse.Failed -> { _personagemError.value = Unit }
         }

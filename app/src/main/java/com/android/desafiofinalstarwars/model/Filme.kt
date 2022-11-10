@@ -7,7 +7,7 @@ data class Filme(
     @SerializedName("created") val dataCriacao : String,
     @SerializedName("director") val diretor : String,
     @SerializedName("edited") val dataEdicao : String,
-    @SerializedName("episode_id") val id : Int,
+    @SerializedName("episode_id") val id : String?,
     @SerializedName("opening_crawl") val fraseAbertura : String,
     @SerializedName("planets") val planetas : List<String>,
     @SerializedName("producer") val produtor : String,
