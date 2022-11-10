@@ -1,11 +1,11 @@
 package com.android.desafiofinalstarwars.koin
 
 import com.android.desafiofinalstarwars.retrofit.webclient.RetrofitInicializador
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.ApiService
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.Repository
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
+import com.android.desafiofinalstarwars.ui.home.EspeciesViewModel
 import com.android.desafiofinalstarwars.ui.naves.NavesViewModel
-import com.android.desafiofinalstarwars.ui.personagens.PersonagensViewModel
+import com.android.desafiofinalstarwars.ui.home.PersonagensViewModel
 import com.android.desafiofinalstarwars.ui.planetas.PlanetasViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,6 +16,7 @@ val modelModule : Module = module {
     viewModel { PersonagensViewModel(get()) }
     viewModel { NavesViewModel(get()) }
     viewModel { PlanetasViewModel(get()) }
+    viewModel { EspeciesViewModel(get()) }
 }
 
 val retrofitModule : Module = module {

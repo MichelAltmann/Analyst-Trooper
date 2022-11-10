@@ -1,13 +1,14 @@
-package com.android.desafiofinalstarwars.ui.personagens
+package com.android.desafiofinalstarwars.ui.home
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
 import com.android.desafiofinalstarwars.model.Personagem
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,22 +26,24 @@ class PersonagensFragment : Fragment() {
     private val viewModel by viewModel<PersonagensViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPersonagensBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setObserver()
+
         viewModel.getBuscaPersonagemsApi()
+        Log.i(TAG, "onViewCreated: ")
     }
 
     private fun setObserver() {
+        Log.i(TAG, "setObserver: ")
         viewModel.personagemResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaPersonagens.addAll(it.resultados!!)
@@ -63,8 +66,4 @@ class PersonagensFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

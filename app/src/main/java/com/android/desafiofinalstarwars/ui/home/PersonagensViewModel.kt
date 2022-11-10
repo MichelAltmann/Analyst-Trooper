@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.personagens
+package com.android.desafiofinalstarwars.ui.home
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -30,13 +30,13 @@ class PersonagensViewModel(private val repository: RepositoryInterface) : ViewMo
         loadStateLiveData.value = State.LOADING_FINISHED
     }
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
-
     enum class State {
         LOADING, LOADING_FINISHED
     }
+    private val _text = MutableLiveData<String>().apply {
+        value = "This is home Fragment"
+    }
+
+    val text: LiveData<String> = _text
 
 }

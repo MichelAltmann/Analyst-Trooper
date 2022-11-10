@@ -9,8 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NaveResposta
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PersonagemResposta
-import com.android.desafiofinalstarwars.ui.personagens.PersonagensViewModel
 import kotlinx.coroutines.launch
 
 class NavesViewModel(private val repository: RepositoryInterface) : ViewModel() {

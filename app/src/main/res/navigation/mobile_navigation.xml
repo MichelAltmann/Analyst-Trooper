@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_personagens">
+    app:startDestination="@+id/navigation_home">
 
 
     <fragment
@@ -13,10 +13,10 @@
         tools:layout="@layout/fragment_naves" />
 
     <fragment
-        android:id="@+id/navigation_personagens"
-        android:name="com.android.desafiofinalstarwars.ui.personagens.PersonagensFragment"
+        android:id="@+id/navigation_home"
+        android:name="com.android.desafiofinalstarwars.ui.home.HomeFragment"
         android:label="@string/title_personagens"
-        tools:layout="@layout/fragment_personagens" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_planetas"

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.PersonagensFragment"
+    tools:context=".ui.home.EspeciesFragment"
     android:background="@drawable/ic_background">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/text_especie"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

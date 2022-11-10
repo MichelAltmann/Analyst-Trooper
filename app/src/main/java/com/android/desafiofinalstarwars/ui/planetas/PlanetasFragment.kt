@@ -44,7 +44,6 @@ class PlanetasFragment : Fragment() {
         viewModel.planetaResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaPlanetas.addAll(it.resultados!!)
-                Toast.makeText(context, "sheesh" + listaPlanetas[1].nome, Toast.LENGTH_SHORT).show()
                 binding.textNotifications.text = listaPlanetas[1].nome
             }
         }
