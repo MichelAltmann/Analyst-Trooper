@@ -3,7 +3,7 @@ package com.android.desafiofinalstarwars.model
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PersonagemResposta
 import com.google.gson.annotations.SerializedName
 
-class Personagem(
+data class Personagem(
     @SerializedName("birth_year") val anoNascimento: String?,
     @SerializedName("eye_color") val corDoOlho: String?,
     @SerializedName("filmes") val filmes: List<String?>?,

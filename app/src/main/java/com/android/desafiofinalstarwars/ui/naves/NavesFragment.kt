@@ -1,13 +1,18 @@
 package com.android.desafiofinalstarwars.ui.naves
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
+import com.android.desafiofinalstarwars.model.Nave
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NavesFragment : Fragment() {
 
@@ -17,22 +22,33 @@ class NavesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val viewModel by viewModel<NavesViewModel>()
+
+    private val listaNaves : ArrayList<Nave> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val navesViewModel =
-            ViewModelProvider(this).get(NavesViewModel::class.java)
 
         _binding = FragmentNavesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textDashboard
-        navesViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setObserver()
+        viewModel.getBuscaNavesApi()
+    }
+
+    private fun setObserver(){
+        viewModel.naveResposta.observe(viewLifecycleOwner){
+            it?.let {
+                listaNaves.addAll(it.resultados!!)
+                binding.textDashboard.text = listaNaves[1].nome
+                Log.e(TAG, "setObserver: " + listaNaves[1].nome)
+            }
         }
-        return root
     }
 
     override fun onDestroyView() {

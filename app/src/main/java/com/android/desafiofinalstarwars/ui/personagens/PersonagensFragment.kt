@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
@@ -50,7 +51,7 @@ class PersonagensFragment : Fragment() {
             handleProgressBar(it)
         }
         viewModel.personagemError.observe(viewLifecycleOwner){
-
+            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }
 
