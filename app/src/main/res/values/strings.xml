@@ -5,4 +5,9 @@
     <string name="title_planetas">Planetas</string>
     <string name="personagens">Personagens</string>
     <string name="especies">Especies</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="planetas">Planetas</string>
+    <string name="filmes">Filmes</string>
+    <string name="title_right">Right</string>
 </resources>

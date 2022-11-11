@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.naves
+package com.android.desafiofinalstarwars.ui.left
 
 import android.content.ContentValues.TAG
 import android.util.Log

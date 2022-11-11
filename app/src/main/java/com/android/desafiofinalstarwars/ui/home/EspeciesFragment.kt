@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentEspeciesBinding
 import com.android.desafiofinalstarwars.model.Especie
-import com.android.desafiofinalstarwars.ui.planetas.PlanetasViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.collections.ArrayList
 

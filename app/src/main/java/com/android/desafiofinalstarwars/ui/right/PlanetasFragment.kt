@@ -1,63 +1,62 @@
-package com.android.desafiofinalstarwars.ui.naves
+package com.android.desafiofinalstarwars.ui.right
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
-import com.android.desafiofinalstarwars.model.Nave
+import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
+import com.android.desafiofinalstarwars.model.Planeta
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NavesFragment : Fragment() {
+class PlanetasFragment : Fragment() {
 
-    private var _binding: FragmentNavesBinding? = null
+    private var _binding: FragmentPlanetasBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel by viewModel<NavesViewModel>()
+    private val viewModel by viewModel<PlanetasViewModel>()
 
-    private val listaNaves : ArrayList<Nave> = ArrayList()
+    private val listaPlanetas : ArrayList<Planeta> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentNavesBinding.inflate(inflater, container, false)
+        _binding = FragmentPlanetasBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObserver()
-        viewModel.getBuscaNavesApi()
+
+        viewModel.getBuscaPlanetasApi()
     }
 
-    private fun setObserver(){
-        viewModel.naveResposta.observe(viewLifecycleOwner){
+    private fun setObserver() {
+        viewModel.planetaResposta.observe(viewLifecycleOwner){
             it?.let {
-                listaNaves.addAll(it.resultados!!)
-                binding.textDashboard.text = listaNaves[1].nome
+                listaPlanetas.addAll(it.resultados!!)
+                binding.textNotifications.text = listaPlanetas[1].nome
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.naveError.observe(viewLifecycleOwner){
+        viewModel.planetaError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun handleProgressBar(state: NavesViewModel.State?) {
+    private fun handleProgressBar(state: PlanetasViewModel.State) {
         when(state){
-            NavesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            NavesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            PlanetasViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            PlanetasViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }
