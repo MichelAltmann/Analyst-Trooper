@@ -30,8 +30,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,10 +44,17 @@ class HomeFragment : Fragment() {
             tab.setText(labels[position])
         }.attach()
 
-        binding.fragmentHomeViewpagerTablayout.setCurrentItem(0, false)
+        selecionaTabPadrão()
     }
 
+    override fun onResume() {
+        super.onResume()
+        selecionaTabPadrão()
+    }
 
+    private fun selecionaTabPadrão(){
+        binding.fragmentHomeViewpagerTablayout.setCurrentItem(0, false)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,32 +1,61 @@
 package com.android.desafiofinalstarwars.ui.left
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.desafiofinalstarwars.R
+import android.widget.Toast
+import com.android.desafiofinalstarwars.databinding.FragmentVeiculosBinding
+import androidx.fragment.app.Fragment
+import com.android.desafiofinalstarwars.model.Veiculo
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VeiculosFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = VeiculosFragment()
-    }
+    private var _binding : FragmentVeiculosBinding? = null
 
-    private lateinit var viewModel: VeiculosViewModel
+    private val binding get() = _binding!!
+
+    private val viewModel by viewModel<VeiculosViewModel>()
+
+    private val listaVeiculos : ArrayList<Veiculo> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_veiculos, container, false)
+    ): View {
+        _binding = FragmentVeiculosBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(VeiculosViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setObserver()
+
+        viewModel.getBuscaPlanetasApi()
+    }
+
+    private fun setObserver() {
+        viewModel.veiculoResposta.observe(viewLifecycleOwner){
+            it?.let {
+                listaVeiculos.addAll(it.resultados!!)
+                binding.textVeiculo.text = listaVeiculos[1].nome
+            }
+        }
+        viewModel.loadStateLiveData.observe(viewLifecycleOwner){
+            handleProgressBar(it)
+        }
+        viewModel.veiculoError.observe(viewLifecycleOwner){
+            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleProgressBar(state: VeiculosViewModel.State) {
+        when(state){
+            VeiculosViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            VeiculosViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            else -> {}
+        }
     }
 
 }

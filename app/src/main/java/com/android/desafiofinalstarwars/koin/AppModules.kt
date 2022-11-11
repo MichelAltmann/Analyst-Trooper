@@ -6,6 +6,7 @@ import com.android.desafiofinalstarwars.retrofit.webclient.personagens.Repositor
 import com.android.desafiofinalstarwars.ui.home.EspeciesViewModel
 import com.android.desafiofinalstarwars.ui.left.NavesViewModel
 import com.android.desafiofinalstarwars.ui.home.PersonagensViewModel
+import com.android.desafiofinalstarwars.ui.left.VeiculosViewModel
 import com.android.desafiofinalstarwars.ui.right.FilmesViewModel
 import com.android.desafiofinalstarwars.ui.right.PlanetasViewModel
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +20,7 @@ val modelModule : Module = module {
     viewModel { PlanetasViewModel(get()) }
     viewModel { EspeciesViewModel(get()) }
     viewModel { FilmesViewModel(get()) }
-//    viewModel { VeiculosViewModel(get()) }
+    viewModel { VeiculosViewModel(get()) }
 }
 
 val retrofitModule : Module = module {

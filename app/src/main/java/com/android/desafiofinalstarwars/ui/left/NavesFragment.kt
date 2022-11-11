@@ -41,7 +41,7 @@ class NavesFragment : Fragment() {
         viewModel.naveResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaNaves.addAll(it.resultados!!)
-                binding.textDashboard.text = listaNaves[1].nome
+                binding.textNave.text = listaNaves[1].nome
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

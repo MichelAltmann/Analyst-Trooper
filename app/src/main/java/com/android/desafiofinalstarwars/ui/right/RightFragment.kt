@@ -22,6 +22,10 @@ class RightFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val viewPagerAdapter by lazy {
+        RightViewPagerAdapter(requireActivity())
+    }
+
     private val labels = arrayOf("Planetas", "Filmes")
 
     override fun onCreateView(
@@ -30,13 +34,11 @@ class RightFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRightBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewPagerAdapter = RightViewPagerAdapter(requireActivity())
         binding.fragmentRightViewpagerTablayout.adapter = viewPagerAdapter
         TabLayoutMediator(
             binding.activityRightTablayout, binding.fragmentRightViewpagerTablayout
@@ -44,9 +46,17 @@ class RightFragment : Fragment() {
             tab.setText(labels[position])
         }.attach()
 
-        binding.fragmentRightViewpagerTablayout.setCurrentItem(0, false)
+        selecionaTabPadrão()
     }
 
+    override fun onResume() {
+        super.onResume()
+        selecionaTabPadrão()
+    }
+
+    private fun selecionaTabPadrão(){
+        binding.fragmentRightViewpagerTablayout.setCurrentItem(0, false)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

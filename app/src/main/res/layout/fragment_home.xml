@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
->
+    tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/activity_home_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/yellow"
+        app:tabSelectedTextColor="@color/yellow"
+        app:tabBackground="@color/black"
+        app:tabTextColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

@@ -8,14 +8,14 @@
 
     <fragment
         android:id="@+id/navigation_naves"
-        android:name="com.android.desafiofinalstarwars.ui.left.NavesFragment"
-        android:label="@string/title_naves"
-        tools:layout="@layout/fragment_naves" />
+        android:name="com.android.desafiofinalstarwars.ui.left.LeftFragment"
+        android:label="@string/title_left"
+        tools:layout="@layout/fragment_left" />
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.android.desafiofinalstarwars.ui.home.HomeFragment"
-        android:label="@string/title_personagens"
+        android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Desafio Final Star Wars</string>
-    <string name="title_personagens">Personagens</string>
+    <string name="title_home">Personagens | Espécies</string>
+    <string name="title_left">Naves | Veículos</string>
+    <string name="title_right">Planetas | Filmes</string>
     <string name="title_naves">Naves</string>
     <string name="title_planetas">Planetas</string>
     <string name="personagens">Personagens</string>
@@ -9,5 +11,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="planetas">Planetas</string>
     <string name="filmes">Filmes</string>
-    <string name="title_right">Right</string>
+    <string name="naves">Naves</string>
+    <string name="veiculos">Veiculos</string>
 </resources>
