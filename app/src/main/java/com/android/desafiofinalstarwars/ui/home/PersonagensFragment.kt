@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
 import com.android.desafiofinalstarwars.model.Personagem
+import com.android.desafiofinalstarwars.ui.home.adapters.PersonagensAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PersonagensFragment : Fragment() {
@@ -25,6 +26,10 @@ class PersonagensFragment : Fragment() {
 
     private val viewModel by viewModel<PersonagensViewModel>()
 
+    private val adapter by lazy {
+        PersonagensAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +40,8 @@ class PersonagensFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.fragmentPersonagensRecyclerview.adapter = adapter
 
         setObserver()
 
@@ -47,7 +54,7 @@ class PersonagensFragment : Fragment() {
         viewModel.personagemResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaPersonagens.addAll(it.resultados!!)
-                binding.textHome.text = listaPersonagens[1].nome
+                adapter.atualiza(listaPersonagens)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

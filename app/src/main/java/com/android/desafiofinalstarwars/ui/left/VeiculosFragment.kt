@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentVeiculosBinding
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.model.Veiculo
+import com.android.desafiofinalstarwars.ui.left.adapters.VeiculosAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VeiculosFragment : Fragment() {
@@ -20,6 +21,10 @@ class VeiculosFragment : Fragment() {
 
     private val listaVeiculos : ArrayList<Veiculo> = ArrayList()
 
+    private val adapter by lazy {
+        VeiculosAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,8 +35,8 @@ class VeiculosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentVeiculosRecyclerview.adapter = adapter
         setObserver()
-
         viewModel.getBuscaPlanetasApi()
     }
 
@@ -39,7 +44,7 @@ class VeiculosFragment : Fragment() {
         viewModel.veiculoResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaVeiculos.addAll(it.resultados!!)
-                binding.textVeiculo.text = listaVeiculos[1].nome
+                adapter.atualiza(listaVeiculos)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

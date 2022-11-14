@@ -15,11 +15,13 @@
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/drawable/ic_stormtrooper.xml" value="0.244" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/drawable/ic_trooper_analyst_icon.xml" value="0.244" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/drawable/ic_trooper_analyst_splash.xml" value="0.244" />
+        <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/drawable/line.xml" value="0.2625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/drawable/selected_color.xml" value="0.2625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/activity_splashscreen.xml" value="0.3614583333333333" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_dashboard.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_especies.xml" value="0.18541666666666667" />
+        <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_filmes.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_left.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_naves.xml" value="0.3625" />
@@ -27,6 +29,8 @@
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_planetas.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_right.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/fragment_veiculos.xml" value="0.1259259259259259" />
+        <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/item_card_view.xml" value="0.8583984375" />
+        <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/layout/item_cardview.xml" value="0.33" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.244" />
         <entry key="..\:/Documentos(D)/Michel/Android Studio/Desafio-Final/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.244" />

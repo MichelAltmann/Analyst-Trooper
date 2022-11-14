@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
 import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.ui.right.adapters.PlanetasAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlanetasFragment : Fragment() {
@@ -22,6 +23,10 @@ class PlanetasFragment : Fragment() {
 
     private val listaPlanetas : ArrayList<Planeta> = ArrayList()
 
+    private val adapter by lazy {
+        PlanetasAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +38,8 @@ class PlanetasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentPlanetasRecyclerview.adapter = adapter
+
         setObserver()
 
         viewModel.getBuscaPlanetasApi()
@@ -42,7 +49,7 @@ class PlanetasFragment : Fragment() {
         viewModel.planetaResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaPlanetas.addAll(it.resultados!!)
-                binding.textNotifications.text = listaPlanetas[1].nome
+                adapter.atualiza(listaPlanetas)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

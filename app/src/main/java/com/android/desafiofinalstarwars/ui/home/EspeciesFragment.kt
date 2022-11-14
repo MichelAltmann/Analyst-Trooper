@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentEspeciesBinding
 import com.android.desafiofinalstarwars.model.Especie
+import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.EspecieResposta
+import com.android.desafiofinalstarwars.ui.home.adapters.EspeciesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.collections.ArrayList
 
@@ -27,6 +30,10 @@ class EspeciesFragment : Fragment() {
 
     private val viewModel by viewModel<EspeciesViewModel>()
 
+    private val adapter by lazy {
+        EspeciesAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +44,8 @@ class EspeciesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.fragmentEspeciesRecyclerview.adapter = adapter
 
         setObserver()
 
@@ -49,7 +58,7 @@ class EspeciesFragment : Fragment() {
         viewModel.especieResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaEspecies.addAll(it.resultados!!)
-                binding.textEspecie.text = listaEspecies[1].nome
+                adapter.atualiza(listaEspecies)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

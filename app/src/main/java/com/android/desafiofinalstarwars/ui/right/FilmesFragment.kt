@@ -11,6 +11,7 @@ import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentFilmesBinding
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
 import com.android.desafiofinalstarwars.model.Filme
+import com.android.desafiofinalstarwars.ui.right.adapters.FilmesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilmesFragment : Fragment() {
@@ -25,6 +26,10 @@ class FilmesFragment : Fragment() {
 
     private val viewModel by viewModel<FilmesViewModel>()
 
+    private val adapter by lazy {
+        FilmesAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +40,7 @@ class FilmesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentFilmesRecyclerview.adapter = adapter
 
         setObserver()
 
@@ -45,7 +51,7 @@ class FilmesFragment : Fragment() {
         viewModel.filmeResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaFilmes.addAll(it.resultados!!)
-                binding.textFilmes.text = listaFilmes[1].titulo
+                adapter.atualiza(listaFilmes)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

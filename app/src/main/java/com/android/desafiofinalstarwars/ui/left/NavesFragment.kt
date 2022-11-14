@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
 import com.android.desafiofinalstarwars.model.Nave
+import com.android.desafiofinalstarwars.ui.left.adapters.NavesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NavesFragment : Fragment() {
@@ -21,6 +22,11 @@ class NavesFragment : Fragment() {
     private val viewModel by viewModel<NavesViewModel>()
 
     private val listaNaves : ArrayList<Nave> = ArrayList()
+
+    private val adapter by lazy {
+        NavesAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +39,7 @@ class NavesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentNavesRecyclerview.adapter = adapter
         setObserver()
         viewModel.getBuscaNavesApi()
     }
@@ -41,7 +48,7 @@ class NavesFragment : Fragment() {
         viewModel.naveResposta.observe(viewLifecycleOwner){
             it?.let {
                 listaNaves.addAll(it.resultados!!)
-                binding.textNave.text = listaNaves[1].nome
+                adapter.atualiza(listaNaves)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

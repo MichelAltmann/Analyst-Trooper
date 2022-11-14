@@ -1,9 +1,5 @@
 package com.android.desafiofinalstarwars.retrofit.webclient.personagens
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import com.android.desafiofinalstarwars.model.Especie
-import com.android.desafiofinalstarwars.model.Veiculo
 import com.android.desafiofinalstarwars.retrofit.webclient.RetrofitInicializador
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.*
 import retrofit2.Response
