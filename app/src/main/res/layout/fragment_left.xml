@@ -9,7 +9,7 @@
     tools:context=".ui.left.LeftFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/activity_left_tablayout"
+        android:id="@+id/fragment_left_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/yellow"
@@ -39,7 +39,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_left_tablayout"
+        app:layout_constraintTop_toBottomOf="@id/fragment_left_tablayout"
         android:layout_marginBottom="60dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

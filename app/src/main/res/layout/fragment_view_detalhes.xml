@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     tools:background="@drawable/ic_background"
-    tools:context=".ui.home.fragments.DetalhesView">
+    tools:context=".ui.DetalhesView">
 
     <TextView
         android:id="@+id/textViewNome"
@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:gravity="center"
-        android:shadowColor="@color/white"
         android:shadowRadius="5"
         android:text="@string/nome_do_personagem"
         android:textColor="@color/yellow"

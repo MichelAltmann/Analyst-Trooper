@@ -19,23 +19,4 @@ data class Especie(
     @SerializedName("people") val pessoas: List<String>?,
     @SerializedName("skin_colors") val coresDePele: String?,
     @SerializedName("url") val url: String?
-) : Serializable {
-    val especie: Especie
-        get() = Especie(
-            nome ?: "",
-            alturaMedia ?: "",
-            mediaDeVida ?: "",
-            classificacao ?: "",
-            dataCriacao ?: "",
-            designiacao ?: "",
-            dataEdicao ?: "",
-            coresDeOlho ?: "",
-            filmes ?: listOf(),
-            coresDeCabelo ?: "",
-            planetaDeOrigem ?: "",
-            lingua ?: "",
-            pessoas ?: listOf(),
-            coresDePele ?: "",
-            url ?: ""
-        )
-}
+) : Serializable

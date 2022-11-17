@@ -1,12 +1,12 @@
-package com.android.desafiofinalstarwars.ui.home.fragments
+package com.android.desafiofinalstarwars.ui
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentViewDetalhesBinding
 import com.android.desafiofinalstarwars.model.Especie
+import com.android.desafiofinalstarwars.model.Nave
 import com.android.desafiofinalstarwars.model.Personagem
 
 
@@ -93,6 +93,45 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
         generic8.visibility = View.GONE
         generic9.visibility = View.GONE
         generic10.visibility = View.GONE
+        generic11.visibility = View.GONE
+        generic12.visibility = View.GONE
+    }
+
+    fun bind(nave: Nave){
+        if (!nave.nome.isNullOrEmpty()) nome.text = nave.nome
+        else nome.visibility = View.GONE
+
+        if (!nave.modelo.isNullOrEmpty()) generic1.text = "Model: "+ nave.modelo
+        else generic1.visibility = View.GONE
+
+        if (!nave.classe.isNullOrEmpty()) generic2.text = "Class: "+ nave.classe
+        else generic2.visibility = View.GONE
+
+        if (!nave.MGLT.isNullOrEmpty()) generic3.text = "MGLT: "+ nave.MGLT
+        else generic3.visibility = View.GONE
+
+        if (!nave.velocidadeMaxima.isNullOrEmpty()) generic4.text = "Max Speed: "+ nave.velocidadeMaxima
+        else generic4.visibility = View.GONE
+
+        if (!nave.avaliacao.isNullOrEmpty()) generic5.text = "Hyperdrive Rating: "+ nave.avaliacao
+        else generic5.visibility = View.GONE
+
+        if (!nave.comprimento.isNullOrEmpty()) generic6.text = "Lenght: "+ nave.comprimento
+        else generic6.visibility = View.GONE
+
+        if (!nave.consumiveis.isNullOrEmpty()) generic7.text = "Consumables: "+ nave.consumiveis
+        else generic7.visibility = View.GONE
+
+        if (!nave.capacidade.isNullOrEmpty()) generic8.text = "Capacity: " + nave.capacidade
+        else generic8.visibility = View.GONE
+
+        if (!nave.capacidadeDePessoas.isNullOrEmpty()) generic9.text = "Crew Capacity: " + nave.capacidade
+        else generic9.visibility = View.GONE
+
+        if (!nave.manufatorador.isNullOrEmpty()) generic10.text = "Manufacturer: " + nave.manufatorador
+        else generic10.visibility = View.GONE
+
+
         generic11.visibility = View.GONE
         generic12.visibility = View.GONE
     }

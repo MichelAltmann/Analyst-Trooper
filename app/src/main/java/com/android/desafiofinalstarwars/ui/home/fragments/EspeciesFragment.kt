@@ -13,7 +13,7 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentEspeciesBinding
 import com.android.desafiofinalstarwars.model.Especie
-import com.android.desafiofinalstarwars.model.Personagem
+import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
 import com.android.desafiofinalstarwars.ui.home.viewmodels.EspeciesViewModel
 import com.android.desafiofinalstarwars.ui.home.adapters.EspeciesAdapter

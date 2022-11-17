@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentLeftBinding
+import com.android.desafiofinalstarwars.ui.home.HomeFragment
 import com.android.desafiofinalstarwars.ui.left.adapters.LeftViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,12 +37,35 @@ class LeftFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.fragmentLeftViewpagerTablayout.adapter = viewPagerAdapter
         TabLayoutMediator(
-            binding.activityLeftTablayout, binding.fragmentLeftViewpagerTablayout
+            binding.fragmentLeftTablayout, binding.fragmentLeftViewpagerTablayout
         ) { tab : TabLayout.Tab, position : Int ->
             tab.setText(labels[position])
         }.attach()
 
         selecionaTabPadrão()
+
+        setListener()
+    }
+
+    private fun setListener(){
+        binding.fragmentLeftTablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                if (binding.fragmentLeftViewpagerTablayout.currentItem == 0){
+                    onTabReselectedNavesListener.invoke()
+                } else {
+                    onTabReselectedVeiculosListener.invoke()
+                }
+            }
+
+        })
     }
 
     override fun onResume() {
@@ -53,4 +77,8 @@ class LeftFragment : Fragment() {
         binding.fragmentLeftViewpagerTablayout.setCurrentItem(0, false)
     }
 
+    companion object {
+        lateinit var onTabReselectedNavesListener : () -> Unit
+        lateinit var onTabReselectedVeiculosListener : () -> Unit
+    }
 }
