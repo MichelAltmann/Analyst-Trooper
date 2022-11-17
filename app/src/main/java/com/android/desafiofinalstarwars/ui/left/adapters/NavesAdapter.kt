@@ -16,7 +16,7 @@ class NavesAdapter() : RecyclerView.Adapter<NavesAdapter.ViewHolder>() {
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
             titulo.text = nave.nome
-            subTitulo.text = "Modelo: " + nave.modelo
+            subTitulo.text = "Model: " + nave.modelo
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(nave)
             }

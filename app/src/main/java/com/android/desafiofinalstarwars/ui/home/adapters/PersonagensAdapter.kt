@@ -9,7 +9,7 @@ import com.android.desafiofinalstarwars.model.Personagem
 
 class PersonagensAdapter() : RecyclerView.Adapter<PersonagensAdapter.ViewHolder>() {
 
-    private val genero = "Gênero: "
+    private val genero = "Gender: "
     private val personagens : MutableList<Personagem> = mutableListOf()
     lateinit var itemClickListener : (Personagem) -> Unit
 
@@ -19,11 +19,11 @@ class PersonagensAdapter() : RecyclerView.Adapter<PersonagensAdapter.ViewHolder>
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
             titulo.text = personagem.nome
-            subTitulo.text = "Altura: " + personagem.altura + "cm"
+            subTitulo.text = "Height: " + personagem.altura
             when(personagem.genero){
-                "male" -> subTitulo2.text = genero + "Masculino"
-                "female" -> subTitulo2.text = genero + "Feminino"
-                else -> subTitulo2.text = genero + "Nenhum"
+                "male" -> subTitulo2.text = genero + "Male"
+                "female" -> subTitulo2.text = genero + "Female"
+                else -> subTitulo2.text = genero + "None"
             }
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(personagem)

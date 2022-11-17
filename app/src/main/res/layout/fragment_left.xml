@@ -23,12 +23,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/naves" />
+            android:text="@string/spaceships" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/veiculos" />
+            android:text="@string/vehicles" />
 
     </com.google.android.material.tabs.TabLayout>
 

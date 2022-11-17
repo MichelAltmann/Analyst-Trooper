@@ -14,4 +14,10 @@
     <string name="naves">Naves</string>
     <string name="veiculos">Veiculos</string>
     <string name="nome_do_personagem">Nome do Personagem</string>
+    <string name="characters">Characters</string>
+    <string name="species">Species</string>
+    <string name="spaceships">Spaceships</string>
+    <string name="vehicles">Vehicles</string>
+    <string name="planets">Planets</string>
+    <string name="movies">Movies</string>
 </resources>

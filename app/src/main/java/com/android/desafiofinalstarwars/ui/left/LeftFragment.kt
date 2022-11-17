@@ -23,7 +23,7 @@ class LeftFragment : Fragment() {
         LeftViewPagerAdapter(requireActivity())
     }
 
-    private val labels = arrayOf("Naves", "Veículos")
+    private val labels = arrayOf("Starships", "Vehicles")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

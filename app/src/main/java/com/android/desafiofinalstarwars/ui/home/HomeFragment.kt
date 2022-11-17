@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val labels = arrayOf("Personagens", "Espécies")
+    private val labels = arrayOf("Characters", "Species")
 
     override fun onCreateView(
         inflater: LayoutInflater,

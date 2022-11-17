@@ -17,8 +17,8 @@ class PlanetasAdapter() : RecyclerView.Adapter<PlanetasAdapter.ViewHolder>() {
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
             titulo.text = planeta.nome
-            subTitulo.text = "Agua por km³: " + planeta.aguaNaSuperficie
-            subTitulo2.text = "População: " + planeta.populacao
+            subTitulo.text = "Water per km: " + planeta.aguaNaSuperficie
+            subTitulo2.text = "Population: " + planeta.populacao
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(planeta)
             }

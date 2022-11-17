@@ -17,7 +17,7 @@ class VeiculosAdapter() : RecyclerView.Adapter<VeiculosAdapter.ViewHolder>() {
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
             titulo.text = veiculo.nome
-            subTitulo.text = "Modelo: " + veiculo.modelo
+            subTitulo.text = "Model: " + veiculo.modelo
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(veiculo)
             }

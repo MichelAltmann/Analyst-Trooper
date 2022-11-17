@@ -18,8 +18,8 @@ class EspeciesAdapter() : RecyclerView.Adapter<EspeciesAdapter.ViewHolder>() {
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
             titulo.text = especie.nome
-            subTitulo.text = "Altura: " + especie.alturaMedia + "cm"
-            subTitulo2.text = "Média de Vida: " + especie.mediaDeVida
+            subTitulo.text = "Average Height: " + especie.alturaMedia
+            subTitulo2.text = "Lifespan: " + especie.mediaDeVida
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(especie)
             }

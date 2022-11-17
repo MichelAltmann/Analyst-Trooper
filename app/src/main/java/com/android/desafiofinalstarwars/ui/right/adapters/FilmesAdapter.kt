@@ -18,8 +18,8 @@ class FilmesAdapter() : RecyclerView.Adapter<FilmesAdapter.ViewHolder>() {
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
             titulo.text = filme.titulo
-            subTitulo.text = "Diretor: " + filme.diretor
-            subTitulo2.text = "Lançamento: " + filme.dataLancamento
+            subTitulo.text = "Director: " + filme.diretor
+            subTitulo2.text = "Release Date: " + filme.dataLancamento
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(filme)
             }

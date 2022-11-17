@@ -24,7 +24,7 @@ class RightFragment : Fragment() {
         RightViewPagerAdapter(requireActivity())
     }
 
-    private val labels = arrayOf("Planetas", "Filmes")
+    private val labels = arrayOf("Planets", "Movies")
 
     override fun onCreateView(
         inflater: LayoutInflater,
