@@ -8,6 +8,7 @@ import com.android.desafiofinalstarwars.databinding.FragmentViewDetalhesBinding
 import com.android.desafiofinalstarwars.model.Especie
 import com.android.desafiofinalstarwars.model.Nave
 import com.android.desafiofinalstarwars.model.Personagem
+import com.android.desafiofinalstarwars.model.Veiculo
 
 
 class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
@@ -128,11 +129,14 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
         if (!nave.capacidadeDePessoas.isNullOrEmpty()) generic9.text = "Crew Capacity: " + nave.capacidade
         else generic9.visibility = View.GONE
 
-        if (!nave.manufatorador.isNullOrEmpty()) generic10.text = "Manufacturer: " + nave.manufatorador
+        if (!nave.preco.isNullOrEmpty()) generic10.text = "Price: " + nave.preco
         else generic10.visibility = View.GONE
 
-
-        generic11.visibility = View.GONE
+        if (!nave.manufatorador.isNullOrEmpty()) generic11.text = "Manufacturer: " + nave.manufatorador
+        else generic11.visibility = View.GONE
+        
         generic12.visibility = View.GONE
     }
+
+
 }
