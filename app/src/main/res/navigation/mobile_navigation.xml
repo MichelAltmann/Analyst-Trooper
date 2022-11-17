@@ -16,7 +16,8 @@
         android:id="@+id/navigation_home"
         android:name="com.android.desafiofinalstarwars.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_right"

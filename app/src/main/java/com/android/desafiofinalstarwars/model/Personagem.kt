@@ -2,6 +2,7 @@ package com.android.desafiofinalstarwars.model
 
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PersonagemResposta
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Personagem(
     @SerializedName("birth_year") val anoNascimento: String?,
@@ -20,4 +21,4 @@ data class Personagem(
     @SerializedName("starships") val naves: List<String?>?,
     @SerializedName("url") val url: String?,
     @SerializedName("vehicles") val veiculos: List<String?>?
-)
+): Serializable

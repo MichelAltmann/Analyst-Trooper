@@ -1,6 +1,7 @@
 package com.android.desafiofinalstarwars.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Veiculo(
     @SerializedName("cargo_capacity") val capacidadeDeCarga : String,
@@ -19,4 +20,4 @@ data class Veiculo(
     @SerializedName("pilots") val pilotos : List<Any>,
     @SerializedName("url") val url: String,
     @SerializedName("vehicle_class") val classe : String
-)
+): Serializable

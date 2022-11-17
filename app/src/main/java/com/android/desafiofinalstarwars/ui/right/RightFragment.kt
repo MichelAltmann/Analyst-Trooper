@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentHomeBinding
 import com.android.desafiofinalstarwars.databinding.FragmentRightBinding
-import com.android.desafiofinalstarwars.ui.home.adapters.HomeViewPagerAdapter
 import com.android.desafiofinalstarwars.ui.right.adapters.RightViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator

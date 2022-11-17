@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.left
+package com.android.desafiofinalstarwars.ui.left.viewmodels
 
 import android.content.ContentValues
 import android.util.Log
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PlanetaResposta
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.VeiculoResposta
 import kotlinx.coroutines.launch
 

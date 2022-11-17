@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.PersonagensFragment"
+    tools:context=".ui.home.fragments.PersonagensFragment"
     android:background="@drawable/ic_background">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -17,6 +17,11 @@
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_cardview"/>
+
+    <include
+        android:id="@+id/fragment_view_detalhes"
+        layout="@layout/fragment_personagens_detalhes"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

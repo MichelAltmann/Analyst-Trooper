@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.home
+package com.android.desafiofinalstarwars.ui.home.fragments
 
 import android.content.ContentValues
 import android.os.Bundle
@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentEspeciesBinding
 import com.android.desafiofinalstarwars.model.Especie
-import com.android.desafiofinalstarwars.model.Planeta
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.EspecieResposta
+import com.android.desafiofinalstarwars.ui.home.viewmodels.EspeciesViewModel
 import com.android.desafiofinalstarwars.ui.home.adapters.EspeciesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.collections.ArrayList

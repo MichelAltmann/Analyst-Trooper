@@ -13,4 +13,5 @@
     <string name="filmes">Filmes</string>
     <string name="naves">Naves</string>
     <string name="veiculos">Veiculos</string>
+    <string name="nome_do_personagem">Nome do Personagem</string>
 </resources>

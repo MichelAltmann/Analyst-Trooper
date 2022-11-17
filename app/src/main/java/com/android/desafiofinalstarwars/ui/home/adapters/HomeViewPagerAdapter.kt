@@ -1,11 +1,10 @@
 package com.android.desafiofinalstarwars.ui.home.adapters
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.android.desafiofinalstarwars.ui.home.EspeciesFragment
-import com.android.desafiofinalstarwars.ui.home.PersonagensFragment
+import com.android.desafiofinalstarwars.ui.home.fragments.EspeciesFragment
+import com.android.desafiofinalstarwars.ui.home.fragments.PersonagensFragment
 
 class HomeViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {

@@ -1,6 +1,7 @@
 package com.android.desafiofinalstarwars.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Nave(
     @SerializedName("name") val nome: String?,
@@ -21,4 +22,4 @@ data class Nave(
     @SerializedName("created") val dataCriacao: String?,
     @SerializedName("edited") val dataEditado: String?,
     @SerializedName("url") val url: String?,
-)
+): Serializable

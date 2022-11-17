@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.right
+package com.android.desafiofinalstarwars.ui.right.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
 import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetasViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.PlanetasAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

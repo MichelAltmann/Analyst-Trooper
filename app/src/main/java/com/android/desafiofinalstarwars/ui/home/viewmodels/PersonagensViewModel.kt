@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.home
+package com.android.desafiofinalstarwars.ui.home.viewmodels
 
 import android.content.ContentValues.TAG
 import android.util.Log

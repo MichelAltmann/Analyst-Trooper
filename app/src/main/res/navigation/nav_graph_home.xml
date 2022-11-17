@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/PersonagensFragment">
+
+    <fragment
+        android:id="@+id/PersonagensFragment"
+        android:name="com.android.desafiofinalstarwars.ui.home.fragments.PersonagensFragment"
+        android:label="Personagens Fragment"
+        tools:layout="@layout/fragment_personagens">
+        <action
+            android:id="@+id/action_from_personagens_to_detalhes"
+            app:destination="@+id/PersonagensDetalhesFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/PersonagensDetalhesFragment"
+        android:name="com.android.desafiofinalstarwars.ui.home.fragments.PersonagensDetalhesFragment"
+        android:label="Personagens Detalhes Fragment"
+        tools:layout="@layout/fragment_personagens_detalhes">
+    </fragment>
+
+    <fragment
+        android:id="@+id/EspeciesFragment"
+        android:name="com.android.desafiofinalstarwars.ui.home.fragments.EspeciesFragment"
+        android:label="Especies Fragment"
+        tools:layout="@layout/fragment_especies">
+        <action
+            android:id="@+id/action_from_especies_to_detalhes"
+            app:destination="@+id/PersonagensDetalhesFragment"/>
+    </fragment>
+
+</navigation>

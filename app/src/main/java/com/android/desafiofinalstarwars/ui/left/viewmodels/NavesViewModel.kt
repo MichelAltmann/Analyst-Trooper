@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.left
+package com.android.desafiofinalstarwars.ui.left.viewmodels
 
 import android.content.ContentValues.TAG
 import android.util.Log

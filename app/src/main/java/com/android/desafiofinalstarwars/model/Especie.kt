@@ -1,6 +1,7 @@
 package com.android.desafiofinalstarwars.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Especie(
     @SerializedName("name") val nome : String,
@@ -18,4 +19,4 @@ data class Especie(
     @SerializedName("people") val pessoas : List<String>,
     @SerializedName("skin_colors") val coresDePele : String,
     @SerializedName("url") val url: String
-)
+) : Serializable

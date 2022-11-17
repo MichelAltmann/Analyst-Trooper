@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.left
+package com.android.desafiofinalstarwars.ui.left.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
 import com.android.desafiofinalstarwars.model.Nave
+import com.android.desafiofinalstarwars.ui.left.viewmodels.NavesViewModel
 import com.android.desafiofinalstarwars.ui.left.adapters.NavesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

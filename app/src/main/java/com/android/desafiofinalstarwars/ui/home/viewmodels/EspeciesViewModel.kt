@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.home
+package com.android.desafiofinalstarwars.ui.home.viewmodels
 
 import android.content.ContentValues
 import android.util.Log
@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.EspecieResposta
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PersonagemResposta
 import kotlinx.coroutines.launch
 
 class EspeciesViewModel(private val repository: RepositoryInterface) : ViewModel() {

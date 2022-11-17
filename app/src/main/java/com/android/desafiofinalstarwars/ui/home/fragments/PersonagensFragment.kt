@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.home
+package com.android.desafiofinalstarwars.ui.home.fragments
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -8,9 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
 import com.android.desafiofinalstarwars.model.Personagem
+import com.android.desafiofinalstarwars.ui.home.HomeFragment
+import com.android.desafiofinalstarwars.ui.home.viewmodels.PersonagensViewModel
 import com.android.desafiofinalstarwars.ui.home.adapters.PersonagensAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,6 +47,12 @@ class PersonagensFragment : Fragment() {
         setObserver()
 
         viewModel.getBuscaPersonagemsApi()
+
+        adapter.itemClickListener = {
+            binding.fragmentPersonagensRecyclerview.visibility = View.GONE
+            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
+        }
+
         Log.i(TAG, "onViewCreated: ")
     }
 

@@ -3,8 +3,8 @@ package com.android.desafiofinalstarwars.ui.left.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.android.desafiofinalstarwars.ui.left.NavesFragment
-import com.android.desafiofinalstarwars.ui.left.VeiculosFragment
+import com.android.desafiofinalstarwars.ui.left.fragments.NavesFragment
+import com.android.desafiofinalstarwars.ui.left.fragments.VeiculosFragment
 
 class LeftViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {

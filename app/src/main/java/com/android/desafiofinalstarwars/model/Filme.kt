@@ -1,6 +1,7 @@
 package com.android.desafiofinalstarwars.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Filme(
     @SerializedName("characters") val personagens : List<String>,
@@ -17,4 +18,4 @@ data class Filme(
     @SerializedName("title") val titulo : String,
     @SerializedName("url") val url: String,
     @SerializedName("vehicles") val veiculos : List<String>
-)
+): Serializable

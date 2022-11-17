@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.left
+package com.android.desafiofinalstarwars.ui.left.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentVeiculosBinding
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.model.Veiculo
+import com.android.desafiofinalstarwars.ui.left.viewmodels.VeiculosViewModel
 import com.android.desafiofinalstarwars.ui.left.adapters.VeiculosAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
