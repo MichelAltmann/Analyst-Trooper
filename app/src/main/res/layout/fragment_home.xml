@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@drawable/ic_background"
+    android:background="@android:color/transparent"
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/activity_home_tablayout"
+        android:id="@+id/fragment_home_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/yellow"
@@ -37,7 +39,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_home_tablayout"
+        app:layout_constraintTop_toBottomOf="@id/fragment_home_tablayout"
         android:layout_marginBottom="60dp"/>
 
 

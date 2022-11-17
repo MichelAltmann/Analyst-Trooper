@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.left.fragments.VeiculosFragment"
-    android:background="@drawable/ic_background">
+    tools:background="@drawable/ic_background"
+    android:background="@android:color/transparent">
 
     <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintTop_toTopOf="parent"
