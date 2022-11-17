@@ -134,9 +134,47 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
 
         if (!nave.manufatorador.isNullOrEmpty()) generic11.text = "Manufacturer: " + nave.manufatorador
         else generic11.visibility = View.GONE
-        
+
         generic12.visibility = View.GONE
     }
 
+    fun bind(veiculo: Veiculo){
+        if (!veiculo.nome.isNullOrEmpty()) nome.text = veiculo.nome
+        else nome.visibility = View.GONE
+
+        if (!veiculo.modelo.isNullOrEmpty()) generic1.text = "Model: "+ veiculo.modelo
+        else generic1.visibility = View.GONE
+
+        if (!veiculo.classe.isNullOrEmpty()) generic2.text = "Class: "+ veiculo.classe
+        else generic2.visibility = View.GONE
+
+        if (!veiculo.capacidadeDeCarga.isNullOrEmpty()) generic3.text = "Cargo Capacity: "+ veiculo.capacidadeDeCarga
+        else generic3.visibility = View.GONE
+
+        if (!veiculo.velocidadeMaxima.isNullOrEmpty()) generic4.text = "Max Speed: "+ veiculo.velocidadeMaxima
+        else generic4.visibility = View.GONE
+
+        if (!veiculo.comprimento.isNullOrEmpty()) generic5.text = "Lenght: "+ veiculo.comprimento
+        else generic5.visibility = View.GONE
+
+        if (!veiculo.consumiveis.isNullOrEmpty()) generic6.text = "Consumables: "+ veiculo.consumiveis
+        else generic6.visibility = View.GONE
+
+        if (!veiculo.passageiros.isNullOrEmpty()) generic7.text = "Passengers: " + veiculo.passageiros
+        else generic7.visibility = View.GONE
+
+        if (!veiculo.tripulantes.isNullOrEmpty()) generic8.text = "Crew: " + veiculo.tripulantes
+        else generic8.visibility = View.GONE
+
+        if (!veiculo.preco.isNullOrEmpty()) generic9.text = "Hyperdrive Rating: "+ veiculo.preco
+        else generic9.visibility = View.GONE
+
+        if (!veiculo.manufaturador.isNullOrEmpty()) generic10.text = "Manufacturer: " + veiculo.manufaturador
+        else generic10.visibility = View.GONE
+
+
+        generic11.visibility = View.GONE
+        generic12.visibility = View.GONE
+    }
 
 }
