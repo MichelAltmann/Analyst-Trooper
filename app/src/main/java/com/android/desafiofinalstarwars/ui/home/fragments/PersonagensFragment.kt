@@ -58,23 +58,24 @@ class PersonagensFragment : Fragment() {
 
         adapter.itemClickListener = {
             isClicked = 1
-            chamaTelaDescricao()
+            chamaTelaDescricao(it)
         }
-        binding.fragmentViewDetalhes.fabExit.setOnClickListener {
-            isClicked = 0
+        HomeFragment.onTabReselectedPersonagensListener = {
+            isClicked = isClicked -1
             chamaTelaDescricao()
         }
 
         Log.i(TAG, "onViewCreated: ")
     }
 
-    private fun chamaTelaDescricao() {
+    private fun chamaTelaDescricao(personagem: Personagem? = null) {
         if (isClicked == 1){
             binding.fragmentPersonagensRecyclerview.startAnimation(fromVisible)
             binding.fragmentPersonagensRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-        } else {
+            DetalhesView(binding.fragmentViewDetalhes).bind(personagem!!)
+        } else if (isClicked == 0) {
             binding.fragmentPersonagensRecyclerview.startAnimation(toVisible)
             binding.fragmentPersonagensRecyclerview.visibility = View.VISIBLE
             binding.fragmentViewDetalhes.root.startAnimation(fromVisible)

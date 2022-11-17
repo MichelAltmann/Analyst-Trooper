@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:background="@drawable/ic_background"
+    tools:context=".ui.home.fragments.DetalhesView">
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:gravity="center"
+        android:shadowColor="@color/white"
+        android:shadowRadius="5"
+        android:text="@string/nome_do_personagem"
+        android:textColor="@color/yellow"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewNome">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric1"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric1"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric1"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric1"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric2"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric2"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric2"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric2"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric3"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric3"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric3"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric3"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric4"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric4"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric4"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric4"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric5"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric5"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric5"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric5"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric6"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric6"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric6"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric6"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric7"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric7"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric7"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric7"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric8"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric8"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric8"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric8"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric9"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric9"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric9"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric9"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric10"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric10"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric10"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric10"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric11"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric11"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric11"/>
+
+            <TextView
+                android:id="@+id/textViewInfoGeneric12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric11"
+                tools:text="Text View 1" />
+
+            <View
+                android:background="@drawable/line"
+                android:layout_height="1dp"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewInfoGeneric12"
+                app:layout_constraintStart_toStartOf="@id/textViewInfoGeneric12"
+                app:layout_constraintEnd_toEndOf="@id/textViewInfoGeneric12"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

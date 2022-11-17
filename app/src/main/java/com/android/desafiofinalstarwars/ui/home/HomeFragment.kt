@@ -6,15 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.databinding.FragmentHomeBinding
-import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
-import com.android.desafiofinalstarwars.model.Personagem
 import com.android.desafiofinalstarwars.ui.home.adapters.HomeViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
@@ -40,13 +36,14 @@ class HomeFragment : Fragment() {
         val viewPagerAdapter = HomeViewPagerAdapter(requireActivity())
         binding.fragmentHomeViewpagerTablayout.adapter = viewPagerAdapter
         TabLayoutMediator(
-            binding.activityHomeTablayout, binding.fragmentHomeViewpagerTablayout
+            binding.fragmentHomeTablayout, binding.fragmentHomeViewpagerTablayout
         ) {
             tab : TabLayout.Tab, position : Int ->
             tab.setText(labels[position])
         }.attach()
 
         selecionaTabPadrão()
+        setListener()
     }
 
     override fun onResume() {
@@ -58,9 +55,35 @@ class HomeFragment : Fragment() {
         binding.fragmentHomeViewpagerTablayout.setCurrentItem(0, false)
     }
 
+    private fun setListener(){
+        binding.fragmentHomeTablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                if (binding.fragmentHomeViewpagerTablayout.currentItem == 0){
+                    onTabReselectedPersonagensListener.invoke()
+                } else {
+                    onTabReselectedEspeciesListener.invoke()
+                }
+            }
+
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        lateinit var onTabReselectedPersonagensListener : () -> Unit
+        lateinit var onTabReselectedEspeciesListener : () -> Unit
     }
 
 }

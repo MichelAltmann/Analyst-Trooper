@@ -17,9 +17,9 @@
 
     <fragment
         android:id="@+id/PersonagensDetalhesFragment"
-        android:name="com.android.desafiofinalstarwars.ui.home.fragments.PersonagensDetalhesFragment"
+        android:name="com.android.desafiofinalstarwars.ui.home.fragments.DetalhesView"
         android:label="Personagens Detalhes Fragment"
-        tools:layout="@layout/fragment_personagens_detalhes">
+        tools:layout="@layout/fragment_view_detalhes">
     </fragment>
 
     <fragment
