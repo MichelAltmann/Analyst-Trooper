@@ -4,10 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
+import com.android.desafiofinalstarwars.model.Nave
 import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.left.LeftFragment
+import com.android.desafiofinalstarwars.ui.right.RightFragment
 import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetasViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.PlanetasAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +35,11 @@ class PlanetasFragment : Fragment() {
         PlanetasAdapter()
     }
 
+    private var isClicked = 0
+
+    private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
+    private val toVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.tovisible)}
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +56,33 @@ class PlanetasFragment : Fragment() {
         setObserver()
 
         viewModel.getBuscaPlanetasApi()
+
+        adapter.itemClickListener = {
+            isClicked = 1
+            chamaTelaDescricao(it)
+        }
+        RightFragment.onTabReselectedPlanetasListener = {
+            isClicked = isClicked -1
+            chamaTelaDescricao()
+        }
+
     }
+
+    private fun chamaTelaDescricao(planeta: Planeta? = null) {
+        if (isClicked == 1){
+            binding.fragmentPlanetasRecyclerview.startAnimation(fromVisible)
+            binding.fragmentPlanetasRecyclerview.visibility = View.GONE
+            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
+            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
+            DetalhesView(binding.fragmentViewDetalhes).bind(planeta!!)
+        } else if (isClicked == 0) {
+            binding.fragmentPlanetasRecyclerview.startAnimation(toVisible)
+            binding.fragmentPlanetasRecyclerview.visibility = View.VISIBLE
+            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
+            binding.fragmentViewDetalhes.root.visibility = View.GONE
+        }
+    }
+
 
     private fun setObserver() {
         viewModel.planetaResposta.observe(viewLifecycleOwner){

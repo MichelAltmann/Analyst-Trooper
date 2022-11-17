@@ -18,6 +18,12 @@
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_cardview"/>
+
+    <include
+        android:id="@+id/fragment_view_detalhes"
+        layout="@layout/fragment_view_detalhes"
+        android:visibility="gone"/>
+
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

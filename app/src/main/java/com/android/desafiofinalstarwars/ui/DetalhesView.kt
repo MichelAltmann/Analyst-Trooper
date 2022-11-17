@@ -5,10 +5,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
 import com.android.desafiofinalstarwars.databinding.FragmentViewDetalhesBinding
-import com.android.desafiofinalstarwars.model.Especie
-import com.android.desafiofinalstarwars.model.Nave
-import com.android.desafiofinalstarwars.model.Personagem
-import com.android.desafiofinalstarwars.model.Veiculo
+import com.android.desafiofinalstarwars.model.*
 
 
 class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
@@ -173,6 +170,38 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
         else generic10.visibility = View.GONE
 
 
+        generic11.visibility = View.GONE
+        generic12.visibility = View.GONE
+    }
+
+    fun bind(planeta: Planeta){
+        if (!planeta.nome.isNullOrEmpty()) nome.text = planeta.nome
+        else nome.visibility = View.GONE
+
+        if (!planeta.diametro.isNullOrEmpty()) generic1.text = "Diameter: "+ planeta.diametro
+        else generic1.visibility = View.GONE
+
+        if (!planeta.aguaNaSuperficie.isNullOrEmpty()) generic2.text = "Water Surface: "+ planeta.aguaNaSuperficie
+        else generic2.visibility = View.GONE
+
+        if (!planeta.terreno.isNullOrEmpty()) generic3.text = "Terrain Type: "+ planeta.terreno
+        else generic3.visibility = View.GONE
+
+        if (!planeta.gravidade.isNullOrEmpty()) generic4.text = "Gravity: "+ planeta.gravidade
+        else generic4.visibility = View.GONE
+
+        if (!planeta.periodoDeRotacao.isNullOrEmpty()) generic5.text = "Rotation Period: "+ planeta.periodoDeRotacao
+        else generic5.visibility = View.GONE
+
+        if (!planeta.periodoOrbital.isNullOrEmpty()) generic6.text = "Orbital Period: "+ planeta.periodoOrbital
+        else generic6.visibility = View.GONE
+
+        if (!planeta.populacao.isNullOrEmpty()) generic7.text = "Population: " + planeta.populacao
+        else generic7.visibility = View.GONE
+
+        generic8.visibility = View.GONE
+        generic9.visibility = View.GONE
+        generic10.visibility = View.GONE
         generic11.visibility = View.GONE
         generic12.visibility = View.GONE
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.desafiofinalstarwars.databinding.FragmentRightBinding
+import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.right.adapters.RightViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -38,12 +39,35 @@ class RightFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.fragmentRightViewpagerTablayout.adapter = viewPagerAdapter
         TabLayoutMediator(
-            binding.activityRightTablayout, binding.fragmentRightViewpagerTablayout
+            binding.fragmentRightTablayout, binding.fragmentRightViewpagerTablayout
         ) { tab: TabLayout.Tab, position: Int ->
             tab.setText(labels[position])
         }.attach()
 
         selecionaTabPadrão()
+
+        setListener()
+    }
+
+    private fun setListener(){
+        binding.fragmentRightTablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                if (binding.fragmentRightViewpagerTablayout.currentItem == 0){
+                    onTabReselectedPlanetasListener.invoke()
+                } else {
+                    onTabReselectedFilmesListener.invoke()
+                }
+            }
+
+        })
     }
 
     override fun onResume() {
@@ -59,4 +83,10 @@ class RightFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        lateinit var onTabReselectedPlanetasListener : () -> Unit
+        lateinit var onTabReselectedFilmesListener : () -> Unit
+    }
+
 }

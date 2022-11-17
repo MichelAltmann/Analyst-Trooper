@@ -8,7 +8,7 @@
     tools:context=".ui.right.RightFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/activity_right_tablayout"
+        android:id="@+id/fragment_right_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/yellow"
@@ -38,7 +38,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_right_tablayout"
+        app:layout_constraintTop_toBottomOf="@id/fragment_right_tablayout"
         android:layout_marginBottom="60dp"/>
 
 
