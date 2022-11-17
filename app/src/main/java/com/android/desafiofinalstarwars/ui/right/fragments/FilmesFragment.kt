@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
+import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentFilmesBinding
 import com.android.desafiofinalstarwars.model.Filme
+import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.right.RightFragment
 import com.android.desafiofinalstarwars.ui.right.viewmodel.FilmesViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.FilmesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +34,11 @@ class FilmesFragment : Fragment() {
         FilmesAdapter()
     }
 
+    private var isClicked = 0
+
+    private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
+    private val toVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.tovisible)}
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +54,31 @@ class FilmesFragment : Fragment() {
         setObserver()
 
         viewModel.getBuscaPlanetasApi()
+
+        adapter.itemClickListener = {
+            isClicked = 1
+            chamaTelaDescricao(it)
+        }
+        RightFragment.onTabReselectedFilmesListener = {
+            isClicked = isClicked -1
+            chamaTelaDescricao()
+        }
+
+    }
+
+    private fun chamaTelaDescricao(filme: Filme? = null) {
+        if (isClicked == 1){
+            binding.fragmentFilmesRecyclerview.startAnimation(fromVisible)
+            binding.fragmentFilmesRecyclerview.visibility = View.GONE
+            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
+            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
+            DetalhesView(binding.fragmentViewDetalhes).bind(filme!!)
+        } else if (isClicked == 0) {
+            binding.fragmentFilmesRecyclerview.startAnimation(toVisible)
+            binding.fragmentFilmesRecyclerview.visibility = View.VISIBLE
+            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
+            binding.fragmentViewDetalhes.root.visibility = View.GONE
+        }
     }
 
     private fun setObserver(){

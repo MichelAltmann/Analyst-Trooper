@@ -206,4 +206,30 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
         generic12.visibility = View.GONE
     }
 
+    fun bind(filme: Filme){
+        if (!filme.titulo.isNullOrEmpty()) nome.text = filme.titulo
+        else nome.visibility = View.GONE
+
+        if (!filme.fraseAbertura.isNullOrEmpty()) generic1.text = filme.fraseAbertura
+        else generic1.visibility = View.GONE
+
+        if (!filme.dataLancamento.isNullOrEmpty()) generic2.text = "Release Date: "+ filme.dataLancamento
+        else generic2.visibility = View.GONE
+
+        if (!filme.produtor.isNullOrEmpty()) generic3.text = "Productor: "+ filme.produtor
+        else generic3.visibility = View.GONE
+
+        if (!filme.diretor.isNullOrEmpty()) generic4.text = "Director: "+ filme.diretor
+        else generic4.visibility = View.GONE
+
+        generic5.visibility = View.GONE
+        generic6.visibility = View.GONE
+        generic7.visibility = View.GONE
+        generic8.visibility = View.GONE
+        generic9.visibility = View.GONE
+        generic10.visibility = View.GONE
+        generic11.visibility = View.GONE
+        generic12.visibility = View.GONE
+    }
+
 }
