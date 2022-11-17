@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
+import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
 import com.android.desafiofinalstarwars.model.Personagem
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
@@ -27,9 +30,14 @@ class PersonagensFragment : Fragment() {
 
     private val viewModel by viewModel<PersonagensViewModel>()
 
+    private var isClicked = 0
+
     private val adapter by lazy {
         PersonagensAdapter()
     }
+
+    private val fromVisible : Animation by lazy {AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
+    private val toVisible : Animation by lazy {AnimationUtils.loadAnimation(context, R.anim.tovisible)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +57,29 @@ class PersonagensFragment : Fragment() {
         viewModel.getBuscaPersonagemsApi()
 
         adapter.itemClickListener = {
-            binding.fragmentPersonagensRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
+            isClicked = 1
+            chamaTelaDescricao()
+        }
+        binding.fragmentViewDetalhes.fabExit.setOnClickListener {
+            isClicked = 0
+            chamaTelaDescricao()
         }
 
         Log.i(TAG, "onViewCreated: ")
+    }
+
+    private fun chamaTelaDescricao() {
+        if (isClicked == 1){
+            binding.fragmentPersonagensRecyclerview.startAnimation(fromVisible)
+            binding.fragmentPersonagensRecyclerview.visibility = View.GONE
+            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
+            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
+        } else {
+            binding.fragmentPersonagensRecyclerview.startAnimation(toVisible)
+            binding.fragmentPersonagensRecyclerview.visibility = View.VISIBLE
+            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
+            binding.fragmentViewDetalhes.root.visibility = View.GONE
+        }
     }
 
     private fun setObserver() {
