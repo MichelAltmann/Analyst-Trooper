@@ -3,7 +3,7 @@ package com.android.desafiofinalstarwars.ui.left.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.android.desafiofinalstarwars.ui.left.fragments.NavesFragment
+import com.android.desafiofinalstarwars.ui.left.fragments.StarshipsFragment
 import com.android.desafiofinalstarwars.ui.left.fragments.VeiculosFragment
 
 class LeftViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
@@ -13,10 +13,10 @@ class LeftViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAd
 
     override fun createFragment(position: Int): Fragment {
         when (position){
-            0 -> return NavesFragment()
+            0 -> return StarshipsFragment()
             1 -> return VeiculosFragment()
         }
-        return NavesFragment()
+        return StarshipsFragment()
     }
 
 }

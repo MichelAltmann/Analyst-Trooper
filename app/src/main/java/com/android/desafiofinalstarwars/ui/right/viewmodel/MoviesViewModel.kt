@@ -11,7 +11,7 @@ import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.Fil
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
 import kotlinx.coroutines.launch
 
-class FilmesViewModel(private val repository: RepositoryInterface) : ViewModel() {
+class MoviesViewModel(private val repository: RepositoryInterface) : ViewModel() {
     private val _filmeResposta = MutableLiveData<FilmeResposta?>()
     val filmeResposta: LiveData<FilmeResposta?> = _filmeResposta
     private val _filmeError = MutableLiveData<Unit>()
@@ -20,9 +20,7 @@ class FilmesViewModel(private val repository: RepositoryInterface) : ViewModel()
 
     fun getBuscaPlanetasApi() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        val response = repository.buscaFilmes()
-        Log.i(ContentValues.TAG, "getBuscaNavesApi: ")
-        when (response) {
+        when (val response = repository.buscaFilmes()) {
             is NetworkResponse.Success -> { _filmeResposta.value = response.data }
             is NetworkResponse.Failed -> { _filmeError.value = Unit }
         }

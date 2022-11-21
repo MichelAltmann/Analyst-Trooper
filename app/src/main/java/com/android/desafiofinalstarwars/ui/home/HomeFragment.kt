@@ -1,8 +1,6 @@
 package com.android.desafiofinalstarwars.ui.home
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +65,7 @@ class HomeFragment : Fragment() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 if (binding.fragmentHomeViewpagerTablayout.currentItem == 0){
-                    onTabReselectedPersonagensListener.invoke()
+                    onTabReselectedCharactersListener.invoke()
                 } else {
                     onTabReselectedEspeciesListener.invoke()
                 }
@@ -82,7 +80,7 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        lateinit var onTabReselectedPersonagensListener : () -> Unit
+        lateinit var onTabReselectedCharactersListener : () -> Unit
         lateinit var onTabReselectedEspeciesListener : () -> Unit
     }
 

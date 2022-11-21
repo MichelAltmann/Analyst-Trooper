@@ -10,17 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
-import com.android.desafiofinalstarwars.model.Especie
-import com.android.desafiofinalstarwars.model.Nave
+import com.android.desafiofinalstarwars.model.Starship
 import com.android.desafiofinalstarwars.ui.DetalhesView
-import com.android.desafiofinalstarwars.ui.home.HomeFragment
-import com.android.desafiofinalstarwars.ui.home.HomeFragment.Companion.onTabReselectedEspeciesListener
 import com.android.desafiofinalstarwars.ui.left.LeftFragment
-import com.android.desafiofinalstarwars.ui.left.viewmodels.NavesViewModel
-import com.android.desafiofinalstarwars.ui.left.adapters.NavesAdapter
+import com.android.desafiofinalstarwars.ui.left.viewmodels.StarshipsViewModel
+import com.android.desafiofinalstarwars.ui.left.adapters.StarshipsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NavesFragment : Fragment() {
+class StarshipsFragment : Fragment() {
 
     private var _binding: FragmentNavesBinding? = null
 
@@ -28,12 +25,12 @@ class NavesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel by viewModel<NavesViewModel>()
+    private val viewModel by viewModel<StarshipsViewModel>()
 
-    private val listaNaves : ArrayList<Nave> = ArrayList()
+    private val starshipsList : ArrayList<Starship> = ArrayList()
 
     private val adapter by lazy {
-        NavesAdapter()
+        StarshipsAdapter()
     }
 
     private var isClicked = 0
@@ -55,26 +52,26 @@ class NavesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.fragmentNavesRecyclerview.adapter = adapter
         setObserver()
-        viewModel.getBuscaNavesApi()
+        viewModel.getApiStarships()
 
         adapter.itemClickListener = {
             isClicked = 1
-            chamaTelaDescricao(it)
+            descriptionTabCall(it)
         }
-        LeftFragment.onTabReselectedNavesListener = {
-            isClicked = isClicked -1
-            chamaTelaDescricao()
+        LeftFragment.onTabReselectedStarshipsListener = {
+            isClicked -= 1
+            descriptionTabCall()
         }
 
     }
 
-    private fun chamaTelaDescricao(nave: Nave? = null) {
+    private fun descriptionTabCall(starship: Starship? = null) {
         if (isClicked == 1){
             binding.fragmentNavesRecyclerview.startAnimation(fromVisible)
             binding.fragmentNavesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(nave!!)
+            DetalhesView(binding.fragmentViewDetalhes).bind(starship!!)
         } else if (isClicked == 0) {
             binding.fragmentNavesRecyclerview.startAnimation(toVisible)
             binding.fragmentNavesRecyclerview.visibility = View.VISIBLE
@@ -84,24 +81,24 @@ class NavesFragment : Fragment() {
     }
 
     private fun setObserver(){
-        viewModel.naveResposta.observe(viewLifecycleOwner){
+        viewModel.starshipResponse.observe(viewLifecycleOwner){
             it?.let {
-                listaNaves.addAll(it.resultados!!)
-                adapter.atualiza(listaNaves)
+                starshipsList.addAll(it.resultados!!)
+                adapter.atualiza(starshipsList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.naveError.observe(viewLifecycleOwner){
+        viewModel.starshipError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun handleProgressBar(state: NavesViewModel.State?) {
+    private fun handleProgressBar(state: StarshipsViewModel.State?) {
         when(state){
-            NavesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            NavesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            StarshipsViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            StarshipsViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

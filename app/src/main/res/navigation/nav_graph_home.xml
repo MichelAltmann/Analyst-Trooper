@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/PersonagensFragment"
-        android:name="com.android.desafiofinalstarwars.ui.home.fragments.PersonagensFragment"
+        android:name="com.android.desafiofinalstarwars.ui.home.fragments.CharactersFragment"
         android:label="Personagens Fragment"
         tools:layout="@layout/fragment_personagens">
         <action
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/EspeciesFragment"
-        android:name="com.android.desafiofinalstarwars.ui.home.fragments.EspeciesFragment"
+        android:name="com.android.desafiofinalstarwars.ui.home.fragments.SpeciesFragment"
         android:label="Especies Fragment"
         tools:layout="@layout/fragment_especies">
         <action

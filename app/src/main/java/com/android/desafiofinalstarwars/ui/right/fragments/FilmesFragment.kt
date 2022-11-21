@@ -11,10 +11,9 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentFilmesBinding
 import com.android.desafiofinalstarwars.model.Filme
-import com.android.desafiofinalstarwars.model.Planeta
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.right.RightFragment
-import com.android.desafiofinalstarwars.ui.right.viewmodel.FilmesViewModel
+import com.android.desafiofinalstarwars.ui.right.viewmodel.MoviesViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.FilmesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,7 +27,7 @@ class FilmesFragment : Fragment() {
 
     private val listaFilmes : ArrayList<Filme> = ArrayList()
 
-    private val viewModel by viewModel<FilmesViewModel>()
+    private val viewModel by viewModel<MoviesViewModel>()
 
     private val adapter by lazy {
         FilmesAdapter()
@@ -96,10 +95,10 @@ class FilmesFragment : Fragment() {
         }
     }
 
-    private fun handleProgressBar(state: FilmesViewModel.State) {
+    private fun handleProgressBar(state: MoviesViewModel.State) {
         when(state){
-            FilmesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            FilmesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            MoviesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            MoviesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

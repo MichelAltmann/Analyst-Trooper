@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentLeftBinding
-import com.android.desafiofinalstarwars.ui.home.HomeFragment
 import com.android.desafiofinalstarwars.ui.left.adapters.LeftViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -59,7 +57,7 @@ class LeftFragment : Fragment() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 if (binding.fragmentLeftViewpagerTablayout.currentItem == 0){
-                    onTabReselectedNavesListener.invoke()
+                    onTabReselectedStarshipsListener.invoke()
                 } else {
                     onTabReselectedVeiculosListener.invoke()
                 }
@@ -78,7 +76,7 @@ class LeftFragment : Fragment() {
     }
 
     companion object {
-        lateinit var onTabReselectedNavesListener : () -> Unit
+        lateinit var onTabReselectedStarshipsListener : () -> Unit
         lateinit var onTabReselectedVeiculosListener : () -> Unit
     }
 }

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
-import com.android.desafiofinalstarwars.model.Nave
 import com.android.desafiofinalstarwars.model.Veiculo
 
 class VeiculosAdapter() : RecyclerView.Adapter<VeiculosAdapter.ViewHolder>() {

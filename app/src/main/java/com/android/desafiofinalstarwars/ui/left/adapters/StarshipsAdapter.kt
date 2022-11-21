@@ -4,21 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
-import com.android.desafiofinalstarwars.model.Nave
+import com.android.desafiofinalstarwars.model.Starship
 
-class NavesAdapter() : RecyclerView.Adapter<NavesAdapter.ViewHolder>() {
+class StarshipsAdapter() : RecyclerView.Adapter<StarshipsAdapter.ViewHolder>() {
 
-    private val naves : MutableList<Nave> = mutableListOf()
-    lateinit var itemClickListener: (Nave) -> Unit
+    private val starships : MutableList<Starship> = mutableListOf()
+    lateinit var itemClickListener: (Starship) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(nave : Nave){
+        fun vincula(starship : Starship){
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
-            titulo.text = nave.nome
-            subTitulo.text = "Model: " + nave.modelo
+            titulo.text = starship.nome
+            subTitulo.text = "Model: " + starship.modelo
             itemView.rootView.setOnClickListener {
-                itemClickListener.invoke(nave)
+                itemClickListener.invoke(starship)
             }
         }
     }
@@ -29,14 +29,14 @@ class NavesAdapter() : RecyclerView.Adapter<NavesAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(naves[position])
+        holder.vincula(starships[position])
     }
 
-    override fun getItemCount() : Int = naves.size
+    override fun getItemCount() : Int = starships.size
 
-    fun atualiza(naves : List<Nave>){
-        this.naves.clear()
-        this.naves.addAll(naves)
+    fun atualiza(starships : List<Starship>){
+        this.starships.clear()
+        this.starships.addAll(starships)
         notifyDataSetChanged()
     }
 }

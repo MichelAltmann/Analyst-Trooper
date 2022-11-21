@@ -10,12 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
-import com.android.desafiofinalstarwars.model.Nave
 import com.android.desafiofinalstarwars.model.Planeta
 import com.android.desafiofinalstarwars.ui.DetalhesView
-import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.right.RightFragment
-import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetasViewModel
+import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetsViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.PlanetasAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,7 +25,7 @@ class PlanetasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel by viewModel<PlanetasViewModel>()
+    private val viewModel by viewModel<PlanetsViewModel>()
 
     private val listaPlanetas : ArrayList<Planeta> = ArrayList()
 
@@ -99,10 +97,10 @@ class PlanetasFragment : Fragment() {
         }
     }
 
-    private fun handleProgressBar(state: PlanetasViewModel.State) {
+    private fun handleProgressBar(state: PlanetsViewModel.State) {
         when(state){
-            PlanetasViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            PlanetasViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            PlanetsViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            PlanetsViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

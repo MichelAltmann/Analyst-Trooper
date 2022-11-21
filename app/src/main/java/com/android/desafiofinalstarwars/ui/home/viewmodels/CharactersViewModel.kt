@@ -8,24 +8,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PersonagemResposta
+import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.CharacterResponse
 import kotlinx.coroutines.launch
 
-class PersonagensViewModel(private val repository: RepositoryInterface) : ViewModel() {
+class CharactersViewModel(private val repository: RepositoryInterface) : ViewModel() {
 
-    private val _personagemResposta = MutableLiveData<PersonagemResposta?>()
-    val personagemResposta: LiveData<PersonagemResposta?> = _personagemResposta
-    private val _personagemError = MutableLiveData<Unit>()
-    val personagemError = _personagemError as LiveData<Unit>
+    private val _characterResponse = MutableLiveData<CharacterResponse?>()
+    val characterResponse: LiveData<CharacterResponse?> = _characterResponse
+    private val _characterError = MutableLiveData<Unit>()
+    val characterError = _characterError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
-    fun getBuscaPersonagemsApi() = viewModelScope.launch {
+    fun getApiCharacters() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        val response = repository.buscaPersonagens()
-        Log.i(TAG, "getBuscaPersonagensApi: $response")
-        when (response) {
-            is NetworkResponse.Success -> { _personagemResposta.value = response.data }
-            is NetworkResponse.Failed -> { _personagemError.value = Unit }
+        when (val response = repository.getCharacters()) {
+            is NetworkResponse.Success -> { _characterResponse.value = response.data }
+            is NetworkResponse.Failed -> { _characterError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED
     }

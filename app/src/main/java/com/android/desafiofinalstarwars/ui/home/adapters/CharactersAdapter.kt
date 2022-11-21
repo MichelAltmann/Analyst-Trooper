@@ -2,31 +2,30 @@ package com.android.desafiofinalstarwars.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
-import com.android.desafiofinalstarwars.model.Personagem
+import com.android.desafiofinalstarwars.model.Character
 
-class PersonagensAdapter() : RecyclerView.Adapter<PersonagensAdapter.ViewHolder>() {
+class CharactersAdapter() : RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
 
     private val genero = "Gender: "
-    private val personagens : MutableList<Personagem> = mutableListOf()
-    lateinit var itemClickListener : (Personagem) -> Unit
+    private val personagens : MutableList<Character> = mutableListOf()
+    lateinit var itemClickListener : (Character) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(personagem: Personagem){
+        fun vincula(character: Character){
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
-            titulo.text = personagem.nome
-            subTitulo.text = "Height: " + personagem.altura
-            when(personagem.genero){
+            titulo.text = character.name
+            subTitulo.text = "Height: " + character.height
+            when(character.gender){
                 "male" -> subTitulo2.text = genero + "Male"
                 "female" -> subTitulo2.text = genero + "Female"
                 else -> subTitulo2.text = genero + "None"
             }
             itemView.rootView.setOnClickListener {
-                itemClickListener.invoke(personagem)
+                itemClickListener.invoke(character)
             }
         }
     }
@@ -42,7 +41,7 @@ class PersonagensAdapter() : RecyclerView.Adapter<PersonagensAdapter.ViewHolder>
 
     override fun getItemCount() : Int = personagens.size
 
-    fun atualiza(personagens: List<Personagem>){
+    fun atualiza(personagens: List<Character>){
         this.personagens.clear()
         this.personagens.addAll(personagens)
         notifyDataSetChanged()

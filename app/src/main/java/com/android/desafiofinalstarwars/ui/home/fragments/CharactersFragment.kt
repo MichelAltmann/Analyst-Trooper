@@ -12,14 +12,14 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
-import com.android.desafiofinalstarwars.model.Personagem
+import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
-import com.android.desafiofinalstarwars.ui.home.viewmodels.PersonagensViewModel
-import com.android.desafiofinalstarwars.ui.home.adapters.PersonagensAdapter
+import com.android.desafiofinalstarwars.ui.home.viewmodels.CharactersViewModel
+import com.android.desafiofinalstarwars.ui.home.adapters.CharactersAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PersonagensFragment : Fragment() {
+class CharactersFragment : Fragment() {
 
     private var _binding: FragmentPersonagensBinding? = null
 
@@ -27,14 +27,14 @@ class PersonagensFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val listaPersonagens : ArrayList<Personagem> = arrayListOf()
+    private val charactersList : ArrayList<Character> = arrayListOf()
 
-    private val viewModel by viewModel<PersonagensViewModel>()
+    private val viewModel by viewModel<CharactersViewModel>()
 
     private var isClicked = 0
 
     private val adapter by lazy {
-        PersonagensAdapter()
+        CharactersAdapter()
     }
 
     private val fromVisible : Animation by lazy {AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
@@ -55,27 +55,27 @@ class PersonagensFragment : Fragment() {
 
         setObserver()
 
-        viewModel.getBuscaPersonagemsApi()
+        viewModel.getApiCharacters()
 
         adapter.itemClickListener = {
             isClicked = 1
-            chamaTelaDescricao(it)
+            descriptionTabCall(it)
         }
-        HomeFragment.onTabReselectedPersonagensListener = {
-            isClicked = isClicked -1
-            chamaTelaDescricao()
+        HomeFragment.onTabReselectedCharactersListener = {
+            isClicked -= 1
+            descriptionTabCall()
         }
 
         Log.i(TAG, "onViewCreated: ")
     }
 
-    private fun chamaTelaDescricao(personagem: Personagem? = null) {
+    private fun descriptionTabCall(character: Character? = null) {
         if (isClicked == 1){
             binding.fragmentPersonagensRecyclerview.startAnimation(fromVisible)
             binding.fragmentPersonagensRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(personagem!!)
+            DetalhesView(binding.fragmentViewDetalhes).bind(character!!)
         } else if (isClicked == 0) {
             binding.fragmentPersonagensRecyclerview.startAnimation(toVisible)
             binding.fragmentPersonagensRecyclerview.visibility = View.VISIBLE
@@ -86,24 +86,24 @@ class PersonagensFragment : Fragment() {
 
     private fun setObserver() {
         Log.i(TAG, "setObserver: ")
-        viewModel.personagemResposta.observe(viewLifecycleOwner){
+        viewModel.characterResponse.observe(viewLifecycleOwner){
             it?.let {
-                listaPersonagens.addAll(it.resultados!!)
-                adapter.atualiza(listaPersonagens)
+                charactersList.addAll(it.resultados!!)
+                adapter.atualiza(charactersList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.personagemError.observe(viewLifecycleOwner){
+        viewModel.characterError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun handleProgressBar(state: PersonagensViewModel.State?) {
+    private fun handleProgressBar(state: CharactersViewModel.State?) {
         when(state){
-            PersonagensViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            PersonagensViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            CharactersViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            CharactersViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

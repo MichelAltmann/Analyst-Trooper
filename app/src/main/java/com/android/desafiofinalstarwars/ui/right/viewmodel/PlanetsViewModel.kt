@@ -11,7 +11,7 @@ import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.Net
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PlanetaResposta
 import kotlinx.coroutines.launch
 
-class PlanetasViewModel(private val repository: RepositoryInterface) : ViewModel() {
+class PlanetsViewModel(private val repository: RepositoryInterface) : ViewModel() {
 
     private val _planetaResposta = MutableLiveData<PlanetaResposta?>()
     val planetaResposta: LiveData<PlanetaResposta?> = _planetaResposta
@@ -21,9 +21,7 @@ class PlanetasViewModel(private val repository: RepositoryInterface) : ViewModel
 
     fun getBuscaPlanetasApi() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        val response = repository.buscaPlanetas()
-        Log.i(ContentValues.TAG, "getBuscaNavesApi: ")
-        when (response) {
+        when (val response = repository.buscaPlanetas()) {
             is NetworkResponse.Success -> { _planetaResposta.value = response.data }
             is NetworkResponse.Failed -> { _planetaError.value = Unit }
         }

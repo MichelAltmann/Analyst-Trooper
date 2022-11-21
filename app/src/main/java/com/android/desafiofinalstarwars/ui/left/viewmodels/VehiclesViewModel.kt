@@ -11,7 +11,7 @@ import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.Net
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.VeiculoResposta
 import kotlinx.coroutines.launch
 
-class VeiculosViewModel(private val repository: RepositoryInterface) : ViewModel() {
+class VehiclesViewModel(private val repository: RepositoryInterface) : ViewModel() {
     private val _veiculoResposta = MutableLiveData<VeiculoResposta?>()
     val veiculoResposta: LiveData<VeiculoResposta?> = _veiculoResposta
     private val _veiculoError = MutableLiveData<Unit>()

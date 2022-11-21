@@ -3,24 +3,24 @@ package com.android.desafiofinalstarwars.koin
 import com.android.desafiofinalstarwars.retrofit.webclient.RetrofitInicializador
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.Repository
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
-import com.android.desafiofinalstarwars.ui.home.viewmodels.EspeciesViewModel
-import com.android.desafiofinalstarwars.ui.left.viewmodels.NavesViewModel
-import com.android.desafiofinalstarwars.ui.home.viewmodels.PersonagensViewModel
-import com.android.desafiofinalstarwars.ui.left.viewmodels.VeiculosViewModel
-import com.android.desafiofinalstarwars.ui.right.viewmodel.FilmesViewModel
-import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetasViewModel
+import com.android.desafiofinalstarwars.ui.home.viewmodels.SpeciesViewModel
+import com.android.desafiofinalstarwars.ui.left.viewmodels.StarshipsViewModel
+import com.android.desafiofinalstarwars.ui.home.viewmodels.CharactersViewModel
+import com.android.desafiofinalstarwars.ui.left.viewmodels.VehiclesViewModel
+import com.android.desafiofinalstarwars.ui.right.viewmodel.MoviesViewModel
+import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val modelModule : Module = module {
-    viewModel { PersonagensViewModel(get()) }
-    viewModel { NavesViewModel(get()) }
-    viewModel { PlanetasViewModel(get()) }
-    viewModel { EspeciesViewModel(get()) }
-    viewModel { FilmesViewModel(get()) }
-    viewModel { VeiculosViewModel(get()) }
+    viewModel { CharactersViewModel(get()) }
+    viewModel { StarshipsViewModel(get()) }
+    viewModel { PlanetsViewModel(get()) }
+    viewModel { SpeciesViewModel(get()) }
+    viewModel { MoviesViewModel(get()) }
+    viewModel { VehiclesViewModel(get()) }
 }
 
 val retrofitModule : Module = module {

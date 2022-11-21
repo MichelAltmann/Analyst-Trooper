@@ -29,31 +29,31 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
     private val generic12 = binding.textViewInfoGeneric12
 
    @SuppressLint("SetTextI18n")
-   fun bind(personagem: Personagem){
-       Log.i(TAG, "bind: " + personagem.nome)
+   fun bind(character: Character){
+       Log.i(TAG, "bind: " + character.name)
 
-       if (!personagem.nome.isNullOrEmpty()) nome.text = personagem.nome
+       if (!character.name.isNullOrEmpty()) nome.text = character.name
        else nome.visibility = View.GONE
 
-       if (!personagem.genero.isNullOrEmpty()) generic1.text = "Gender: "+ personagem.genero
+       if (!character.gender.isNullOrEmpty()) generic1.text = "Gender: "+ character.gender
        else generic1.visibility = View.GONE
 
-       if (!personagem.altura.isNullOrEmpty()) generic2.text = "Height: "+ personagem.altura + "cm"
+       if (!character.height.isNullOrEmpty()) generic2.text = "Height: "+ character.height + "cm"
        else generic2.visibility = View.GONE
 
-       if (!personagem.anoNascimento.isNullOrEmpty()) generic3.text = "Year of Birth: "+ personagem.anoNascimento
+       if (!character.birthYear.isNullOrEmpty()) generic3.text = "Year of Birth: "+ character.birthYear
        else generic3.visibility = View.GONE
 
-       if (!personagem.peso.isNullOrEmpty()) generic4.text = "Weight: "+ personagem.peso + "Kg"
+       if (!character.mass.isNullOrEmpty()) generic4.text = "Weight: "+ character.mass + "Kg"
        else generic4.visibility = View.GONE
 
-       if (!personagem.corDePele.isNullOrEmpty()) generic5.text = "Skin Color: "+ personagem.corDePele
+       if (!character.skinColor.isNullOrEmpty()) generic5.text = "Skin Color: "+ character.skinColor
        else generic5.visibility = View.GONE
 
-       if (!personagem.corDoCabelo.isNullOrEmpty()) generic6.text = "Hair Color: "+ personagem.corDoCabelo
+       if (!character.hairColor.isNullOrEmpty()) generic6.text = "Hair Color: "+ character.hairColor
        else generic6.visibility = View.GONE
 
-       if (!personagem.corDoOlho.isNullOrEmpty()) generic7.text = "Eye Color: "+ personagem.corDoOlho
+       if (!character.eyeColor.isNullOrEmpty()) generic7.text = "Eye Color: "+ character.eyeColor
        else generic7.visibility = View.GONE
 
        generic8.visibility = View.GONE
@@ -63,29 +63,29 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
        generic12.visibility = View.GONE
    }
 
-    fun bind(especie: Especie){
-        if (!especie.nome.isNullOrEmpty()) nome.text = especie.nome
+    fun bind(specie: Specie){
+        if (!specie.nome.isNullOrEmpty()) nome.text = specie.nome
         else nome.visibility = View.GONE
 
-        if (!especie.lingua.isNullOrEmpty()) generic1.text = "Language: "+ especie.lingua
+        if (!specie.lingua.isNullOrEmpty()) generic1.text = "Language: "+ specie.lingua
         else generic1.visibility = View.GONE
 
-        if (!especie.alturaMedia.isNullOrEmpty()) generic2.text = "Average Height: "+ especie.alturaMedia + "cm"
+        if (!specie.alturaMedia.isNullOrEmpty()) generic2.text = "Average Height: "+ specie.alturaMedia + "cm"
         else generic2.visibility = View.GONE
 
-        if (!especie.classificacao.isNullOrEmpty()) generic3.text = "Classification: "+ especie.classificacao
+        if (!specie.classificacao.isNullOrEmpty()) generic3.text = "Classification: "+ specie.classificacao
         else generic3.visibility = View.GONE
 
-        if (!especie.coresDeCabelo.isNullOrEmpty()) generic4.text = "Hair Colors: "+ especie.coresDeCabelo
+        if (!specie.coresDeCabelo.isNullOrEmpty()) generic4.text = "Hair Colors: "+ specie.coresDeCabelo
         else generic4.visibility = View.GONE
 
-        if (!especie.coresDePele.isNullOrEmpty()) generic5.text = "Skin Colors: "+ especie.coresDePele
+        if (!specie.coresDePele.isNullOrEmpty()) generic5.text = "Skin Colors: "+ specie.coresDePele
         else generic5.visibility = View.GONE
 
-        if (!especie.coresDeOlho.isNullOrEmpty()) generic6.text = "Eye Colors: "+ especie.coresDeOlho
+        if (!specie.coresDeOlho.isNullOrEmpty()) generic6.text = "Eye Colors: "+ specie.coresDeOlho
         else generic6.visibility = View.GONE
 
-        if (!especie.mediaDeVida.isNullOrEmpty()) generic7.text = "Lifespan: "+ especie.mediaDeVida
+        if (!specie.mediaDeVida.isNullOrEmpty()) generic7.text = "Lifespan: "+ specie.mediaDeVida
         else generic7.visibility = View.GONE
 
         generic8.visibility = View.GONE
@@ -95,41 +95,41 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
         generic12.visibility = View.GONE
     }
 
-    fun bind(nave: Nave){
-        if (!nave.nome.isNullOrEmpty()) nome.text = nave.nome
+    fun bind(starship: Starship){
+        if (!starship.nome.isNullOrEmpty()) nome.text = starship.nome
         else nome.visibility = View.GONE
 
-        if (!nave.modelo.isNullOrEmpty()) generic1.text = "Model: "+ nave.modelo
+        if (!starship.modelo.isNullOrEmpty()) generic1.text = "Model: "+ starship.modelo
         else generic1.visibility = View.GONE
 
-        if (!nave.classe.isNullOrEmpty()) generic2.text = "Class: "+ nave.classe
+        if (!starship.classe.isNullOrEmpty()) generic2.text = "Class: "+ starship.classe
         else generic2.visibility = View.GONE
 
-        if (!nave.MGLT.isNullOrEmpty()) generic3.text = "MGLT: "+ nave.MGLT
+        if (!starship.MGLT.isNullOrEmpty()) generic3.text = "MGLT: "+ starship.MGLT
         else generic3.visibility = View.GONE
 
-        if (!nave.velocidadeMaxima.isNullOrEmpty()) generic4.text = "Max Speed: "+ nave.velocidadeMaxima
+        if (!starship.velocidadeMaxima.isNullOrEmpty()) generic4.text = "Max Speed: "+ starship.velocidadeMaxima
         else generic4.visibility = View.GONE
 
-        if (!nave.avaliacao.isNullOrEmpty()) generic5.text = "Hyperdrive Rating: "+ nave.avaliacao
+        if (!starship.avaliacao.isNullOrEmpty()) generic5.text = "Hyperdrive Rating: "+ starship.avaliacao
         else generic5.visibility = View.GONE
 
-        if (!nave.comprimento.isNullOrEmpty()) generic6.text = "Lenght: "+ nave.comprimento
+        if (!starship.comprimento.isNullOrEmpty()) generic6.text = "Lenght: "+ starship.comprimento
         else generic6.visibility = View.GONE
 
-        if (!nave.consumiveis.isNullOrEmpty()) generic7.text = "Consumables: "+ nave.consumiveis
+        if (!starship.consumiveis.isNullOrEmpty()) generic7.text = "Consumables: "+ starship.consumiveis
         else generic7.visibility = View.GONE
 
-        if (!nave.capacidade.isNullOrEmpty()) generic8.text = "Capacity: " + nave.capacidade
+        if (!starship.capacidade.isNullOrEmpty()) generic8.text = "Capacity: " + starship.capacidade
         else generic8.visibility = View.GONE
 
-        if (!nave.capacidadeDePessoas.isNullOrEmpty()) generic9.text = "Crew Capacity: " + nave.capacidade
+        if (!starship.capacidadeDePessoas.isNullOrEmpty()) generic9.text = "Crew Capacity: " + starship.capacidade
         else generic9.visibility = View.GONE
 
-        if (!nave.preco.isNullOrEmpty()) generic10.text = "Price: " + nave.preco
+        if (!starship.preco.isNullOrEmpty()) generic10.text = "Price: " + starship.preco
         else generic10.visibility = View.GONE
 
-        if (!nave.manufatorador.isNullOrEmpty()) generic11.text = "Manufacturer: " + nave.manufatorador
+        if (!starship.manufatorador.isNullOrEmpty()) generic11.text = "Manufacturer: " + starship.manufatorador
         else generic11.visibility = View.GONE
 
         generic12.visibility = View.GONE

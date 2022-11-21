@@ -10,11 +10,10 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentVeiculosBinding
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.model.Nave
 import com.android.desafiofinalstarwars.model.Veiculo
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.left.LeftFragment
-import com.android.desafiofinalstarwars.ui.left.viewmodels.VeiculosViewModel
+import com.android.desafiofinalstarwars.ui.left.viewmodels.VehiclesViewModel
 import com.android.desafiofinalstarwars.ui.left.adapters.VeiculosAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +23,7 @@ class VeiculosFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private val viewModel by viewModel<VeiculosViewModel>()
+    private val viewModel by viewModel<VehiclesViewModel>()
 
     private val listaVeiculos : ArrayList<Veiculo> = ArrayList()
 
@@ -56,7 +55,7 @@ class VeiculosFragment : Fragment() {
             chamaTelaDescricao(it)
         }
         LeftFragment.onTabReselectedVeiculosListener = {
-            isClicked = isClicked -1
+            isClicked -= 1
             chamaTelaDescricao()
         }
 
@@ -93,10 +92,10 @@ class VeiculosFragment : Fragment() {
         }
     }
 
-    private fun handleProgressBar(state: VeiculosViewModel.State) {
+    private fun handleProgressBar(state: VehiclesViewModel.State) {
         when(state){
-            VeiculosViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            VeiculosViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            VehiclesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            VehiclesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

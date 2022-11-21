@@ -3,7 +3,7 @@ package com.android.desafiofinalstarwars.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Nave(
+data class Starship(
     @SerializedName("name") val nome: String?,
     @SerializedName("model") val modelo: String?,
     @SerializedName("manufacturer") val manufatorador: String?,

@@ -12,27 +12,27 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentEspeciesBinding
-import com.android.desafiofinalstarwars.model.Especie
+import com.android.desafiofinalstarwars.model.Specie
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
-import com.android.desafiofinalstarwars.ui.home.viewmodels.EspeciesViewModel
-import com.android.desafiofinalstarwars.ui.home.adapters.EspeciesAdapter
+import com.android.desafiofinalstarwars.ui.home.viewmodels.SpeciesViewModel
+import com.android.desafiofinalstarwars.ui.home.adapters.SpeciesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.collections.ArrayList
 
-class EspeciesFragment : Fragment() {
+class SpeciesFragment : Fragment() {
 
     companion object {
-        fun newInstance() = EspeciesFragment()
+        fun newInstance() = SpeciesFragment()
     }
 
     private var _binding : FragmentEspeciesBinding? = null
 
     private val binding get() = _binding!!
 
-    private val listaEspecies : ArrayList<Especie> = ArrayList()
+    private val speciesList : ArrayList<Specie> = ArrayList()
 
-    private val viewModel by viewModel<EspeciesViewModel>()
+    private val viewModel by viewModel<SpeciesViewModel>()
 
     private var isClicked = 0
 
@@ -40,7 +40,7 @@ class EspeciesFragment : Fragment() {
     private val toVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.tovisible)}
 
     private val adapter by lazy {
-        EspeciesAdapter()
+        SpeciesAdapter()
     }
 
     override fun onCreateView(
@@ -58,27 +58,27 @@ class EspeciesFragment : Fragment() {
 
         setObserver()
 
-        viewModel.getBuscaEspeciesApi()
+        viewModel.getApiSpecies()
         Log.i(ContentValues.TAG, "onViewCreated: ")
 
         adapter.itemClickListener = {
             isClicked = 1
-            chamaTelaDescricao(it)
+            descriptionTabCall(it)
         }
         HomeFragment.onTabReselectedEspeciesListener = {
-            isClicked = isClicked -1
-            chamaTelaDescricao()
+            isClicked -= 1
+            descriptionTabCall()
         }
 
     }
 
-    private fun chamaTelaDescricao(especie: Especie? = null) {
+    private fun descriptionTabCall(specie: Specie? = null) {
         if (isClicked == 1){
             binding.fragmentEspeciesRecyclerview.startAnimation(fromVisible)
             binding.fragmentEspeciesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(especie!!)
+            DetalhesView(binding.fragmentViewDetalhes).bind(specie!!)
         } else if (isClicked == 0) {
             binding.fragmentEspeciesRecyclerview.startAnimation(toVisible)
             binding.fragmentEspeciesRecyclerview.visibility = View.VISIBLE
@@ -89,24 +89,24 @@ class EspeciesFragment : Fragment() {
 
     private fun setObserver() {
         Log.i(ContentValues.TAG, "setObserver: ")
-        viewModel.especieResposta.observe(viewLifecycleOwner){
+        viewModel.specieResponse.observe(viewLifecycleOwner){
             it?.let {
-                listaEspecies.addAll(it.resultados!!)
-                adapter.atualiza(listaEspecies)
+                speciesList.addAll(it.resultados!!)
+                adapter.atualiza(speciesList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.especieError.observe(viewLifecycleOwner){
+        viewModel.specieError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun handleProgressBar(state: EspeciesViewModel.State) {
+    private fun handleProgressBar(state: SpeciesViewModel.State) {
         when(state){
-            EspeciesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            EspeciesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            SpeciesViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            SpeciesViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

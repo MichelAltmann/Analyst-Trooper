@@ -3,7 +3,7 @@ package com.android.desafiofinalstarwars.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Especie(
+data class Specie(
     @SerializedName("name") val nome: String?,
     @SerializedName("average_height") val alturaMedia: String?,
     @SerializedName("average_lifespan") val mediaDeVida: String?,
