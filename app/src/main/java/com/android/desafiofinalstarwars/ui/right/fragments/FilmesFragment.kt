@@ -10,7 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentFilmesBinding
-import com.android.desafiofinalstarwars.model.Filme
+import com.android.desafiofinalstarwars.model.Movie
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.right.RightFragment
 import com.android.desafiofinalstarwars.ui.right.viewmodel.MoviesViewModel
@@ -25,7 +25,7 @@ class FilmesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val listaFilmes : ArrayList<Filme> = ArrayList()
+    private val moviesList : ArrayList<Movie> = ArrayList()
 
     private val viewModel by viewModel<MoviesViewModel>()
 
@@ -65,13 +65,13 @@ class FilmesFragment : Fragment() {
 
     }
 
-    private fun chamaTelaDescricao(filme: Filme? = null) {
+    private fun chamaTelaDescricao(movie: Movie? = null) {
         if (isClicked == 1){
             binding.fragmentFilmesRecyclerview.startAnimation(fromVisible)
             binding.fragmentFilmesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(filme!!)
+            DetalhesView(binding.fragmentViewDetalhes).bind(movie!!)
         } else if (isClicked == 0) {
             binding.fragmentFilmesRecyclerview.startAnimation(toVisible)
             binding.fragmentFilmesRecyclerview.visibility = View.VISIBLE
@@ -83,8 +83,8 @@ class FilmesFragment : Fragment() {
     private fun setObserver(){
         viewModel.filmeResposta.observe(viewLifecycleOwner){
             it?.let {
-                listaFilmes.addAll(it.resultados!!)
-                adapter.atualiza(listaFilmes)
+                moviesList.addAll(it.resultados!!)
+                adapter.atualiza(moviesList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

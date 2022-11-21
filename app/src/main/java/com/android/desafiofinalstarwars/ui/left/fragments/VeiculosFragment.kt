@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.databinding.FragmentVeiculosBinding
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.model.Veiculo
+import com.android.desafiofinalstarwars.model.Vehicle
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.left.viewmodels.VehiclesViewModel
@@ -25,7 +25,7 @@ class VeiculosFragment : Fragment() {
 
     private val viewModel by viewModel<VehiclesViewModel>()
 
-    private val listaVeiculos : ArrayList<Veiculo> = ArrayList()
+    private val vehiclesList : ArrayList<Vehicle> = ArrayList()
 
     private val adapter by lazy {
         VeiculosAdapter()
@@ -61,13 +61,13 @@ class VeiculosFragment : Fragment() {
 
     }
 
-    private fun chamaTelaDescricao(veiculo: Veiculo? = null) {
+    private fun chamaTelaDescricao(vehicle: Vehicle? = null) {
         if (isClicked == 1){
             binding.fragmentVeiculosRecyclerview.startAnimation(fromVisible)
             binding.fragmentVeiculosRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(veiculo!!)
+            DetalhesView(binding.fragmentViewDetalhes).bind(vehicle!!)
         } else if (isClicked == 0) {
             binding.fragmentVeiculosRecyclerview.startAnimation(toVisible)
             binding.fragmentVeiculosRecyclerview.visibility = View.VISIBLE
@@ -80,8 +80,8 @@ class VeiculosFragment : Fragment() {
     private fun setObserver() {
         viewModel.veiculoResposta.observe(viewLifecycleOwner){
             it?.let {
-                listaVeiculos.addAll(it.resultados!!)
-                adapter.atualiza(listaVeiculos)
+                vehiclesList.addAll(it.resultados!!)
+                adapter.atualiza(vehiclesList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

@@ -15,8 +15,8 @@ class StarshipsAdapter() : RecyclerView.Adapter<StarshipsAdapter.ViewHolder>() {
         fun vincula(starship : Starship){
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
-            titulo.text = starship.nome
-            subTitulo.text = "Model: " + starship.modelo
+            titulo.text = starship.name
+            subTitulo.text = "Model: " + starship.model
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(starship)
             }

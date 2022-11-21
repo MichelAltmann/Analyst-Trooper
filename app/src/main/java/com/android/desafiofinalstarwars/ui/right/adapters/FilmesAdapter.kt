@@ -4,24 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
-import com.android.desafiofinalstarwars.model.Filme
-import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.model.Movie
 
 class FilmesAdapter() : RecyclerView.Adapter<FilmesAdapter.ViewHolder>() {
 
-    private val filmes : MutableList<Filme> = mutableListOf()
-    lateinit var itemClickListener: (Filme) -> Unit
+    private val movies : MutableList<Movie> = mutableListOf()
+    lateinit var itemClickListener: (Movie) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(filme: Filme){
+        fun vincula(movie: Movie){
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
-            titulo.text = filme.titulo
-            subTitulo.text = "Director: " + filme.diretor
-            subTitulo2.text = "Release Date: " + filme.dataLancamento
+            titulo.text = movie.title
+            subTitulo.text = "Director: " + movie.director
+            subTitulo2.text = "Release Date: " + movie.releaseDate
             itemView.rootView.setOnClickListener {
-                itemClickListener.invoke(filme)
+                itemClickListener.invoke(movie)
             }
         }
     }
@@ -32,14 +31,14 @@ class FilmesAdapter() : RecyclerView.Adapter<FilmesAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(filmes[position])
+        holder.vincula(movies[position])
     }
 
-    override fun getItemCount() : Int = filmes.size
+    override fun getItemCount() : Int = movies.size
 
-    fun atualiza(filmes: List<Filme>){
-        this.filmes.clear()
-        this.filmes.addAll(filmes)
+    fun atualiza(movies: List<Movie>){
+        this.movies.clear()
+        this.movies.addAll(movies)
         notifyDataSetChanged()
     }
 }

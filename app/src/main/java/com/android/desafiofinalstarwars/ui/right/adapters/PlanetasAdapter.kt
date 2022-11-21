@@ -4,23 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
-import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.model.Planet
 
 class PlanetasAdapter() : RecyclerView.Adapter<PlanetasAdapter.ViewHolder>() {
 
-    private val planetas : MutableList<Planeta> = mutableListOf()
-    lateinit var itemClickListener: (Planeta) -> Unit
+    private val planets : MutableList<Planet> = mutableListOf()
+    lateinit var itemClickListener: (Planet) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(planeta: Planeta){
+        fun vincula(planet: Planet){
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
             val subTitulo2 = binding.cardViewSubtitulo2
-            titulo.text = planeta.nome
-            subTitulo.text = "Water per km: " + planeta.aguaNaSuperficie
-            subTitulo2.text = "Population: " + planeta.populacao
+            titulo.text = planet.name
+            subTitulo.text = "Water per km: " + planet.surfaceWater
+            subTitulo2.text = "Population: " + planet.population
             itemView.rootView.setOnClickListener {
-                itemClickListener.invoke(planeta)
+                itemClickListener.invoke(planet)
             }
         }
     }
@@ -31,14 +31,14 @@ class PlanetasAdapter() : RecyclerView.Adapter<PlanetasAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(planetas[position])
+        holder.vincula(planets[position])
     }
 
-    override fun getItemCount() : Int = planetas.size
+    override fun getItemCount() : Int = planets.size
 
-    fun atualiza(planetas: List<Planeta>){
-        this.planetas.clear()
-        this.planetas.addAll(planetas)
+    fun atualiza(planets: List<Planet>){
+        this.planets.clear()
+        this.planets.addAll(planets)
         notifyDataSetChanged()
     }
 }

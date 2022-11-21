@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
-import com.android.desafiofinalstarwars.model.Planeta
+import com.android.desafiofinalstarwars.model.Planet
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.right.RightFragment
 import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetsViewModel
@@ -27,7 +27,7 @@ class PlanetasFragment : Fragment() {
 
     private val viewModel by viewModel<PlanetsViewModel>()
 
-    private val listaPlanetas : ArrayList<Planeta> = ArrayList()
+    private val planetsList : ArrayList<Planet> = ArrayList()
 
     private val adapter by lazy {
         PlanetasAdapter()
@@ -66,13 +66,13 @@ class PlanetasFragment : Fragment() {
 
     }
 
-    private fun chamaTelaDescricao(planeta: Planeta? = null) {
+    private fun chamaTelaDescricao(planet: Planet? = null) {
         if (isClicked == 1){
             binding.fragmentPlanetasRecyclerview.startAnimation(fromVisible)
             binding.fragmentPlanetasRecyclerview.visibility = View.GONE
             binding.fragmentViewDetalhes.root.startAnimation(toVisible)
             binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(planeta!!)
+            DetalhesView(binding.fragmentViewDetalhes).bind(planet!!)
         } else if (isClicked == 0) {
             binding.fragmentPlanetasRecyclerview.startAnimation(toVisible)
             binding.fragmentPlanetasRecyclerview.visibility = View.VISIBLE
@@ -85,8 +85,8 @@ class PlanetasFragment : Fragment() {
     private fun setObserver() {
         viewModel.planetaResposta.observe(viewLifecycleOwner){
             it?.let {
-                listaPlanetas.addAll(it.resultados!!)
-                adapter.atualiza(listaPlanetas)
+                planetsList.addAll(it.resultados!!)
+                adapter.atualiza(planetsList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

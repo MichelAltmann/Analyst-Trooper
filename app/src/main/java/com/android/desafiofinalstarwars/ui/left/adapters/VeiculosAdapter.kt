@@ -4,21 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
-import com.android.desafiofinalstarwars.model.Veiculo
+import com.android.desafiofinalstarwars.model.Vehicle
 
 class VeiculosAdapter() : RecyclerView.Adapter<VeiculosAdapter.ViewHolder>() {
 
-    private val veiculos : MutableList<Veiculo> = mutableListOf()
-    lateinit var itemClickListener: (Veiculo) -> Unit
+    private val vehicles : MutableList<Vehicle> = mutableListOf()
+    lateinit var itemClickListener: (Vehicle) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(veiculo : Veiculo){
+        fun vincula(vehicle : Vehicle){
             val titulo = binding.cardViewTitulo
             val subTitulo = binding.cardViewSubtitulo
-            titulo.text = veiculo.nome
-            subTitulo.text = "Model: " + veiculo.modelo
+            titulo.text = vehicle.name
+            subTitulo.text = "Model: " + vehicle.model
             itemView.rootView.setOnClickListener {
-                itemClickListener.invoke(veiculo)
+                itemClickListener.invoke(vehicle)
             }
         }
     }
@@ -29,14 +29,14 @@ class VeiculosAdapter() : RecyclerView.Adapter<VeiculosAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(veiculos[position])
+        holder.vincula(vehicles[position])
     }
 
-    override fun getItemCount() : Int = veiculos.size
+    override fun getItemCount() : Int = vehicles.size
 
-    fun atualiza(veiculos : List<Veiculo>){
-        this.veiculos.clear()
-        this.veiculos.addAll(veiculos)
+    fun atualiza(vehicles : List<Vehicle>){
+        this.vehicles.clear()
+        this.vehicles.addAll(vehicles)
         notifyDataSetChanged()
     }
 }
