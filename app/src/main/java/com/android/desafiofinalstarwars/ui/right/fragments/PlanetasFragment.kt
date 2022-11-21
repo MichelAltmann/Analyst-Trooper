@@ -70,14 +70,14 @@ class PlanetasFragment : Fragment() {
         if (isClicked == 1){
             binding.fragmentPlanetasRecyclerview.startAnimation(fromVisible)
             binding.fragmentPlanetasRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(planet!!)
+            binding.fragmentViewDetails.root.startAnimation(toVisible)
+            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            DetalhesView(binding.fragmentViewDetails).bind(planet!!)
         } else if (isClicked == 0) {
             binding.fragmentPlanetasRecyclerview.startAnimation(toVisible)
             binding.fragmentPlanetasRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.GONE
+            binding.fragmentViewDetails.root.startAnimation(fromVisible)
+            binding.fragmentViewDetails.root.visibility = View.GONE
         }
     }
 

@@ -37,19 +37,19 @@ class HomeFragment : Fragment() {
             binding.fragmentHomeTablayout, binding.fragmentHomeViewpagerTablayout
         ) {
             tab : TabLayout.Tab, position : Int ->
-            tab.setText(labels[position])
+            tab.text = labels[position]
         }.attach()
 
-        selecionaTabPadrão()
+        defaultTabSelection()
         setListener()
     }
 
     override fun onResume() {
         super.onResume()
-        selecionaTabPadrão()
+        defaultTabSelection()
     }
 
-    private fun selecionaTabPadrão(){
+    private fun defaultTabSelection(){
         binding.fragmentHomeViewpagerTablayout.setCurrentItem(0, false)
     }
 
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                 if (binding.fragmentHomeViewpagerTablayout.currentItem == 0){
                     onTabReselectedCharactersListener.invoke()
                 } else {
-                    onTabReselectedEspeciesListener.invoke()
+                    onTabReselectedSpeciesListener.invoke()
                 }
             }
 
@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
 
     companion object {
         lateinit var onTabReselectedCharactersListener : () -> Unit
-        lateinit var onTabReselectedEspeciesListener : () -> Unit
+        lateinit var onTabReselectedSpeciesListener : () -> Unit
     }
 
 }

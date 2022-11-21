@@ -9,7 +9,7 @@
         android:id="@+id/PersonagensFragment"
         android:name="com.android.desafiofinalstarwars.ui.home.fragments.CharactersFragment"
         android:label="Personagens Fragment"
-        tools:layout="@layout/fragment_personagens">
+        tools:layout="@layout/fragment_characters">
         <action
             android:id="@+id/action_from_personagens_to_detalhes"
             app:destination="@+id/PersonagensDetalhesFragment"/>
@@ -19,14 +19,14 @@
         android:id="@+id/PersonagensDetalhesFragment"
         android:name="com.android.desafiofinalstarwars.ui.DetalhesView"
         android:label="Personagens Detalhes Fragment"
-        tools:layout="@layout/fragment_view_detalhes">
+        tools:layout="@layout/fragment_view_details">
     </fragment>
 
     <fragment
         android:id="@+id/EspeciesFragment"
         android:name="com.android.desafiofinalstarwars.ui.home.fragments.SpeciesFragment"
         android:label="Especies Fragment"
-        tools:layout="@layout/fragment_especies">
+        tools:layout="@layout/fragment_species">
         <action
             android:id="@+id/action_from_especies_to_detalhes"
             app:destination="@+id/PersonagensDetalhesFragment"/>

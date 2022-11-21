@@ -3,22 +3,21 @@ package com.android.desafiofinalstarwars.ui.home.fragments
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentEspeciesBinding
+import com.android.desafiofinalstarwars.databinding.FragmentSpeciesBinding
 import com.android.desafiofinalstarwars.model.Specie
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
-import com.android.desafiofinalstarwars.ui.home.viewmodels.SpeciesViewModel
 import com.android.desafiofinalstarwars.ui.home.adapters.SpeciesAdapter
+import com.android.desafiofinalstarwars.ui.home.viewmodels.SpeciesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.collections.ArrayList
 
 class SpeciesFragment : Fragment() {
 
@@ -26,7 +25,7 @@ class SpeciesFragment : Fragment() {
         fun newInstance() = SpeciesFragment()
     }
 
-    private var _binding : FragmentEspeciesBinding? = null
+    private var _binding : FragmentSpeciesBinding? = null
 
     private val binding get() = _binding!!
 
@@ -47,14 +46,14 @@ class SpeciesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEspeciesBinding.inflate(inflater,container, false)
+        _binding = FragmentSpeciesBinding.inflate(inflater,container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.fragmentEspeciesRecyclerview.adapter = adapter
+        binding.fragmentSpeciesRecyclerview.adapter = adapter
 
         setObserver()
 
@@ -65,7 +64,7 @@ class SpeciesFragment : Fragment() {
             isClicked = 1
             descriptionTabCall(it)
         }
-        HomeFragment.onTabReselectedEspeciesListener = {
+        HomeFragment.onTabReselectedSpeciesListener = {
             isClicked -= 1
             descriptionTabCall()
         }
@@ -74,16 +73,16 @@ class SpeciesFragment : Fragment() {
 
     private fun descriptionTabCall(specie: Specie? = null) {
         if (isClicked == 1){
-            binding.fragmentEspeciesRecyclerview.startAnimation(fromVisible)
-            binding.fragmentEspeciesRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(specie!!)
+            binding.fragmentSpeciesRecyclerview.startAnimation(fromVisible)
+            binding.fragmentSpeciesRecyclerview.visibility = View.GONE
+            binding.fragmentViewDetails.root.startAnimation(toVisible)
+            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            DetalhesView(binding.fragmentViewDetails).bind(specie!!)
         } else if (isClicked == 0) {
-            binding.fragmentEspeciesRecyclerview.startAnimation(toVisible)
-            binding.fragmentEspeciesRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.GONE
+            binding.fragmentSpeciesRecyclerview.startAnimation(toVisible)
+            binding.fragmentSpeciesRecyclerview.visibility = View.VISIBLE
+            binding.fragmentViewDetails.root.startAnimation(fromVisible)
+            binding.fragmentViewDetails.root.visibility = View.GONE
         }
     }
 
@@ -92,7 +91,7 @@ class SpeciesFragment : Fragment() {
         viewModel.specieResponse.observe(viewLifecycleOwner){
             it?.let {
                 speciesList.addAll(it.results!!)
-                adapter.atualiza(speciesList)
+                adapter.update(speciesList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

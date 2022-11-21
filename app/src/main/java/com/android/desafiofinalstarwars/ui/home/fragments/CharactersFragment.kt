@@ -11,7 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentPersonagensBinding
+import com.android.desafiofinalstarwars.databinding.FragmentCharactersBinding
 import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharactersFragment : Fragment() {
 
-    private var _binding: FragmentPersonagensBinding? = null
+    private var _binding: FragmentCharactersBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -44,14 +44,14 @@ class CharactersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPersonagensBinding.inflate(inflater, container, false)
+        _binding = FragmentCharactersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.fragmentPersonagensRecyclerview.adapter = adapter
+        binding.fragmentCharactersRecyclerview.adapter = adapter
 
         setObserver()
 
@@ -71,16 +71,16 @@ class CharactersFragment : Fragment() {
 
     private fun descriptionTabCall(character: Character? = null) {
         if (isClicked == 1){
-            binding.fragmentPersonagensRecyclerview.startAnimation(fromVisible)
-            binding.fragmentPersonagensRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(character!!)
+            binding.fragmentCharactersRecyclerview.startAnimation(fromVisible)
+            binding.fragmentCharactersRecyclerview.visibility = View.GONE
+            binding.fragmentViewDetails.root.startAnimation(toVisible)
+            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            DetalhesView(binding.fragmentViewDetails).bind(character!!)
         } else if (isClicked == 0) {
-            binding.fragmentPersonagensRecyclerview.startAnimation(toVisible)
-            binding.fragmentPersonagensRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.GONE
+            binding.fragmentCharactersRecyclerview.startAnimation(toVisible)
+            binding.fragmentCharactersRecyclerview.visibility = View.VISIBLE
+            binding.fragmentViewDetails.root.startAnimation(fromVisible)
+            binding.fragmentViewDetails.root.visibility = View.GONE
         }
     }
 
@@ -89,7 +89,7 @@ class CharactersFragment : Fragment() {
         viewModel.characterResponse.observe(viewLifecycleOwner){
             it?.let {
                 charactersList.addAll(it.results!!)
-                adapter.atualiza(charactersList)
+                adapter.update(charactersList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

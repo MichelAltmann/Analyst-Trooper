@@ -8,17 +8,17 @@ import com.android.desafiofinalstarwars.model.Specie
 
 class SpeciesAdapter() : RecyclerView.Adapter<SpeciesAdapter.ViewHolder>() {
 
-    private val especies : MutableList<Specie> = mutableListOf()
+    private val species : MutableList<Specie> = mutableListOf()
     lateinit var itemClickListener: (Specie) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(specie: Specie){
-            val titulo = binding.cardViewTitulo
-            val subTitulo = binding.cardViewSubtitulo
-            val subTitulo2 = binding.cardViewSubtitulo2
-            titulo.text = specie.nome
-            subTitulo.text = "Average Height: " + specie.alturaMedia
-            subTitulo2.text = "Lifespan: " + specie.mediaDeVida
+        fun bind(specie: Specie){
+            val title = binding.cardViewTitulo
+            val subTitle = binding.cardViewSubtitulo
+            val subTitle2 = binding.cardViewSubtitulo2
+            title.text = specie.name
+            subTitle.text = "Average Height: " + specie.averageHeight
+            subTitle2.text = "Lifespan: " + specie.averageLifespan
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(specie)
             }
@@ -31,14 +31,14 @@ class SpeciesAdapter() : RecyclerView.Adapter<SpeciesAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(especies[position])
+        holder.bind(species[position])
     }
 
-    override fun getItemCount() : Int = especies.size
+    override fun getItemCount() : Int = species.size
 
-    fun atualiza(especies: List<Specie>){
-        this.especies.clear()
-        this.especies.addAll(especies)
+    fun update(especies: List<Specie>){
+        this.species.clear()
+        this.species.addAll(especies)
         notifyDataSetChanged()
     }
 }

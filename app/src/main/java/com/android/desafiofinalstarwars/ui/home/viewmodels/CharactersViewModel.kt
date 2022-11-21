@@ -31,10 +31,5 @@ class CharactersViewModel(private val repository: RepositoryInterface) : ViewMod
     enum class State {
         LOADING, LOADING_FINISHED
     }
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-
-    val text: LiveData<String> = _text
 
 }

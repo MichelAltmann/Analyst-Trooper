@@ -20,8 +20,8 @@
         tools:listitem="@layout/item_cardview"/>
 
     <include
-        android:id="@+id/fragment_view_detalhes"
-        layout="@layout/fragment_view_detalhes"
+        android:id="@+id/fragment_view_details"
+        layout="@layout/fragment_view_details"
         android:visibility="gone"/>
 
     <ProgressBar

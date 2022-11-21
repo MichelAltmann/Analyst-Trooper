@@ -69,14 +69,14 @@ class StarshipsFragment : Fragment() {
         if (isClicked == 1){
             binding.fragmentNavesRecyclerview.startAnimation(fromVisible)
             binding.fragmentNavesRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetalhes.root.startAnimation(toVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetalhes).bind(starship!!)
+            binding.fragmentViewDetails.root.startAnimation(toVisible)
+            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            DetalhesView(binding.fragmentViewDetails).bind(starship!!)
         } else if (isClicked == 0) {
             binding.fragmentNavesRecyclerview.startAnimation(toVisible)
             binding.fragmentNavesRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetalhes.root.startAnimation(fromVisible)
-            binding.fragmentViewDetalhes.root.visibility = View.GONE
+            binding.fragmentViewDetails.root.startAnimation(fromVisible)
+            binding.fragmentViewDetails.root.visibility = View.GONE
         }
     }
 

@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
-import com.android.desafiofinalstarwars.databinding.FragmentViewDetalhesBinding
+import com.android.desafiofinalstarwars.databinding.FragmentViewDetailsBinding
 import com.android.desafiofinalstarwars.model.*
 
 
-class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
+class DetalhesView(private val binding : FragmentViewDetailsBinding) {
 
 //    constructor(personagem: Personagem) : this(){
 //
@@ -64,28 +64,28 @@ class DetalhesView(private val binding : FragmentViewDetalhesBinding) {
    }
 
     fun bind(specie: Specie){
-        if (!specie.nome.isNullOrEmpty()) nome.text = specie.nome
+        if (!specie.name.isNullOrEmpty()) nome.text = specie.name
         else nome.visibility = View.GONE
 
-        if (!specie.lingua.isNullOrEmpty()) generic1.text = "Language: "+ specie.lingua
+        if (!specie.language.isNullOrEmpty()) generic1.text = "Language: "+ specie.language
         else generic1.visibility = View.GONE
 
-        if (!specie.alturaMedia.isNullOrEmpty()) generic2.text = "Average Height: "+ specie.alturaMedia + "cm"
+        if (!specie.averageHeight.isNullOrEmpty()) generic2.text = "Average Height: "+ specie.averageHeight + "cm"
         else generic2.visibility = View.GONE
 
-        if (!specie.classificacao.isNullOrEmpty()) generic3.text = "Classification: "+ specie.classificacao
+        if (!specie.classification.isNullOrEmpty()) generic3.text = "Classification: "+ specie.classification
         else generic3.visibility = View.GONE
 
-        if (!specie.coresDeCabelo.isNullOrEmpty()) generic4.text = "Hair Colors: "+ specie.coresDeCabelo
+        if (!specie.hairColors.isNullOrEmpty()) generic4.text = "Hair Colors: "+ specie.hairColors
         else generic4.visibility = View.GONE
 
-        if (!specie.coresDePele.isNullOrEmpty()) generic5.text = "Skin Colors: "+ specie.coresDePele
+        if (!specie.skinColors.isNullOrEmpty()) generic5.text = "Skin Colors: "+ specie.skinColors
         else generic5.visibility = View.GONE
 
-        if (!specie.coresDeOlho.isNullOrEmpty()) generic6.text = "Eye Colors: "+ specie.coresDeOlho
+        if (!specie.eyeColors.isNullOrEmpty()) generic6.text = "Eye Colors: "+ specie.eyeColors
         else generic6.visibility = View.GONE
 
-        if (!specie.mediaDeVida.isNullOrEmpty()) generic7.text = "Lifespan: "+ specie.mediaDeVida
+        if (!specie.averageLifespan.isNullOrEmpty()) generic7.text = "Lifespan: "+ specie.averageLifespan
         else generic7.visibility = View.GONE
 
         generic8.visibility = View.GONE
