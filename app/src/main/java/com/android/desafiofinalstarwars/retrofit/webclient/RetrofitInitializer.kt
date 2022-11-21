@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 private const val BASE_URL = "https://swapi.dev/api/"
 
-class RetrofitInicializador {
+class RetrofitInitializer {
     companion object {
         fun create(context: Context?): ApiService {
             val logger = HttpLoggingInterceptor()

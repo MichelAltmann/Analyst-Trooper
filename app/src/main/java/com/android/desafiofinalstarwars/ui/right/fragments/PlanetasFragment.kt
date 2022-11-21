@@ -83,9 +83,9 @@ class PlanetasFragment : Fragment() {
 
 
     private fun setObserver() {
-        viewModel.planetaResposta.observe(viewLifecycleOwner){
+        viewModel.planetResponse.observe(viewLifecycleOwner){
             it?.let {
-                planetsList.addAll(it.resultados!!)
+                planetsList.addAll(it.results!!)
                 adapter.atualiza(planetsList)
             }
         }

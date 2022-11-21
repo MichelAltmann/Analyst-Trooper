@@ -6,20 +6,20 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("people/")
-    suspend fun buscaPersonagens() : Response<CharacterResponse>
+    suspend fun getCharacters() : Response<CharacterResponse>
 
     @GET("starships/")
-    suspend fun buscaNaves() : Response<StarshipResponse>
+    suspend fun getStarships() : Response<StarshipResponse>
 
     @GET("planets/")
-    suspend fun buscaPlanetas() : Response<PlanetaResposta>
+    suspend fun getPlanets() : Response<PlanetResponse>
 
     @GET("species/")
-    suspend fun buscaEspecies() : Response<SpecieResponse>
+    suspend fun getSpecies() : Response<SpecieResponse>
 
     @GET("films/")
-    suspend fun buscaFilmes() : Response<FilmeResposta>
+    suspend fun getMovies() : Response<MovieResponse>
 
     @GET("vehicles/")
-    suspend fun buscaVeiculos() : Response<VeiculoResposta>
+    suspend fun getVehicles() : Response<VehicleResponse>
 }

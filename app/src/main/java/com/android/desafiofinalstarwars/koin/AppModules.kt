@@ -1,6 +1,6 @@
 package com.android.desafiofinalstarwars.koin
 
-import com.android.desafiofinalstarwars.retrofit.webclient.RetrofitInicializador
+import com.android.desafiofinalstarwars.retrofit.webclient.RetrofitInitializer
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.Repository
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.ui.home.viewmodels.SpeciesViewModel
@@ -28,7 +28,7 @@ val retrofitModule : Module = module {
 }
 
 val dataModule = module {
-    single { RetrofitInicializador.create(androidContext()) }
+    single { RetrofitInitializer.create(androidContext()) }
 }
 
 

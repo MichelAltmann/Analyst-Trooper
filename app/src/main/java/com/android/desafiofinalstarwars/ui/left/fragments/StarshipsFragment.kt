@@ -83,7 +83,7 @@ class StarshipsFragment : Fragment() {
     private fun setObserver(){
         viewModel.starshipResponse.observe(viewLifecycleOwner){
             it?.let {
-                starshipsList.addAll(it.resultados!!)
+                starshipsList.addAll(it.results!!)
                 adapter.atualiza(starshipsList)
             }
         }

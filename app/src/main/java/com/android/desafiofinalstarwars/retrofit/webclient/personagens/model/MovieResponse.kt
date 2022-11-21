@@ -1,16 +1,16 @@
 package com.android.desafiofinalstarwars.retrofit.webclient.personagens.model
 
-import com.android.desafiofinalstarwars.model.Specie
+import com.android.desafiofinalstarwars.model.Movie
 import com.google.gson.annotations.SerializedName
 
-class SpecieResponse(
+class MovieResponse(
     @SerializedName("count") val count: Int?,
     @SerializedName("next") val next: String?,
     @SerializedName("previous") val previous: String?,
-    @SerializedName("results") val results: List<Specie>?,
+    @SerializedName("results") val results: List<Movie>?,
 ) {
-    val resposta: SpecieResponse
-        get() = SpecieResponse(
+    val resposta: MovieResponse
+        get() = MovieResponse(
             count ?: 0,
             next ?: "",
             previous ?: "",

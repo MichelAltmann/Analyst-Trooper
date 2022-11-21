@@ -1,28 +1,26 @@
 package com.android.desafiofinalstarwars.ui.right.viewmodel
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
-import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PlanetaResposta
+import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PlanetResponse
 import kotlinx.coroutines.launch
 
 class PlanetsViewModel(private val repository: RepositoryInterface) : ViewModel() {
 
-    private val _planetaResposta = MutableLiveData<PlanetaResposta?>()
-    val planetaResposta: LiveData<PlanetaResposta?> = _planetaResposta
+    private val _planetResponse = MutableLiveData<PlanetResponse?>()
+    val planetResponse: LiveData<PlanetResponse?> = _planetResponse
     private val _planetaError = MutableLiveData<Unit>()
     val planetaError = _planetaError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
     fun getBuscaPlanetasApi() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.buscaPlanetas()) {
-            is NetworkResponse.Success -> { _planetaResposta.value = response.data }
+        when (val response = repository.getPlanets()) {
+            is NetworkResponse.Success -> { _planetResponse.value = response.data }
             is NetworkResponse.Failed -> { _planetaError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED

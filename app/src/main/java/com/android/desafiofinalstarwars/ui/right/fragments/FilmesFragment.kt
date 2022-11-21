@@ -81,9 +81,9 @@ class FilmesFragment : Fragment() {
     }
 
     private fun setObserver(){
-        viewModel.filmeResposta.observe(viewLifecycleOwner){
+        viewModel.movieResponse.observe(viewLifecycleOwner){
             it?.let {
-                moviesList.addAll(it.resultados!!)
+                moviesList.addAll(it.results!!)
                 adapter.atualiza(moviesList)
             }
         }

@@ -88,7 +88,7 @@ class CharactersFragment : Fragment() {
         Log.i(TAG, "setObserver: ")
         viewModel.characterResponse.observe(viewLifecycleOwner){
             it?.let {
-                charactersList.addAll(it.resultados!!)
+                charactersList.addAll(it.results!!)
                 adapter.atualiza(charactersList)
             }
         }

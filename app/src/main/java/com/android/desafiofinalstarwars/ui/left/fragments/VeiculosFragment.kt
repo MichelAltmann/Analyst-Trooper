@@ -78,9 +78,9 @@ class VeiculosFragment : Fragment() {
 
 
     private fun setObserver() {
-        viewModel.veiculoResposta.observe(viewLifecycleOwner){
+        viewModel.vehicleResponse.observe(viewLifecycleOwner){
             it?.let {
-                vehiclesList.addAll(it.resultados!!)
+                vehiclesList.addAll(it.results!!)
                 adapter.atualiza(vehiclesList)
             }
         }

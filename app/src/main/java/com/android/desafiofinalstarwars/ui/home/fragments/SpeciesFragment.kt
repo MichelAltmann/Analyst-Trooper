@@ -91,7 +91,7 @@ class SpeciesFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.specieResponse.observe(viewLifecycleOwner){
             it?.let {
-                speciesList.addAll(it.resultados!!)
+                speciesList.addAll(it.results!!)
                 adapter.atualiza(speciesList)
             }
         }
