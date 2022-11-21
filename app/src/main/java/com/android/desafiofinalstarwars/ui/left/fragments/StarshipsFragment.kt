@@ -50,7 +50,7 @@ class StarshipsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentNavesRecyclerview.adapter = adapter
+        binding.fragmentStarshipsRecyclerview.adapter = adapter
         setObserver()
         viewModel.getApiStarships()
 
@@ -67,14 +67,14 @@ class StarshipsFragment : Fragment() {
 
     private fun descriptionTabCall(starship: Starship? = null) {
         if (isClicked == 1){
-            binding.fragmentNavesRecyclerview.startAnimation(fromVisible)
-            binding.fragmentNavesRecyclerview.visibility = View.GONE
+            binding.fragmentStarshipsRecyclerview.startAnimation(fromVisible)
+            binding.fragmentStarshipsRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
             DetalhesView(binding.fragmentViewDetails).bind(starship!!)
         } else if (isClicked == 0) {
-            binding.fragmentNavesRecyclerview.startAnimation(toVisible)
-            binding.fragmentNavesRecyclerview.visibility = View.VISIBLE
+            binding.fragmentStarshipsRecyclerview.startAnimation(toVisible)
+            binding.fragmentStarshipsRecyclerview.visibility = View.VISIBLE
             binding.fragmentViewDetails.root.startAnimation(fromVisible)
             binding.fragmentViewDetails.root.visibility = View.GONE
         }
@@ -84,7 +84,7 @@ class StarshipsFragment : Fragment() {
         viewModel.starshipResponse.observe(viewLifecycleOwner){
             it?.let {
                 starshipsList.addAll(it.results!!)
-                adapter.atualiza(starshipsList)
+                adapter.update(starshipsList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

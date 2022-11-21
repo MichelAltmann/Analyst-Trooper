@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/navigation_naves"
-        android:icon="@drawable/ic_nave"
-        android:title="@string/title_naves" />
+        android:icon="@drawable/ic_starship"
+        android:title="@string/title_starships" />
 
     <item
         android:id="@+id/navigation_home"
@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/navigation_right"
-        android:icon="@drawable/ic_planeta"
-        android:title="@string/title_planetas" />
+        android:icon="@drawable/ic_planet"
+        android:title="@string/title_planets" />
 
 </menu>

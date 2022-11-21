@@ -37,10 +37,10 @@ class LeftFragment : Fragment() {
         TabLayoutMediator(
             binding.fragmentLeftTablayout, binding.fragmentLeftViewpagerTablayout
         ) { tab : TabLayout.Tab, position : Int ->
-            tab.setText(labels[position])
+            tab.text = labels[position]
         }.attach()
 
-        selecionaTabPadrão()
+        defaultTabSelector()
 
         setListener()
     }
@@ -59,7 +59,7 @@ class LeftFragment : Fragment() {
                 if (binding.fragmentLeftViewpagerTablayout.currentItem == 0){
                     onTabReselectedStarshipsListener.invoke()
                 } else {
-                    onTabReselectedVeiculosListener.invoke()
+                    onTabReselectedVehiclesListener.invoke()
                 }
             }
 
@@ -68,15 +68,15 @@ class LeftFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        selecionaTabPadrão()
+        defaultTabSelector()
     }
 
-    private fun selecionaTabPadrão(){
+    private fun defaultTabSelector(){
         binding.fragmentLeftViewpagerTablayout.setCurrentItem(0, false)
     }
 
     companion object {
         lateinit var onTabReselectedStarshipsListener : () -> Unit
-        lateinit var onTabReselectedVeiculosListener : () -> Unit
+        lateinit var onTabReselectedVehiclesListener : () -> Unit
     }
 }

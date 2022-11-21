@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
 import com.android.desafiofinalstarwars.model.Planet
 
-class PlanetasAdapter() : RecyclerView.Adapter<PlanetasAdapter.ViewHolder>() {
+class PlanetsAdapter() : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
 
     private val planets : MutableList<Planet> = mutableListOf()
     lateinit var itemClickListener: (Planet) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
         fun vincula(planet: Planet){
-            val titulo = binding.cardViewTitulo
-            val subTitulo = binding.cardViewSubtitulo
+            val titulo = binding.cardViewTitle
+            val subTitulo = binding.cardViewSubtitle
             val subTitulo2 = binding.cardViewSubtitulo2
             titulo.text = planet.name
             subTitulo.text = "Water per km: " + planet.surfaceWater
@@ -36,7 +36,7 @@ class PlanetasAdapter() : RecyclerView.Adapter<PlanetasAdapter.ViewHolder>() {
 
     override fun getItemCount() : Int = planets.size
 
-    fun atualiza(planets: List<Planet>){
+    fun update(planets: List<Planet>){
         this.planets.clear()
         this.planets.addAll(planets)
         notifyDataSetChanged()

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.desafiofinalstarwars.databinding.FragmentRightBinding
-import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.right.adapters.RightViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -61,7 +60,7 @@ class RightFragment : Fragment() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 if (binding.fragmentRightViewpagerTablayout.currentItem == 0){
-                    onTabReselectedPlanetasListener.invoke()
+                    onTabReselectedPlanetsListener.invoke()
                 } else {
                     onTabReselectedFilmesListener.invoke()
                 }
@@ -85,7 +84,7 @@ class RightFragment : Fragment() {
     }
 
     companion object {
-        lateinit var onTabReselectedPlanetasListener : () -> Unit
+        lateinit var onTabReselectedPlanetsListener : () -> Unit
         lateinit var onTabReselectedFilmesListener : () -> Unit
     }
 

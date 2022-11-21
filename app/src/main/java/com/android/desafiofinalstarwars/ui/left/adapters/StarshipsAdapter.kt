@@ -12,11 +12,11 @@ class StarshipsAdapter() : RecyclerView.Adapter<StarshipsAdapter.ViewHolder>() {
     lateinit var itemClickListener: (Starship) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(starship : Starship){
-            val titulo = binding.cardViewTitulo
-            val subTitulo = binding.cardViewSubtitulo
-            titulo.text = starship.name
-            subTitulo.text = "Model: " + starship.model
+        fun bind(starship : Starship){
+            val title = binding.cardViewTitle
+            val subTitle = binding.cardViewSubtitle
+            title.text = starship.name
+            subTitle.text = "Model: " + starship.model
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(starship)
             }
@@ -29,12 +29,12 @@ class StarshipsAdapter() : RecyclerView.Adapter<StarshipsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(starships[position])
+        holder.bind(starships[position])
     }
 
     override fun getItemCount() : Int = starships.size
 
-    fun atualiza(starships : List<Starship>){
+    fun update(starships : List<Starship>){
         this.starships.clear()
         this.starships.addAll(starships)
         notifyDataSetChanged()

@@ -13,8 +13,8 @@ class FilmesAdapter() : RecyclerView.Adapter<FilmesAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
         fun vincula(movie: Movie){
-            val titulo = binding.cardViewTitulo
-            val subTitulo = binding.cardViewSubtitulo
+            val titulo = binding.cardViewTitle
+            val subTitulo = binding.cardViewSubtitle
             val subTitulo2 = binding.cardViewSubtitulo2
             titulo.text = movie.title
             subTitulo.text = "Director: " + movie.director

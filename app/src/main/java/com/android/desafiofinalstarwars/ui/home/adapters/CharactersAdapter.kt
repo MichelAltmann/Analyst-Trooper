@@ -14,8 +14,8 @@ class CharactersAdapter() : RecyclerView.Adapter<CharactersAdapter.ViewHolder>()
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(character: Character){
-            val title = binding.cardViewTitulo
-            val subTitle = binding.cardViewSubtitulo
+            val title = binding.cardViewTitle
+            val subTitle = binding.cardViewSubtitle
             val subTitle2 = binding.cardViewSubtitulo2
             title.text = character.name
             subTitle.text = "Height: " + character.height

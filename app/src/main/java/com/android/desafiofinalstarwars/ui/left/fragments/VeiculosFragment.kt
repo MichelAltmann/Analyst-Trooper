@@ -14,7 +14,7 @@ import com.android.desafiofinalstarwars.model.Vehicle
 import com.android.desafiofinalstarwars.ui.DetalhesView
 import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.left.viewmodels.VehiclesViewModel
-import com.android.desafiofinalstarwars.ui.left.adapters.VeiculosAdapter
+import com.android.desafiofinalstarwars.ui.left.adapters.VehiclesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VeiculosFragment : Fragment() {
@@ -28,7 +28,7 @@ class VeiculosFragment : Fragment() {
     private val vehiclesList : ArrayList<Vehicle> = ArrayList()
 
     private val adapter by lazy {
-        VeiculosAdapter()
+        VehiclesAdapter()
     }
 
     private var isClicked = 0
@@ -46,31 +46,31 @@ class VeiculosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentVeiculosRecyclerview.adapter = adapter
+        binding.fragmentVehiclesRecyclerview.adapter = adapter
         setObserver()
-        viewModel.getBuscaPlanetasApi()
+        viewModel.getPlanetsApi()
 
         adapter.itemClickListener = {
             isClicked = 1
-            chamaTelaDescricao(it)
+            descriptionTabCall(it)
         }
-        LeftFragment.onTabReselectedVeiculosListener = {
+        LeftFragment.onTabReselectedVehiclesListener = {
             isClicked -= 1
-            chamaTelaDescricao()
+            descriptionTabCall()
         }
 
     }
 
-    private fun chamaTelaDescricao(vehicle: Vehicle? = null) {
+    private fun descriptionTabCall(vehicle: Vehicle? = null) {
         if (isClicked == 1){
-            binding.fragmentVeiculosRecyclerview.startAnimation(fromVisible)
-            binding.fragmentVeiculosRecyclerview.visibility = View.GONE
+            binding.fragmentVehiclesRecyclerview.startAnimation(fromVisible)
+            binding.fragmentVehiclesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
             DetalhesView(binding.fragmentViewDetails).bind(vehicle!!)
         } else if (isClicked == 0) {
-            binding.fragmentVeiculosRecyclerview.startAnimation(toVisible)
-            binding.fragmentVeiculosRecyclerview.visibility = View.VISIBLE
+            binding.fragmentVehiclesRecyclerview.startAnimation(toVisible)
+            binding.fragmentVehiclesRecyclerview.visibility = View.VISIBLE
             binding.fragmentViewDetails.root.startAnimation(fromVisible)
             binding.fragmentViewDetails.root.visibility = View.GONE
         }
@@ -81,13 +81,13 @@ class VeiculosFragment : Fragment() {
         viewModel.vehicleResponse.observe(viewLifecycleOwner){
             it?.let {
                 vehiclesList.addAll(it.results!!)
-                adapter.atualiza(vehiclesList)
+                adapter.update(vehiclesList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.veiculoError.observe(viewLifecycleOwner){
+        viewModel.vehicleError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }

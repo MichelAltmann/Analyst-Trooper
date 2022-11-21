@@ -28,11 +28,6 @@ class StarshipsViewModel(private val repository: RepositoryInterface) : ViewMode
         loadStateLiveData.value = State.LOADING_FINISHED
     }
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
-
     enum class State {
         LOADING, LOADING_FINISHED
     }

@@ -17,7 +17,7 @@ class PlanetsViewModel(private val repository: RepositoryInterface) : ViewModel(
     val planetaError = _planetaError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
-    fun getBuscaPlanetasApi() = viewModelScope.launch {
+    fun getApiPlanets() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
         when (val response = repository.getPlanets()) {
             is NetworkResponse.Success -> { _planetResponse.value = response.data }
