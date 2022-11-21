@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import com.android.desafiofinalstarwars.databinding.FragmentVeiculosBinding
+import com.android.desafiofinalstarwars.databinding.FragmentVehiclesBinding
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.model.Vehicle
-import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.left.viewmodels.VehiclesViewModel
 import com.android.desafiofinalstarwars.ui.left.adapters.VehiclesAdapter
@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VeiculosFragment : Fragment() {
 
-    private var _binding : FragmentVeiculosBinding? = null
+    private var _binding : FragmentVehiclesBinding? = null
 
     private val binding get() = _binding!!
 
@@ -40,7 +40,7 @@ class VeiculosFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentVeiculosBinding.inflate(inflater, container, false)
+        _binding = FragmentVehiclesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -67,7 +67,7 @@ class VeiculosFragment : Fragment() {
             binding.fragmentVehiclesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetails).bind(vehicle!!)
+            DetailsView(binding.fragmentViewDetails).bind(vehicle!!)
         } else if (isClicked == 0) {
             binding.fragmentVehiclesRecyclerview.startAnimation(toVisible)
             binding.fragmentVehiclesRecyclerview.visibility = View.VISIBLE

@@ -8,13 +8,9 @@ import com.android.desafiofinalstarwars.databinding.FragmentViewDetailsBinding
 import com.android.desafiofinalstarwars.model.*
 
 
-class DetalhesView(private val binding : FragmentViewDetailsBinding) {
+class DetailsView(private val binding : FragmentViewDetailsBinding) {
 
-//    constructor(personagem: Personagem) : this(){
-//
-//    }
-
-    private val nome = binding.textViewNome
+    private val name = binding.textViewName
     private val generic1 = binding.textViewInfoGeneric1
     private val generic2 = binding.textViewInfoGeneric2
     private val generic3 = binding.textViewInfoGeneric3
@@ -32,8 +28,8 @@ class DetalhesView(private val binding : FragmentViewDetailsBinding) {
    fun bind(character: Character){
        Log.i(TAG, "bind: " + character.name)
 
-       if (!character.name.isNullOrEmpty()) nome.text = character.name
-       else nome.visibility = View.GONE
+       if (!character.name.isNullOrEmpty()) name.text = character.name
+       else name.visibility = View.GONE
 
        if (!character.gender.isNullOrEmpty()) generic1.text = "Gender: "+ character.gender
        else generic1.visibility = View.GONE
@@ -64,8 +60,8 @@ class DetalhesView(private val binding : FragmentViewDetailsBinding) {
    }
 
     fun bind(specie: Specie){
-        if (!specie.name.isNullOrEmpty()) nome.text = specie.name
-        else nome.visibility = View.GONE
+        if (!specie.name.isNullOrEmpty()) name.text = specie.name
+        else name.visibility = View.GONE
 
         if (!specie.language.isNullOrEmpty()) generic1.text = "Language: "+ specie.language
         else generic1.visibility = View.GONE
@@ -96,8 +92,8 @@ class DetalhesView(private val binding : FragmentViewDetailsBinding) {
     }
 
     fun bind(starship: Starship){
-        if (!starship.name.isNullOrEmpty()) nome.text = starship.name
-        else nome.visibility = View.GONE
+        if (!starship.name.isNullOrEmpty()) name.text = starship.name
+        else name.visibility = View.GONE
 
         if (!starship.model.isNullOrEmpty()) generic1.text = "Model: "+ starship.model
         else generic1.visibility = View.GONE
@@ -136,8 +132,8 @@ class DetalhesView(private val binding : FragmentViewDetailsBinding) {
     }
 
     fun bind(vehicle: Vehicle){
-        if (!vehicle.name.isNullOrEmpty()) nome.text = vehicle.name
-        else nome.visibility = View.GONE
+        if (!vehicle.name.isNullOrEmpty()) name.text = vehicle.name
+        else name.visibility = View.GONE
 
         if (!vehicle.model.isNullOrEmpty()) generic1.text = "Model: "+ vehicle.model
         else generic1.visibility = View.GONE
@@ -175,8 +171,8 @@ class DetalhesView(private val binding : FragmentViewDetailsBinding) {
     }
 
     fun bind(planet: Planet){
-        if (!planet.name.isNullOrEmpty()) nome.text = planet.name
-        else nome.visibility = View.GONE
+        if (!planet.name.isNullOrEmpty()) name.text = planet.name
+        else name.visibility = View.GONE
 
         if (!planet.diameter.isNullOrEmpty()) generic1.text = "Diameter: "+ planet.diameter
         else generic1.visibility = View.GONE
@@ -207,8 +203,8 @@ class DetalhesView(private val binding : FragmentViewDetailsBinding) {
     }
 
     fun bind(movie: Movie){
-        if (!movie.title.isNullOrEmpty()) nome.text = movie.title
-        else nome.visibility = View.GONE
+        if (!movie.title.isNullOrEmpty()) name.text = movie.title
+        else name.visibility = View.GONE
 
         if (!movie.openingCrawl.isNullOrEmpty()) generic1.text = movie.openingCrawl
         else generic1.visibility = View.GONE

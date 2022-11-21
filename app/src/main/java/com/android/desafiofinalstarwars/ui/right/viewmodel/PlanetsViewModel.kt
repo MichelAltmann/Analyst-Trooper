@@ -13,15 +13,15 @@ class PlanetsViewModel(private val repository: RepositoryInterface) : ViewModel(
 
     private val _planetResponse = MutableLiveData<PlanetResponse?>()
     val planetResponse: LiveData<PlanetResponse?> = _planetResponse
-    private val _planetaError = MutableLiveData<Unit>()
-    val planetaError = _planetaError as LiveData<Unit>
+    private val _planetError = MutableLiveData<Unit>()
+    val planetError = _planetError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
     fun getApiPlanets() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
         when (val response = repository.getPlanets()) {
             is NetworkResponse.Success -> { _planetResponse.value = response.data }
-            is NetworkResponse.Failed -> { _planetaError.value = Unit }
+            is NetworkResponse.Failed -> { _planetError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED
     }

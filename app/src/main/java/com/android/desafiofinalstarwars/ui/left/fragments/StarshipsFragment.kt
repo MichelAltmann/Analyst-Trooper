@@ -9,9 +9,9 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentNavesBinding
+import com.android.desafiofinalstarwars.databinding.FragmentStarshipsBinding
 import com.android.desafiofinalstarwars.model.Starship
-import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.left.LeftFragment
 import com.android.desafiofinalstarwars.ui.left.viewmodels.StarshipsViewModel
 import com.android.desafiofinalstarwars.ui.left.adapters.StarshipsAdapter
@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StarshipsFragment : Fragment() {
 
-    private var _binding: FragmentNavesBinding? = null
+    private var _binding: FragmentStarshipsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -44,7 +44,7 @@ class StarshipsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentNavesBinding.inflate(inflater, container, false)
+        _binding = FragmentStarshipsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -71,7 +71,7 @@ class StarshipsFragment : Fragment() {
             binding.fragmentStarshipsRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetails).bind(starship!!)
+            DetailsView(binding.fragmentViewDetails).bind(starship!!)
         } else if (isClicked == 0) {
             binding.fragmentStarshipsRecyclerview.startAnimation(toVisible)
             binding.fragmentStarshipsRecyclerview.visibility = View.VISIBLE

@@ -16,7 +16,7 @@ class CharactersAdapter() : RecyclerView.Adapter<CharactersAdapter.ViewHolder>()
         fun bind(character: Character){
             val title = binding.cardViewTitle
             val subTitle = binding.cardViewSubtitle
-            val subTitle2 = binding.cardViewSubtitulo2
+            val subTitle2 = binding.cardViewSubtitle2
             title.text = character.name
             subTitle.text = "Height: " + character.height
             when(character.gender){

@@ -13,9 +13,9 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
 
-        val imagem = findViewById<ImageView>(R.id.splash_image)
-        imagem.alpha = 0f
-        imagem.animate().setDuration(2000).alpha(1f).scaleXBy(1.5f).scaleYBy(1.5f).withEndAction{
+        val image = findViewById<ImageView>(R.id.splash_image)
+        image.alpha = 0f
+        image.animate().setDuration(2000).alpha(1f).scaleXBy(1.5f).scaleYBy(1.5f).withEndAction{
                 val it = Intent(this, MainActivity::class.java)
                 startActivity(it)
                 overridePendingTransition(android.R.anim.fade_in,

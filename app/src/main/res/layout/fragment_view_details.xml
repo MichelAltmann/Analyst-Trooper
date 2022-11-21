@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     tools:background="@drawable/ic_background"
-    tools:context=".ui.DetalhesView">
+    tools:context=".ui.DetailsView">
 
     <TextView
-        android:id="@+id/textViewNome"
+        android:id="@+id/text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewNome">
+        app:layout_constraintTop_toBottomOf="@id/text_view_name">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

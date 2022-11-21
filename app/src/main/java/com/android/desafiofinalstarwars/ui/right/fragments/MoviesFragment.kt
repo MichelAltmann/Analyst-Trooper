@@ -9,17 +9,17 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentFilmesBinding
+import com.android.desafiofinalstarwars.databinding.FragmentMoviesBinding
 import com.android.desafiofinalstarwars.model.Movie
-import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.right.RightFragment
 import com.android.desafiofinalstarwars.ui.right.viewmodel.MoviesViewModel
-import com.android.desafiofinalstarwars.ui.right.adapters.FilmesAdapter
+import com.android.desafiofinalstarwars.ui.right.adapters.MoviesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FilmesFragment : Fragment() {
+class MoviesFragment : Fragment() {
 
-    private var _binding: FragmentFilmesBinding? = null
+    private var _binding: FragmentMoviesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,7 +30,7 @@ class FilmesFragment : Fragment() {
     private val viewModel by viewModel<MoviesViewModel>()
 
     private val adapter by lazy {
-        FilmesAdapter()
+        MoviesAdapter()
     }
 
     private var isClicked = 0
@@ -42,39 +42,39 @@ class FilmesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFilmesBinding.inflate(inflater, container, false)
+        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentFilmesRecyclerview.adapter = adapter
+        binding.fragmentMoviesRecyclerview.adapter = adapter
 
         setObserver()
 
-        viewModel.getBuscaPlanetasApi()
+        viewModel.getApiMovies()
 
         adapter.itemClickListener = {
             isClicked = 1
-            chamaTelaDescricao(it)
+            descriptionTabCall(it)
         }
         RightFragment.onTabReselectedFilmesListener = {
-            isClicked = isClicked -1
-            chamaTelaDescricao()
+            isClicked -= 1
+            descriptionTabCall()
         }
 
     }
 
-    private fun chamaTelaDescricao(movie: Movie? = null) {
+    private fun descriptionTabCall(movie: Movie? = null) {
         if (isClicked == 1){
-            binding.fragmentFilmesRecyclerview.startAnimation(fromVisible)
-            binding.fragmentFilmesRecyclerview.visibility = View.GONE
+            binding.fragmentMoviesRecyclerview.startAnimation(fromVisible)
+            binding.fragmentMoviesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetails).bind(movie!!)
+            DetailsView(binding.fragmentViewDetails).bind(movie!!)
         } else if (isClicked == 0) {
-            binding.fragmentFilmesRecyclerview.startAnimation(toVisible)
-            binding.fragmentFilmesRecyclerview.visibility = View.VISIBLE
+            binding.fragmentMoviesRecyclerview.startAnimation(toVisible)
+            binding.fragmentMoviesRecyclerview.visibility = View.VISIBLE
             binding.fragmentViewDetails.root.startAnimation(fromVisible)
             binding.fragmentViewDetails.root.visibility = View.GONE
         }
@@ -84,13 +84,13 @@ class FilmesFragment : Fragment() {
         viewModel.movieResponse.observe(viewLifecycleOwner){
             it?.let {
                 moviesList.addAll(it.results!!)
-                adapter.atualiza(moviesList)
+                adapter.update(moviesList)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.filmeError.observe(viewLifecycleOwner){
+        viewModel.movieError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }

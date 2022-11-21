@@ -13,7 +13,7 @@ import android.widget.Toast
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentCharactersBinding
 import com.android.desafiofinalstarwars.model.Character
-import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
 import com.android.desafiofinalstarwars.ui.home.viewmodels.CharactersViewModel
 import com.android.desafiofinalstarwars.ui.home.adapters.CharactersAdapter
@@ -75,7 +75,7 @@ class CharactersFragment : Fragment() {
             binding.fragmentCharactersRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetails).bind(character!!)
+            DetailsView(binding.fragmentViewDetails).bind(character!!)
         } else if (isClicked == 0) {
             binding.fragmentCharactersRecyclerview.startAnimation(toVisible)
             binding.fragmentCharactersRecyclerview.visibility = View.VISIBLE

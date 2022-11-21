@@ -12,15 +12,15 @@ import kotlinx.coroutines.launch
 class MoviesViewModel(private val repository: RepositoryInterface) : ViewModel() {
     private val _movieResponse = MutableLiveData<MovieResponse?>()
     val movieResponse: LiveData<MovieResponse?> = _movieResponse
-    private val _filmeError = MutableLiveData<Unit>()
-    val filmeError = _filmeError as LiveData<Unit>
+    private val _movieError = MutableLiveData<Unit>()
+    val movieError = _movieError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
-    fun getBuscaPlanetasApi() = viewModelScope.launch {
+    fun getApiMovies() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
         when (val response = repository.getMovies()) {
             is NetworkResponse.Success -> { _movieResponse.value = response.data }
-            is NetworkResponse.Failed -> { _filmeError.value = Unit }
+            is NetworkResponse.Failed -> { _movieError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED
     }

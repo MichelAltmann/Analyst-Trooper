@@ -15,7 +15,7 @@ class SpeciesAdapter() : RecyclerView.Adapter<SpeciesAdapter.ViewHolder>() {
         fun bind(specie: Specie){
             val title = binding.cardViewTitle
             val subTitle = binding.cardViewSubtitle
-            val subTitle2 = binding.cardViewSubtitulo2
+            val subTitle2 = binding.cardViewSubtitle2
             title.text = specie.name
             subTitle.text = "Average Height: " + specie.averageHeight
             subTitle2.text = "Lifespan: " + specie.averageLifespan

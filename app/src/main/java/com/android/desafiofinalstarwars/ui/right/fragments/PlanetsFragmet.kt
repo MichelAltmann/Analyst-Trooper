@@ -9,17 +9,17 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentPlanetasBinding
+import com.android.desafiofinalstarwars.databinding.FragmentPlanetsBinding
 import com.android.desafiofinalstarwars.model.Planet
-import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.right.RightFragment
 import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetsViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.PlanetsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PlanetasFragment : Fragment() {
+class PlanetsFragmet : Fragment() {
 
-    private var _binding: FragmentPlanetasBinding? = null
+    private var _binding: FragmentPlanetsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,7 +43,7 @@ class PlanetasFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPlanetasBinding.inflate(inflater, container, false)
+        _binding = FragmentPlanetsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -72,7 +72,7 @@ class PlanetasFragment : Fragment() {
             binding.fragmentPlanetsRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetails).bind(planet!!)
+            DetailsView(binding.fragmentViewDetails).bind(planet!!)
         } else if (isClicked == 0) {
             binding.fragmentPlanetsRecyclerview.startAnimation(toVisible)
             binding.fragmentPlanetsRecyclerview.visibility = View.VISIBLE
@@ -92,7 +92,7 @@ class PlanetasFragment : Fragment() {
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.planetaError.observe(viewLifecycleOwner){
+        viewModel.planetError.observe(viewLifecycleOwner){
             Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }

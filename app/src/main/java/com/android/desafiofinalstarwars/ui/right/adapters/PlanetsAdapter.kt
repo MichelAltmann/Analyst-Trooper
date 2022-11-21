@@ -12,13 +12,13 @@ class PlanetsAdapter() : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
     lateinit var itemClickListener: (Planet) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(planet: Planet){
-            val titulo = binding.cardViewTitle
-            val subTitulo = binding.cardViewSubtitle
-            val subTitulo2 = binding.cardViewSubtitulo2
-            titulo.text = planet.name
-            subTitulo.text = "Water per km: " + planet.surfaceWater
-            subTitulo2.text = "Population: " + planet.population
+        fun bind(planet: Planet){
+            val title = binding.cardViewTitle
+            val subTitle = binding.cardViewSubtitle
+            val subTitle2 = binding.cardViewSubtitle2
+            title.text = planet.name
+            subTitle.text = "Water per km: " + planet.surfaceWater
+            subTitle2.text = "Population: " + planet.population
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(planet)
             }
@@ -31,7 +31,7 @@ class PlanetsAdapter() : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(planets[position])
+        holder.bind(planets[position])
     }
 
     override fun getItemCount() : Int = planets.size

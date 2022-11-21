@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentSpeciesBinding
 import com.android.desafiofinalstarwars.model.Specie
-import com.android.desafiofinalstarwars.ui.DetalhesView
+import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.home.HomeFragment
 import com.android.desafiofinalstarwars.ui.home.adapters.SpeciesAdapter
 import com.android.desafiofinalstarwars.ui.home.viewmodels.SpeciesViewModel
@@ -77,7 +77,7 @@ class SpeciesFragment : Fragment() {
             binding.fragmentSpeciesRecyclerview.visibility = View.GONE
             binding.fragmentViewDetails.root.startAnimation(toVisible)
             binding.fragmentViewDetails.root.visibility = View.VISIBLE
-            DetalhesView(binding.fragmentViewDetails).bind(specie!!)
+            DetailsView(binding.fragmentViewDetails).bind(specie!!)
         } else if (isClicked == 0) {
             binding.fragmentSpeciesRecyclerview.startAnimation(toVisible)
             binding.fragmentSpeciesRecyclerview.visibility = View.VISIBLE

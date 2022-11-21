@@ -40,15 +40,16 @@ class RightFragment : Fragment() {
         TabLayoutMediator(
             binding.fragmentRightTablayout, binding.fragmentRightViewpagerTablayout
         ) { tab: TabLayout.Tab, position: Int ->
-            tab.setText(labels[position])
+            tab.text = labels[position]
         }.attach()
 
-        selecionaTabPadrão()
+        defaultTabSelectior()
 
         setListener()
     }
 
     private fun setListener(){
+
         binding.fragmentRightTablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
@@ -71,10 +72,10 @@ class RightFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        selecionaTabPadrão()
+        defaultTabSelectior()
     }
 
-    private fun selecionaTabPadrão(){
+    private fun defaultTabSelectior(){
         binding.fragmentRightViewpagerTablayout.setCurrentItem(0, false)
     }
 

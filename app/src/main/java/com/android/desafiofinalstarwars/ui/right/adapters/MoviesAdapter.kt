@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.databinding.ItemCardviewBinding
 import com.android.desafiofinalstarwars.model.Movie
 
-class FilmesAdapter() : RecyclerView.Adapter<FilmesAdapter.ViewHolder>() {
+class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val movies : MutableList<Movie> = mutableListOf()
     lateinit var itemClickListener: (Movie) -> Unit
 
     inner class ViewHolder(val binding: ItemCardviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun vincula(movie: Movie){
-            val titulo = binding.cardViewTitle
-            val subTitulo = binding.cardViewSubtitle
-            val subTitulo2 = binding.cardViewSubtitulo2
-            titulo.text = movie.title
-            subTitulo.text = "Director: " + movie.director
-            subTitulo2.text = "Release Date: " + movie.releaseDate
+        fun bind(movie: Movie){
+            val title = binding.cardViewTitle
+            val subTitle = binding.cardViewSubtitle
+            val subTitle2 = binding.cardViewSubtitle2
+            title.text = movie.title
+            subTitle.text = "Director: " + movie.director
+            subTitle2.text = "Release Date: " + movie.releaseDate
             itemView.rootView.setOnClickListener {
                 itemClickListener.invoke(movie)
             }
@@ -31,12 +31,12 @@ class FilmesAdapter() : RecyclerView.Adapter<FilmesAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(movies[position])
+        holder.bind(movies[position])
     }
 
     override fun getItemCount() : Int = movies.size
 
-    fun atualiza(movies: List<Movie>){
+    fun update(movies: List<Movie>){
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
