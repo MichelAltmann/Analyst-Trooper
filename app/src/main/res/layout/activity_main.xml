@@ -18,9 +18,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:itemTextColor="@color/selected_color"
         app:menu="@menu/bottom_nav_menu"
-        app:itemIconSize="40dp"
-        app:labelVisibilityMode="unlabeled"/>
+        app:itemIconSize="30dp"
+        app:labelVisibilityMode="labeled"/>
 
 
 
