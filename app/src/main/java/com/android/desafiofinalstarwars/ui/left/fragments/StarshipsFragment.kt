@@ -8,6 +8,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentStarshipsBinding
 import com.android.desafiofinalstarwars.model.Starship
@@ -33,6 +35,12 @@ class StarshipsFragment : Fragment() {
         StarshipsAdapter()
     }
 
+    private val recyclerView by lazy{
+        binding.fragmentStarshipsRecyclerview
+    }
+
+    private lateinit var scrollListener : RecyclerView.OnScrollListener
+
     private var isClicked = 0
 
     private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
@@ -50,8 +58,14 @@ class StarshipsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentStarshipsRecyclerview.adapter = adapter
+        setupRecycler()
+    }
+
+    private fun setupRecycler() {
+        recyclerView.adapter = adapter
+
         setObserver()
+
         viewModel.getApiStarships()
 
         adapter.itemClickListener = {
@@ -62,21 +76,47 @@ class StarshipsFragment : Fragment() {
             isClicked -= 1
             descriptionTabCall()
         }
+    }
 
+    private fun addScrollListenerAdapter() {
+        scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemVisble = visibleItemCount + pastVisibleItems
+                    val totalItemCount = layoutManager.itemCount
+                    if (totalItemVisble >= totalItemCount) {
+                        removeScrollListenerAdapter()
+                        viewModel.getApiStarships()
+                    }
+                }
+            }
+        }
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    private fun removeScrollListenerAdapter() {
+        if (::scrollListener.isInitialized) {
+            recyclerView.removeOnScrollListener(scrollListener)
+        }
     }
 
     private fun descriptionTabCall(starship: Starship? = null) {
+        val viewDetail = binding.fragmentViewDetails.root
         if (isClicked == 1){
-            binding.fragmentStarshipsRecyclerview.startAnimation(fromVisible)
-            binding.fragmentStarshipsRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetails.root.startAnimation(toVisible)
-            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            recyclerView.startAnimation(fromVisible)
+            recyclerView.visibility = View.GONE
+            viewDetail.startAnimation(toVisible)
+            viewDetail.visibility = View.VISIBLE
             DetailsView(binding.fragmentViewDetails).bind(starship!!)
         } else if (isClicked == 0) {
-            binding.fragmentStarshipsRecyclerview.startAnimation(toVisible)
-            binding.fragmentStarshipsRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetails.root.startAnimation(fromVisible)
-            binding.fragmentViewDetails.root.visibility = View.GONE
+            recyclerView.startAnimation(toVisible)
+            recyclerView.visibility = View.VISIBLE
+            viewDetail.startAnimation(fromVisible)
+            viewDetail.visibility = View.GONE
         }
     }
 
@@ -85,13 +125,15 @@ class StarshipsFragment : Fragment() {
             it?.let {
                 starshipsList.addAll(it.results!!)
                 adapter.update(starshipsList)
+                removeScrollListenerAdapter()
+                addScrollListenerAdapter()
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
         viewModel.starshipError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Fim da lista.", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -12,7 +12,9 @@ interface ApiService {
     ) : Response<CharacterResponse>
 
     @GET("starships/")
-    suspend fun getStarships() : Response<StarshipResponse>
+    suspend fun getStarships(
+        @Query("page") page : Int
+    ) : Response<StarshipResponse>
 
     @GET("planets/")
     suspend fun getPlanets() : Response<PlanetResponse>

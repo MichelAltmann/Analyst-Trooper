@@ -1,7 +1,5 @@
 package com.android.desafiofinalstarwars.ui.left.viewmodels
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,10 +17,13 @@ class StarshipsViewModel(private val repository: RepositoryInterface) : ViewMode
     val starshipError = _starshipError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
+    private var page = 1
+
     fun getApiStarships() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.getStarships()) {
-            is NetworkResponse.Success -> { _starshipResponse.value = response.data }
+        when (val response = repository.getStarships(page = page)) {
+            is NetworkResponse.Success -> { _starshipResponse.value = response.data
+            page++}
             is NetworkResponse.Failed -> { _starshipError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED
