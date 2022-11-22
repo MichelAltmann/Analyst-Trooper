@@ -57,9 +57,9 @@ class Repository(private val apiService: ApiService) : RepositoryInterface {
         }
     }
 
-    override suspend fun getSpecies(): NetworkResponse<SpecieResponse> {
+    override suspend fun getSpecies(page: Int): NetworkResponse<SpecieResponse> {
         return try {
-            val response = apiService.getSpecies()
+            val response = apiService.getSpecies(page = page)
             if (response.isSuccessful){
                 NetworkResponse.Success(response.body()!!)
             }else{
@@ -89,6 +89,6 @@ interface RepositoryInterface {
     suspend fun getStarships() : NetworkResponse<StarshipResponse>
     suspend fun getPlanets() : NetworkResponse<PlanetResponse>
     suspend fun getMovies() : NetworkResponse<MovieResponse>
-    suspend fun getSpecies() : NetworkResponse<SpecieResponse>
+    suspend fun getSpecies(page: Int): NetworkResponse<SpecieResponse>
     suspend fun getVehicles() : NetworkResponse<VehicleResponse>
 }

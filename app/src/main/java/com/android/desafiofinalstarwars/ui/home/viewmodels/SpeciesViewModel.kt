@@ -1,7 +1,5 @@
 package com.android.desafiofinalstarwars.ui.home.viewmodels
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,10 +17,13 @@ class SpeciesViewModel(private val repository: RepositoryInterface) : ViewModel(
     val specieError = _specieError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
+    private var page = 1
+
     fun getApiSpecies() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.getSpecies()) {
-            is NetworkResponse.Success -> { _specieResponse.value = response.data }
+        when (val response = repository.getSpecies(page = page)) {
+            is NetworkResponse.Success -> { _specieResponse.value = response.data
+            page++}
             is NetworkResponse.Failed -> { _specieError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED

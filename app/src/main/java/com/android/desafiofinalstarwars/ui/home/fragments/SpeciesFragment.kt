@@ -10,6 +10,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentSpeciesBinding
 import com.android.desafiofinalstarwars.model.Specie
@@ -35,11 +37,17 @@ class SpeciesFragment : Fragment() {
 
     private var isClicked = 0
 
+    private lateinit var scrollListener: RecyclerView.OnScrollListener
+
     private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
     private val toVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.tovisible)}
 
     private val adapter by lazy {
         SpeciesAdapter()
+    }
+
+    private val recyclerView by lazy{
+        binding.fragmentSpeciesRecyclerview
     }
 
     override fun onCreateView(
@@ -52,8 +60,11 @@ class SpeciesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecycler()
+    }
 
-        binding.fragmentSpeciesRecyclerview.adapter = adapter
+    private fun setupRecycler() {
+        recyclerView.adapter = adapter
 
         setObserver()
 
@@ -68,21 +79,47 @@ class SpeciesFragment : Fragment() {
             isClicked -= 1
             descriptionTabCall()
         }
+    }
 
+    private fun addScrollListenerAdapter() {
+        scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemVisble = visibleItemCount + pastVisibleItems
+                    val totalItemCount = layoutManager.itemCount
+                    if (totalItemVisble >= totalItemCount) {
+                        removeScrollListenerAdapter()
+                        viewModel.getApiSpecies()
+                    }
+                }
+            }
+        }
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    private fun removeScrollListenerAdapter() {
+        if (::scrollListener.isInitialized) {
+            recyclerView.removeOnScrollListener(scrollListener)
+        }
     }
 
     private fun descriptionTabCall(specie: Specie? = null) {
+        val viewDetails = binding.fragmentViewDetails.root
         if (isClicked == 1){
-            binding.fragmentSpeciesRecyclerview.startAnimation(fromVisible)
-            binding.fragmentSpeciesRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetails.root.startAnimation(toVisible)
-            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            recyclerView.startAnimation(fromVisible)
+            recyclerView.visibility = View.GONE
+            viewDetails.startAnimation(toVisible)
+            viewDetails.visibility = View.VISIBLE
             DetailsView(binding.fragmentViewDetails).bind(specie!!)
         } else if (isClicked == 0) {
-            binding.fragmentSpeciesRecyclerview.startAnimation(toVisible)
-            binding.fragmentSpeciesRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetails.root.startAnimation(fromVisible)
-            binding.fragmentViewDetails.root.visibility = View.GONE
+            recyclerView.startAnimation(toVisible)
+            recyclerView.visibility = View.VISIBLE
+            viewDetails.startAnimation(fromVisible)
+            viewDetails.visibility = View.GONE
         }
     }
 
@@ -92,13 +129,15 @@ class SpeciesFragment : Fragment() {
             it?.let {
                 speciesList.addAll(it.results!!)
                 adapter.update(speciesList)
+                removeScrollListenerAdapter()
+                addScrollListenerAdapter()
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
         viewModel.specieError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Fim da lista.", Toast.LENGTH_SHORT).show()
         }
     }
 
