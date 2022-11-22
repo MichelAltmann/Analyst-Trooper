@@ -8,6 +8,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentPlanetsBinding
 import com.android.desafiofinalstarwars.model.Planet
@@ -33,6 +35,12 @@ class PlanetsFragmet : Fragment() {
         PlanetsAdapter()
     }
 
+    private val recyclerView by lazy {
+        binding.fragmentPlanetsRecyclerview
+    }
+
+    private lateinit var scrollListener : RecyclerView.OnScrollListener
+
     private var isClicked = 0
 
     private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
@@ -49,7 +57,7 @@ class PlanetsFragmet : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentPlanetsRecyclerview.adapter = adapter
+        recyclerView.adapter = adapter
 
         setObserver()
 
@@ -66,18 +74,46 @@ class PlanetsFragmet : Fragment() {
 
     }
 
+    private fun addScrollListenerAdapter() {
+        scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemVisble = visibleItemCount + pastVisibleItems
+                    val totalItemCount = layoutManager.itemCount
+                    if (totalItemVisble >= totalItemCount) {
+                        removeScrollListenerAdapter()
+                        viewModel.getApiPlanets()
+                    }
+                }
+            }
+        }
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    private fun removeScrollListenerAdapter() {
+        if (::scrollListener.isInitialized) {
+            recyclerView.removeOnScrollListener(scrollListener)
+        }
+    }
+
+
     private fun descriptionTabCall(planet: Planet? = null) {
+        val viewDetails = binding.fragmentViewDetails.root
         if (isClicked == 1){
-            binding.fragmentPlanetsRecyclerview.startAnimation(fromVisible)
-            binding.fragmentPlanetsRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetails.root.startAnimation(toVisible)
-            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            recyclerView.startAnimation(fromVisible)
+            recyclerView.visibility = View.GONE
+            viewDetails.startAnimation(toVisible)
+            viewDetails.visibility = View.VISIBLE
             DetailsView(binding.fragmentViewDetails).bind(planet!!)
         } else if (isClicked == 0) {
-            binding.fragmentPlanetsRecyclerview.startAnimation(toVisible)
-            binding.fragmentPlanetsRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetails.root.startAnimation(fromVisible)
-            binding.fragmentViewDetails.root.visibility = View.GONE
+            recyclerView.startAnimation(toVisible)
+            recyclerView.visibility = View.VISIBLE
+            viewDetails.startAnimation(fromVisible)
+            viewDetails.visibility = View.GONE
         }
     }
 
@@ -87,6 +123,8 @@ class PlanetsFragmet : Fragment() {
             it?.let {
                 planetsList.addAll(it.results!!)
                 adapter.update(planetsList)
+                removeScrollListenerAdapter()
+                addScrollListenerAdapter()
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){

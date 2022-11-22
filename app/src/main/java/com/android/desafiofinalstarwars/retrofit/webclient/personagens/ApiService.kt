@@ -17,7 +17,9 @@ interface ApiService {
     ) : Response<StarshipResponse>
 
     @GET("planets/")
-    suspend fun getPlanets() : Response<PlanetResponse>
+    suspend fun getPlanets(
+        @Query("page") page : Int
+    ) : Response<PlanetResponse>
 
     @GET("species/")
     suspend fun getSpecies(

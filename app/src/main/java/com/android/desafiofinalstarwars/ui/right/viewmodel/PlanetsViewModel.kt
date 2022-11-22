@@ -17,10 +17,13 @@ class PlanetsViewModel(private val repository: RepositoryInterface) : ViewModel(
     val planetError = _planetError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
+    private var page = 1
+
     fun getApiPlanets() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.getPlanets()) {
-            is NetworkResponse.Success -> { _planetResponse.value = response.data }
+        when (val response = repository.getPlanets(page = page)) {
+            is NetworkResponse.Success -> { _planetResponse.value = response.data
+            page++}
             is NetworkResponse.Failed -> { _planetError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED
@@ -29,8 +32,4 @@ class PlanetsViewModel(private val repository: RepositoryInterface) : ViewModel(
     enum class State {
         LOADING, LOADING_FINISHED
     }
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
 }

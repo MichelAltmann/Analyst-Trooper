@@ -16,6 +16,7 @@ class MoviesViewModel(private val repository: RepositoryInterface) : ViewModel()
     val movieError = _movieError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
+
     fun getApiMovies() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
         when (val response = repository.getMovies()) {

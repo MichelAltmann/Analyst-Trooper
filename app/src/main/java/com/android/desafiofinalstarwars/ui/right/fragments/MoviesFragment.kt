@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentMoviesBinding
 import com.android.desafiofinalstarwars.model.Movie
@@ -33,6 +35,11 @@ class MoviesFragment : Fragment() {
         MoviesAdapter()
     }
 
+    private val recyclerView by lazy {
+        binding.fragmentMoviesRecyclerview
+    }
+
+
     private var isClicked = 0
 
     private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
@@ -48,7 +55,7 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentMoviesRecyclerview.adapter = adapter
+        recyclerView.adapter = adapter
 
         setObserver()
 
@@ -65,18 +72,20 @@ class MoviesFragment : Fragment() {
 
     }
 
+
     private fun descriptionTabCall(movie: Movie? = null) {
+        val viewDetails = binding.fragmentViewDetails.root
         if (isClicked == 1){
-            binding.fragmentMoviesRecyclerview.startAnimation(fromVisible)
-            binding.fragmentMoviesRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetails.root.startAnimation(toVisible)
-            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+            recyclerView.startAnimation(fromVisible)
+            recyclerView.visibility = View.GONE
+            viewDetails.startAnimation(toVisible)
+            viewDetails.visibility = View.VISIBLE
             DetailsView(binding.fragmentViewDetails).bind(movie!!)
         } else if (isClicked == 0) {
-            binding.fragmentMoviesRecyclerview.startAnimation(toVisible)
-            binding.fragmentMoviesRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetails.root.startAnimation(fromVisible)
-            binding.fragmentViewDetails.root.visibility = View.GONE
+            recyclerView.startAnimation(toVisible)
+            recyclerView.visibility = View.VISIBLE
+            viewDetails.startAnimation(fromVisible)
+            viewDetails.visibility = View.GONE
         }
     }
 
