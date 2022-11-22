@@ -5,9 +5,9 @@ import java.lang.Exception
 
 class Repository(private val apiService: ApiService) : RepositoryInterface {
 
-    override suspend fun getCharacters(): NetworkResponse<CharacterResponse> {
+    override suspend fun getCharacters(page : Int): NetworkResponse<CharacterResponse> {
         return try {
-            val response = apiService.getCharacters()
+            val response = apiService.getCharacters(page = page)
             if (response.isSuccessful){
                 NetworkResponse.Success(response.body()!!)
             }else{
@@ -85,7 +85,7 @@ class Repository(private val apiService: ApiService) : RepositoryInterface {
 }
 
 interface RepositoryInterface {
-    suspend fun getCharacters() : NetworkResponse<CharacterResponse>
+    suspend fun getCharacters(page : Int) : NetworkResponse<CharacterResponse>
     suspend fun getStarships() : NetworkResponse<StarshipResponse>
     suspend fun getPlanets() : NetworkResponse<PlanetResponse>
     suspend fun getMovies() : NetworkResponse<MovieResponse>

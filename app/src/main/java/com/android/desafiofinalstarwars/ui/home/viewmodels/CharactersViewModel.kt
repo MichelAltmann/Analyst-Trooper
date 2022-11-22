@@ -19,10 +19,14 @@ class CharactersViewModel(private val repository: RepositoryInterface) : ViewMod
     val characterError = _characterError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
+    private var page = 1
+
     fun getApiCharacters() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.getCharacters()) {
-            is NetworkResponse.Success -> { _characterResponse.value = response.data }
+        when (val response = repository.getCharacters(page)) {
+            is NetworkResponse.Success -> {
+            _characterResponse.value = response.data
+            page++}
             is NetworkResponse.Failed -> { _characterError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED

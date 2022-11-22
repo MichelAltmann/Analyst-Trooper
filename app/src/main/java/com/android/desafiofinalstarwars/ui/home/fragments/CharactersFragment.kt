@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentCharactersBinding
 import com.android.desafiofinalstarwars.model.Character
@@ -27,18 +29,34 @@ class CharactersFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val charactersList : ArrayList<Character> = arrayListOf()
+    private val charactersList: ArrayList<Character> = arrayListOf()
 
     private val viewModel by viewModel<CharactersViewModel>()
 
     private var isClicked = 0
 
+    private lateinit var scrollListener: RecyclerView.OnScrollListener
+
     private val adapter by lazy {
         CharactersAdapter()
     }
 
-    private val fromVisible : Animation by lazy {AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
-    private val toVisible : Animation by lazy {AnimationUtils.loadAnimation(context, R.anim.tovisible)}
+    private val recyclerView by lazy {
+        binding.fragmentCharactersRecyclerview
+    }
+
+    private val fromVisible: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fromvisible
+        )
+    }
+    private val toVisible: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.tovisible
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,8 +68,11 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecycler()
+    }
 
-        binding.fragmentCharactersRecyclerview.adapter = adapter
+    private fun setupRecycler() {
+        recyclerView.adapter = adapter
 
         setObserver()
 
@@ -61,49 +82,78 @@ class CharactersFragment : Fragment() {
             isClicked = 1
             descriptionTabCall(it)
         }
+
         HomeFragment.onTabReselectedCharactersListener = {
             isClicked -= 1
             descriptionTabCall()
         }
+    }
 
-        Log.i(TAG, "onViewCreated: ")
+    private fun addScrollListenerAdapter() {
+        scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemVisble = visibleItemCount + pastVisibleItems
+                    val totalItemCount = layoutManager.itemCount
+                    if (totalItemVisble >= totalItemCount) {
+                        removeScrollListenerAdapter()
+                        viewModel.getApiCharacters()
+                    }
+                }
+            }
+        }
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    private fun removeScrollListenerAdapter() {
+        if (::scrollListener.isInitialized) {
+            recyclerView.removeOnScrollListener(scrollListener)
+        }
     }
 
     private fun descriptionTabCall(character: Character? = null) {
-        if (isClicked == 1){
-            binding.fragmentCharactersRecyclerview.startAnimation(fromVisible)
-            binding.fragmentCharactersRecyclerview.visibility = View.GONE
-            binding.fragmentViewDetails.root.startAnimation(toVisible)
-            binding.fragmentViewDetails.root.visibility = View.VISIBLE
+        val viewDetails = binding.fragmentViewDetails.root
+        if (isClicked == 1) {
+            recyclerView.startAnimation(fromVisible)
+            recyclerView.visibility = View.GONE
+            viewDetails.startAnimation(toVisible)
+            viewDetails.visibility = View.VISIBLE
             DetailsView(binding.fragmentViewDetails).bind(character!!)
         } else if (isClicked == 0) {
-            binding.fragmentCharactersRecyclerview.startAnimation(toVisible)
-            binding.fragmentCharactersRecyclerview.visibility = View.VISIBLE
-            binding.fragmentViewDetails.root.startAnimation(fromVisible)
-            binding.fragmentViewDetails.root.visibility = View.GONE
+            recyclerView.startAnimation(toVisible)
+            recyclerView.visibility = View.VISIBLE
+            viewDetails.startAnimation(fromVisible)
+            viewDetails.visibility = View.GONE
         }
     }
 
     private fun setObserver() {
         Log.i(TAG, "setObserver: ")
-        viewModel.characterResponse.observe(viewLifecycleOwner){
+        viewModel.characterResponse.observe(viewLifecycleOwner) {
             it?.let {
                 charactersList.addAll(it.results!!)
                 adapter.update(charactersList)
+                removeScrollListenerAdapter()
+                addScrollListenerAdapter()
             }
         }
-        viewModel.loadStateLiveData.observe(viewLifecycleOwner){
+        viewModel.loadStateLiveData.observe(viewLifecycleOwner) {
             handleProgressBar(it)
         }
-        viewModel.characterError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+        viewModel.characterError.observe(viewLifecycleOwner) {
+            Toast.makeText(context, "Fim da lista.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun handleProgressBar(state: CharactersViewModel.State?) {
-        when(state){
+        when (state) {
             CharactersViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            CharactersViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            CharactersViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility =
+                View.GONE
             else -> {}
         }
     }
