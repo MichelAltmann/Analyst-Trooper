@@ -16,10 +16,13 @@ class VehiclesViewModel(private val repository: RepositoryInterface) : ViewModel
     val vehicleError = _vehicleError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
-    fun getPlanetsApi() = viewModelScope.launch {
+    private var page = 1
+
+    fun getApiVehicles() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
-        when (val response = repository.getVehicles()) {
-            is NetworkResponse.Success -> { _vehicleResponse.value = response.data }
+        when (val response = repository.getVehicles(page = page)) {
+            is NetworkResponse.Success -> { _vehicleResponse.value = response.data
+            page++}
             is NetworkResponse.Failed -> { _vehicleError.value = Unit }
         }
         loadStateLiveData.value = State.LOADING_FINISHED

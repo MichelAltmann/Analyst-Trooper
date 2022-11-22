@@ -28,5 +28,7 @@ interface ApiService {
     suspend fun getMovies() : Response<MovieResponse>
 
     @GET("vehicles/")
-    suspend fun getVehicles() : Response<VehicleResponse>
+    suspend fun getVehicles(
+        @Query("page") page : Int
+    ) : Response<VehicleResponse>
 }
