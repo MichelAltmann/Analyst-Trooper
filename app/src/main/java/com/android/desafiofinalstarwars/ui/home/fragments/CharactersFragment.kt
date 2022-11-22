@@ -89,7 +89,7 @@ class CharactersFragment : Fragment() {
         }
     }
 
-    private fun addScrollListenerAdapter() {
+    private fun addScrollListenerAdapter(isLastPage : String?) {
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -99,9 +99,11 @@ class CharactersFragment : Fragment() {
                     val visibleItemCount = layoutManager.childCount
                     val totalItemVisble = visibleItemCount + pastVisibleItems
                     val totalItemCount = layoutManager.itemCount
-                    if (totalItemVisble >= totalItemCount) {
+                    if (totalItemVisble >= totalItemCount && isLastPage != null) {
                         removeScrollListenerAdapter()
                         viewModel.getApiCharacters()
+                    } else if (totalItemVisble >= totalItemCount && isLastPage == null){
+                        Toast.makeText(context, "List end reached.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -138,14 +140,14 @@ class CharactersFragment : Fragment() {
                 charactersList.addAll(it.results!!)
                 adapter.update(charactersList)
                 removeScrollListenerAdapter()
-                addScrollListenerAdapter()
+                addScrollListenerAdapter(it.next)
             }
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner) {
             handleProgressBar(it)
         }
         viewModel.characterError.observe(viewLifecycleOwner) {
-            Toast.makeText(context, "Fim da lista.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
         }
     }
 
