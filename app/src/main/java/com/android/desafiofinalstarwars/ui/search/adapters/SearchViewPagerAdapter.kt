@@ -12,12 +12,12 @@ class SearchViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentState
 
     override fun createFragment(position: Int): Fragment {
         when (position){
-            0 -> return CharacterSearchFragment()
-            1 -> return SpecieSearchFragment()
-            2 -> return StarshipSearchFragment()
-            3 -> return VehicleSearchFragment()
+            0 -> return CharactersSearchFragment()
+            1 -> return SpeciesSearchFragment()
+            2 -> return StarshipsSearchFragment()
+            3 -> return VehiclesSearchFragment()
             4 -> return PlanetsSearchFragment()
-            else -> return CharacterSearchFragment()
+            else -> return CharactersSearchFragment()
         }
     }
 

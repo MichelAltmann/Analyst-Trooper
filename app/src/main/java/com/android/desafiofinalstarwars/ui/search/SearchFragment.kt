@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentRightBinding
 import com.android.desafiofinalstarwars.databinding.FragmentSearchBinding
+import com.android.desafiofinalstarwars.ui.home.HomeFragment
+import com.android.desafiofinalstarwars.ui.home.HomeFragment.Companion.onTabReselectedCharactersListener
 import com.android.desafiofinalstarwars.ui.right.adapters.RightViewPagerAdapter
 import com.android.desafiofinalstarwars.ui.search.adapters.SearchViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -58,7 +60,10 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
+                when (binding.fragmentSearchViewpagerTablayout.currentItem){
+                    0 -> onTabReselectedCharactersSearchListener.invoke()
+                    1 -> onTabReselectedSpeciesSearchListener.invoke()
+                }
             }
 
         })
@@ -70,7 +75,7 @@ class SearchFragment : Fragment() {
     }
 
     companion object {
-        lateinit var onTabSelectedPlanetsListener : () -> Unit
-        lateinit var onTabSelectedFilmesListener : () -> Unit
+        lateinit var onTabReselectedCharactersSearchListener : () -> Unit
+        lateinit var onTabReselectedSpeciesSearchListener : () -> Unit
     }
 }
