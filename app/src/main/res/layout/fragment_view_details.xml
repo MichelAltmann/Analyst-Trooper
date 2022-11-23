@@ -15,7 +15,7 @@
         android:layout_margin="24dp"
         android:gravity="center"
         android:shadowRadius="5"
-        android:text="@string/nome_do_personagem"
+        tools:text="Character name"
         android:textColor="@color/yellow"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"

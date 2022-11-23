@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_left"
         android:icon="@drawable/ic_starship"
-        android:title="@string/title_starships" />
+        android:title="@string/starships" />
 
     <item
         android:id="@+id/navigation_home"
@@ -15,6 +15,11 @@
     <item
         android:id="@+id/navigation_right"
         android:icon="@drawable/ic_planet"
-        android:title="@string/title_planets" />
+        android:title="@string/planets" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search" />
 
 </menu>

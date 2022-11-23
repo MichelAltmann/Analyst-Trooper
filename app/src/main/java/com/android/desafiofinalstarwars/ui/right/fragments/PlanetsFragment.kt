@@ -19,7 +19,7 @@ import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetsViewModel
 import com.android.desafiofinalstarwars.ui.right.adapters.PlanetsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PlanetsFragmet : Fragment() {
+class PlanetsFragment : Fragment() {
 
     private var _binding: FragmentPlanetsBinding? = null
 

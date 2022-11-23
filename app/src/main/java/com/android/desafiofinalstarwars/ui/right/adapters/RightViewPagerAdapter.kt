@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.android.desafiofinalstarwars.ui.right.fragments.MoviesFragment
-import com.android.desafiofinalstarwars.ui.right.fragments.PlanetsFragmet
+import com.android.desafiofinalstarwars.ui.right.fragments.PlanetsFragment
 
 class RightViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
@@ -13,10 +13,10 @@ class RightViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateA
 
     override fun createFragment(position: Int): Fragment {
         when (position){
-            0 -> return PlanetsFragmet()
+            0 -> return PlanetsFragment()
             1 -> return MoviesFragment()
         }
-        return PlanetsFragmet()
+        return PlanetsFragment()
     }
 
 }

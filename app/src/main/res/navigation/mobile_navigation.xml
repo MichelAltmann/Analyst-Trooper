@@ -24,4 +24,10 @@
         android:name="com.android.desafiofinalstarwars.ui.right.RightFragment"
         android:label="@string/title_right"
         tools:layout="@layout/fragment_right" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.android.desafiofinalstarwars.ui.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search"/>
 </navigation>

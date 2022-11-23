@@ -26,11 +26,11 @@ interface ApiService {
         @Query("page") page : Int
     ) : Response<SpecieResponse>
 
-    @GET("films/")
-    suspend fun getMovies() : Response<MovieResponse>
-
     @GET("vehicles/")
     suspend fun getVehicles(
         @Query("page") page : Int
     ) : Response<VehicleResponse>
+
+    @GET("films/")
+    suspend fun getMovies() : Response<MovieResponse>
 }
