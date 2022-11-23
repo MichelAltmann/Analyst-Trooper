@@ -1,13 +1,25 @@
 package com.android.desafiofinalstarwars.retrofit.webclient.personagens
 
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.*
-import java.lang.Exception
 
 class Repository(private val apiService: ApiService) : RepositoryInterface {
 
     override suspend fun getCharacters(page : Int): NetworkResponse<CharacterResponse> {
         return try {
             val response = apiService.getCharacters(page = page)
+            if (response.isSuccessful){
+                NetworkResponse.Success(response.body()!!)
+            }else{
+                NetworkResponse.Failed(Exception())
+            }
+        } catch (e : Exception){
+            NetworkResponse.Failed(ApiError.GenericException())
+        }
+    }
+
+    override suspend fun getCharactersSearch(filter: String, page : Int) : NetworkResponse<CharacterResponse>{
+        return try {
+            val response = apiService.getCharactersSearch(filter = filter, page = page)
             if (response.isSuccessful){
                 NetworkResponse.Success(response.body()!!)
             }else{
@@ -86,6 +98,7 @@ class Repository(private val apiService: ApiService) : RepositoryInterface {
 
 interface RepositoryInterface {
     suspend fun getCharacters(page : Int) : NetworkResponse<CharacterResponse>
+    suspend fun getCharactersSearch(filter: String, page: Int) : NetworkResponse<CharacterResponse>
     suspend fun getStarships(page: Int): NetworkResponse<StarshipResponse>
     suspend fun getPlanets(page: Int): NetworkResponse<PlanetResponse>
     suspend fun getMovies() : NetworkResponse<MovieResponse>

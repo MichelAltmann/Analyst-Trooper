@@ -13,14 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentCharactersBinding
 import com.android.desafiofinalstarwars.databinding.FragmentSearchCharactersBinding
 import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.ui.DetailsView
-import com.android.desafiofinalstarwars.ui.home.HomeFragment
 import com.android.desafiofinalstarwars.ui.home.adapters.CharactersAdapter
 import com.android.desafiofinalstarwars.ui.home.viewmodels.CharactersViewModel
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedCharactersSearchListener
+import com.android.desafiofinalstarwars.ui.search.viewmodels.CharacterSearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharactersSearchFragment : Fragment() {
@@ -32,7 +31,7 @@ class CharactersSearchFragment : Fragment() {
 
     private val charactersList: ArrayList<Character> = arrayListOf()
 
-    private val viewModel by viewModel<CharactersViewModel>()
+    private val viewModel by viewModel<CharacterSearchViewModel>()
 
     private var isClicked = 0
 
@@ -71,14 +70,20 @@ class CharactersSearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
+
+//        setupSearch()
     }
+
+//    private fun setupSearch() {
+//        binding.se
+//    }
 
     private fun setupRecycler() {
         recyclerView.adapter = adapter
 
         setObserver()
 
-        viewModel.getApiCharacters()
+        viewModel.getApiCharactersSearch()
 
         adapter.itemClickListener = {
             isClicked = 1
@@ -103,7 +108,7 @@ class CharactersSearchFragment : Fragment() {
                     val totalItemCount = layoutManager.itemCount
                     if (totalItemVisble >= totalItemCount && isLastPage != null) {
                         removeScrollListenerAdapter()
-                        viewModel.getApiCharacters()
+                        viewModel.getApiCharactersSearch()
                     } else if (totalItemVisble >= totalItemCount && isLastPage == null){
                         Toast.makeText(context, "List end reached.", Toast.LENGTH_SHORT).show()
                     }
@@ -153,10 +158,10 @@ class CharactersSearchFragment : Fragment() {
         }
     }
 
-    private fun handleProgressBar(state: CharactersViewModel.State?) {
+    private fun handleProgressBar(state: CharacterSearchViewModel.State?) {
         when (state) {
-            CharactersViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            CharactersViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility =
+            CharacterSearchViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            CharacterSearchViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility =
                 View.GONE
             else -> {}
         }

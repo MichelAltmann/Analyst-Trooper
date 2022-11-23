@@ -11,6 +11,12 @@ interface ApiService {
         @Query("page") page : Int
     ) : Response<CharacterResponse>
 
+    @GET("people/?search=")
+    suspend fun getCharactersSearch(
+        @Query("search") filter: String,
+        @Query("page") page : Int
+    ) : Response<CharacterResponse>
+
     @GET("starships/")
     suspend fun getStarships(
         @Query("page") page : Int
