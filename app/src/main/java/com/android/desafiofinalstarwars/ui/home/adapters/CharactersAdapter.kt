@@ -43,7 +43,6 @@ class CharactersAdapter() : RecyclerView.Adapter<CharactersAdapter.ViewHolder>()
 
     fun update(characters: List<Character>){
         this.characters.clear()
-        this.characters.removeAll(characters)
         this.characters.addAll(characters)
         notifyDataSetChanged()
     }

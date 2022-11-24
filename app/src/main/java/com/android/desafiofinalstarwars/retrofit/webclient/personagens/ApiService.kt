@@ -17,6 +17,17 @@ interface ApiService {
         @Query("page") page : Int
     ) : Response<CharacterResponse>
 
+    @GET("species/")
+    suspend fun getSpecies(
+        @Query("page") page : Int
+    ) : Response<SpecieResponse>
+
+    @GET("species/?search=")
+    suspend fun getSpeciesSearch(
+        @Query("search") filter: String,
+        @Query("page") page: Int
+    ) : Response<SpecieResponse>
+
     @GET("starships/")
     suspend fun getStarships(
         @Query("page") page : Int
@@ -26,11 +37,6 @@ interface ApiService {
     suspend fun getPlanets(
         @Query("page") page : Int
     ) : Response<PlanetResponse>
-
-    @GET("species/")
-    suspend fun getSpecies(
-        @Query("page") page : Int
-    ) : Response<SpecieResponse>
 
     @GET("vehicles/")
     suspend fun getVehicles(

@@ -59,21 +59,22 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val filter = binding.fragmentSearchSearchBar.text.toString()
                 when(binding.fragmentSearchTablayout.selectedTabPosition){
                     0 -> {
-                        onTabSelectedCharactersSearchListener.invoke(binding.fragmentSearchSearchBar.text.toString())
+                        onTabSelectedCharactersSearchListener.invoke(filter)
                     }
                     1 -> {
-//                        onTabSelectedSpeciesSearchListener.invoke()
+                        onTabSelectedSpeciesSearchListener.invoke(filter)
                     }
                     2 -> {
-//                        onTabSelectedStarshipsSearchListener.invoke()
+//                        onTabSelectedStarshipsSearchListener.invoke(filter)
                     }
                     3 -> {
-//                        onTabSelectedVehiclesSearchListener.invoke()
+//                        onTabSelectedVehiclesSearchListener.invoke(filter)
                     }
                     4 -> {
-//                        onTabSelectedPlanetsSearchListener.invoke()
+//                        onTabSelectedPlanetsSearchListener.invoke(filter)
                     }
                 }
             }
@@ -91,29 +92,47 @@ class SearchFragment : Fragment() {
                 when (tab?.position){
                     0 -> {
                         binding.fragmentSearchSearchBar.hint = "Search for characters"
-//                        onTabSelectedCharactersSearchListener.invoke()
+                        binding.fragmentSearchSearchBar.text.clear()
                     }
                     1 -> {
                         binding.fragmentSearchSearchBar.hint = "Search for species"
-//                        onTabSelectedSpeciesSearchListener.invoke()
+                        binding.fragmentSearchSearchBar.text.clear()
                     }
                     2 -> {
                         binding.fragmentSearchSearchBar.hint = "Search for starships"
-//                        onTabSelectedStarshipsSearchListener.invoke()
+                        binding.fragmentSearchSearchBar.text.clear()
                     }
                     3 -> {
                         binding.fragmentSearchSearchBar.hint = "Search for vehicles"
-//                        onTabSelectedVehiclesSearchListener.invoke()
+                        binding.fragmentSearchSearchBar.text.clear()
+
                     }
                     4 -> {
                         binding.fragmentSearchSearchBar.hint = "Search for planets"
-//                        onTabSelectedPlanetsSearchListener.invoke()
+                        binding.fragmentSearchSearchBar.text.clear()
                     }
                 }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
+                when (tab?.position){
+                    0 -> {
+                        onTabSelectedCharactersSearchListener.invoke("")
+                    }
+                    1 -> {
+                        onTabSelectedSpeciesSearchListener.invoke("")
+                    }
+                    2 -> {
 
+                    }
+                    3 -> {
+
+
+                    }
+                    4 -> {
+
+                    }
+                }
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {

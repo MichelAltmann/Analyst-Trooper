@@ -10,13 +10,12 @@ import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.Cha
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
 import kotlinx.coroutines.launch
 
-class CharacterSearchViewModel(private val repository: RepositoryInterface) : ViewModel() {
+class CharactersSearchViewModel(private val repository: RepositoryInterface) : ViewModel() {
     private val _characterResponse = MutableLiveData<CharacterResponse?>()
     val characterResponse: LiveData<CharacterResponse?> = _characterResponse
     private val _characterError = MutableLiveData<Unit>()
     val characterError = _characterError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
-
 
     private var page = 1
     var filter = ""

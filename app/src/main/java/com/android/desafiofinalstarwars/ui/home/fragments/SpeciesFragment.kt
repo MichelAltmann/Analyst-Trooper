@@ -23,10 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SpeciesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SpeciesFragment()
-    }
-
     private var _binding : FragmentSpeciesBinding? = null
 
     private val binding get() = _binding!!

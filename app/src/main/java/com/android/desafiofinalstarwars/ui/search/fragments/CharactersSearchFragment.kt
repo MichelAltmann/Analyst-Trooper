@@ -17,10 +17,9 @@ import com.android.desafiofinalstarwars.databinding.FragmentSearchCharactersBind
 import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.home.adapters.CharactersAdapter
-import com.android.desafiofinalstarwars.ui.home.viewmodels.CharactersViewModel
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedCharactersSearchListener
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedCharactersSearchListener
-import com.android.desafiofinalstarwars.ui.search.viewmodels.CharacterSearchViewModel
+import com.android.desafiofinalstarwars.ui.search.viewmodels.CharactersSearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharactersSearchFragment : Fragment() {
@@ -32,7 +31,7 @@ class CharactersSearchFragment : Fragment() {
 
     private val charactersList: ArrayList<Character> = arrayListOf()
 
-    private val viewModel by viewModel<CharacterSearchViewModel>()
+    private val viewModel by viewModel<CharactersSearchViewModel>()
 
     private var isClicked = 0
 
@@ -78,6 +77,7 @@ class CharactersSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedCharactersSearchListener = {
             viewModel.filter = it
+            charactersList.clear()
         }
     }
 
@@ -147,7 +147,6 @@ class CharactersSearchFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.characterResponse.observe(viewLifecycleOwner) {
             it?.let {
-                charactersList.clear()
                 charactersList.addAll(it.results!!)
                 adapter.update(charactersList)
                 removeScrollListenerAdapter()
@@ -162,10 +161,10 @@ class CharactersSearchFragment : Fragment() {
         }
     }
 
-    private fun handleProgressBar(state: CharacterSearchViewModel.State?) {
+    private fun handleProgressBar(state: CharactersSearchViewModel.State?) {
         when (state) {
-            CharacterSearchViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            CharacterSearchViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility =
+            CharactersSearchViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            CharactersSearchViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility =
                 View.GONE
             else -> {}
         }
