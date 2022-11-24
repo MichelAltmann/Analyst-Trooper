@@ -19,6 +19,7 @@ import com.android.desafiofinalstarwars.ui.DetailsView
 import com.android.desafiofinalstarwars.ui.home.adapters.CharactersAdapter
 import com.android.desafiofinalstarwars.ui.home.viewmodels.CharactersViewModel
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedCharactersSearchListener
+import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedCharactersSearchListener
 import com.android.desafiofinalstarwars.ui.search.viewmodels.CharacterSearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -71,12 +72,14 @@ class CharactersSearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
 
-//        setupSearch()
+        setupSearch()
     }
 
-//    private fun setupSearch() {
-//        binding.se
-//    }
+    private fun setupSearch() {
+        onTabSelectedCharactersSearchListener = {
+            viewModel.filter = it
+        }
+    }
 
     private fun setupRecycler() {
         recyclerView.adapter = adapter
@@ -144,6 +147,7 @@ class CharactersSearchFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.characterResponse.observe(viewLifecycleOwner) {
             it?.let {
+                charactersList.clear()
                 charactersList.addAll(it.results!!)
                 adapter.update(charactersList)
                 removeScrollListenerAdapter()

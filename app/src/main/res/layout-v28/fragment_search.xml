@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
+        android:textColorHint="@color/yellow"
+        android:hint="Search for characters"
         android:textColor="@color/white"
         android:drawableTint="@color/yellow"
         android:drawableLeft="@drawable/ic_baseline_search_24"

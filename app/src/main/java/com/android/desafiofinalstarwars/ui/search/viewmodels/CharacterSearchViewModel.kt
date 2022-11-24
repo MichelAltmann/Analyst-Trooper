@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.CharacterResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
@@ -16,13 +17,15 @@ class CharacterSearchViewModel(private val repository: RepositoryInterface) : Vi
     val characterError = _characterError as LiveData<Unit>
     var loadStateLiveData = MutableLiveData<State>()
 
+
     private var page = 1
-    var filter = "Skywalker"
+    var filter = ""
         set(value) {
             field = value
             page = 1
             getApiCharactersSearch()
         }
+
 
     fun getApiCharactersSearch() = viewModelScope.launch {
         loadStateLiveData.value = State.LOADING
