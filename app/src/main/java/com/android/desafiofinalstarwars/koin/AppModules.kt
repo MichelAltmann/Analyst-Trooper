@@ -11,6 +11,7 @@ import com.android.desafiofinalstarwars.ui.right.viewmodel.MoviesViewModel
 import com.android.desafiofinalstarwars.ui.right.viewmodel.PlanetsViewModel
 import com.android.desafiofinalstarwars.ui.search.viewmodels.CharactersSearchViewModel
 import com.android.desafiofinalstarwars.ui.search.viewmodels.SpeciesSearchViewModel
+import com.android.desafiofinalstarwars.ui.search.viewmodels.StarshipsSearchViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -19,10 +20,11 @@ import org.koin.dsl.module
 val modelModule : Module = module {
     viewModel { CharactersViewModel(get()) }
     viewModel { CharactersSearchViewModel(get()) }
-    viewModel { StarshipsViewModel(get()) }
-    viewModel { SpeciesSearchViewModel(get()) }
-    viewModel { PlanetsViewModel(get()) }
     viewModel { SpeciesViewModel(get()) }
+    viewModel { SpeciesSearchViewModel(get()) }
+    viewModel { StarshipsViewModel(get()) }
+    viewModel { StarshipsSearchViewModel(get()) }
+    viewModel { PlanetsViewModel(get()) }
     viewModel { MoviesViewModel(get()) }
     viewModel { VehiclesViewModel(get()) }
 }

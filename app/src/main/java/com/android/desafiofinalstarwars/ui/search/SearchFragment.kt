@@ -59,6 +59,10 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
                 val filter = binding.fragmentSearchSearchBar.text.toString()
                 when(binding.fragmentSearchTablayout.selectedTabPosition){
                     0 -> {
@@ -68,7 +72,7 @@ class SearchFragment : Fragment() {
                         onTabSelectedSpeciesSearchListener.invoke(filter)
                     }
                     2 -> {
-//                        onTabSelectedStarshipsSearchListener.invoke(filter)
+                        onTabSelectedStarshipsSearchListener.invoke(filter)
                     }
                     3 -> {
 //                        onTabSelectedVehiclesSearchListener.invoke(filter)
@@ -77,9 +81,6 @@ class SearchFragment : Fragment() {
 //                        onTabSelectedPlanetsSearchListener.invoke(filter)
                     }
                 }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
             }
 
         })
@@ -123,7 +124,7 @@ class SearchFragment : Fragment() {
                         onTabSelectedSpeciesSearchListener.invoke("")
                     }
                     2 -> {
-
+                        onTabSelectedStarshipsSearchListener.invoke("")
                     }
                     3 -> {
 
@@ -139,7 +140,7 @@ class SearchFragment : Fragment() {
                 when (binding.fragmentSearchViewpagerTablayout.currentItem){
                     0 -> onTabReselectedCharactersSearchListener.invoke()
                     1 -> onTabReselectedSpeciesSearchListener.invoke()
-//                    2 ->
+                    2 -> onTabReselectedStarshipsSearchListener.invoke()
 //                    3 ->
 //                    4 ->
                 }
@@ -156,6 +157,9 @@ class SearchFragment : Fragment() {
     companion object {
         lateinit var onTabReselectedCharactersSearchListener : () -> Unit
         lateinit var onTabReselectedSpeciesSearchListener : () -> Unit
+        lateinit var onTabReselectedStarshipsSearchListener : () -> Unit
+        lateinit var onTabReselectedSVehiclesSearchListener : () -> Unit
+        lateinit var onTabReselectedPlanetsSearchListener : () -> Unit
         lateinit var onTabSelectedCharactersSearchListener : (filter : String) -> Unit
         lateinit var onTabSelectedSpeciesSearchListener : (filter : String) -> Unit
         lateinit var onTabSelectedStarshipsSearchListener : (filter : String) -> Unit

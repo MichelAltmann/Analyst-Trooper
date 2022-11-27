@@ -31,8 +31,11 @@ class CharactersSearchViewModel(private val repository: RepositoryInterface) : V
         when (val response = repository.getCharactersSearch(filter, page)) {
             is NetworkResponse.Success -> {
                 _characterResponse.value = response.data
-                page++}
-            is NetworkResponse.Failed -> { _characterError.value = Unit }
+                page++
+            }
+            is NetworkResponse.Failed -> {
+                _characterError.value = Unit
+            }
         }
         loadStateLiveData.value = State.LOADING_FINISHED
     }

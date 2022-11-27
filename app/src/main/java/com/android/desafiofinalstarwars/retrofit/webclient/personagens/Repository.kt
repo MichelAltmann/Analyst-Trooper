@@ -69,6 +69,19 @@ class Repository(private val apiService: ApiService) : RepositoryInterface {
         }
     }
 
+    override suspend fun getStarshipsSearch(filter: String, page : Int) : NetworkResponse<StarshipResponse>{
+        return try {
+            val response = apiService.getStarshipsSearch(filter = filter, page = page)
+            if (response.isSuccessful){
+                NetworkResponse.Success(response.body()!!)
+            }else{
+                NetworkResponse.Failed(Exception())
+            }
+        } catch (e : Exception){
+            NetworkResponse.Failed(ApiError.GenericException())
+        }
+    }
+
     override suspend fun getPlanets(page: Int): NetworkResponse<PlanetResponse> {
         return try {
             val response = apiService.getPlanets(page = page)
@@ -115,6 +128,7 @@ interface RepositoryInterface {
     suspend fun getSpecies(page: Int): NetworkResponse<SpecieResponse>
     suspend fun getSpeciesSearch(filter: String, page: Int): NetworkResponse<SpecieResponse>
     suspend fun getStarships(page: Int): NetworkResponse<StarshipResponse>
+    suspend fun getStarshipsSearch(filter : String, page : Int) : NetworkResponse<StarshipResponse>
     suspend fun getPlanets(page: Int): NetworkResponse<PlanetResponse>
     suspend fun getMovies() : NetworkResponse<MovieResponse>
     suspend fun getVehicles(page: Int): NetworkResponse<VehicleResponse>

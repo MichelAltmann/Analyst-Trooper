@@ -33,6 +33,12 @@ interface ApiService {
         @Query("page") page : Int
     ) : Response<StarshipResponse>
 
+    @GET("starships/?search=")
+    suspend fun getStarshipsSearch(
+        @Query("search") filter : String,
+        @Query("page") page : Int
+    ) : Response<StarshipResponse>
+
     @GET("planets/")
     suspend fun getPlanets(
         @Query("page") page : Int
