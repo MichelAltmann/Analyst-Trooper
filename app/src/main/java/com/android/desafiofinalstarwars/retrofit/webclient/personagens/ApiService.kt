@@ -39,15 +39,20 @@ interface ApiService {
         @Query("page") page : Int
     ) : Response<StarshipResponse>
 
-    @GET("planets/")
-    suspend fun getPlanets(
-        @Query("page") page : Int
-    ) : Response<PlanetResponse>
-
     @GET("vehicles/")
     suspend fun getVehicles(
         @Query("page") page : Int
     ) : Response<VehicleResponse>
+    @GET("vehicles/?search=")
+    suspend fun getVehiclesSearch(
+        @Query("search") filter : String,
+        @Query("page") page : Int
+    ) : Response<VehicleResponse>
+
+    @GET("planets/")
+    suspend fun getPlanets(
+        @Query("page") page : Int
+    ) : Response<PlanetResponse>
 
     @GET("films/")
     suspend fun getMovies() : Response<MovieResponse>

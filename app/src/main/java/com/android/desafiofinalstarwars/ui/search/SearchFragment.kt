@@ -7,13 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
-import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentRightBinding
 import com.android.desafiofinalstarwars.databinding.FragmentSearchBinding
-import com.android.desafiofinalstarwars.ui.home.HomeFragment
-import com.android.desafiofinalstarwars.ui.home.HomeFragment.Companion.onTabReselectedCharactersListener
-import com.android.desafiofinalstarwars.ui.right.adapters.RightViewPagerAdapter
 import com.android.desafiofinalstarwars.ui.search.adapters.SearchViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -75,7 +69,7 @@ class SearchFragment : Fragment() {
                         onTabSelectedStarshipsSearchListener.invoke(filter)
                     }
                     3 -> {
-//                        onTabSelectedVehiclesSearchListener.invoke(filter)
+                        onTabSelectedVehiclesSearchListener.invoke(filter)
                     }
                     4 -> {
 //                        onTabSelectedPlanetsSearchListener.invoke(filter)
@@ -127,8 +121,7 @@ class SearchFragment : Fragment() {
                         onTabSelectedStarshipsSearchListener.invoke("")
                     }
                     3 -> {
-
-
+                        onTabSelectedVehiclesSearchListener.invoke("")
                     }
                     4 -> {
 
@@ -141,7 +134,7 @@ class SearchFragment : Fragment() {
                     0 -> onTabReselectedCharactersSearchListener.invoke()
                     1 -> onTabReselectedSpeciesSearchListener.invoke()
                     2 -> onTabReselectedStarshipsSearchListener.invoke()
-//                    3 ->
+                    3 -> onTabReselectedVehiclesSearchListener.invoke()
 //                    4 ->
                 }
             }
@@ -158,7 +151,7 @@ class SearchFragment : Fragment() {
         lateinit var onTabReselectedCharactersSearchListener : () -> Unit
         lateinit var onTabReselectedSpeciesSearchListener : () -> Unit
         lateinit var onTabReselectedStarshipsSearchListener : () -> Unit
-        lateinit var onTabReselectedSVehiclesSearchListener : () -> Unit
+        lateinit var onTabReselectedVehiclesSearchListener : () -> Unit
         lateinit var onTabReselectedPlanetsSearchListener : () -> Unit
         lateinit var onTabSelectedCharactersSearchListener : (filter : String) -> Unit
         lateinit var onTabSelectedSpeciesSearchListener : (filter : String) -> Unit
