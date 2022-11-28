@@ -29,3 +29,17 @@ The first one to appear is the characters one.
 Then you can scroll to the right to see the species tab.
 
 ![image](https://user-images.githubusercontent.com/110844942/204346495-263875ce-adff-4154-96ea-8dc0435e992e.png)
+
+In any list of the app you can click on the item, and it'll show the details of it.
+For example the Human in species:
+
+![image](https://user-images.githubusercontent.com/110844942/204347921-d6d9712c-961a-42d1-855f-041c9d8c3321.png)
+
+After being clicked, it shows the user some information of the item clicked.
+To go back to the list you simply have to click on the tab that you're on, in this case, the species.
+
+![image](https://user-images.githubusercontent.com/110844942/204348191-294568ab-0192-4cb2-b8c0-5032f1267b19.png)
+
+After clicking it, you'll go back to the list of species.
+
+
