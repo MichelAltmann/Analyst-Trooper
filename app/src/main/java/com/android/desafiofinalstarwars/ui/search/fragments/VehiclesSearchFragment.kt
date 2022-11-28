@@ -64,10 +64,14 @@ class VehiclesSearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.adapter = adapter
-        setObserver()
+        setupRecycler()
 
         setupSearch()
+    }
+
+    private fun setupRecycler() {
+        setObserver()
+        recyclerView.adapter = adapter
         viewModel.getApiVehiclesSearch()
 
         adapter.itemClickListener = {
@@ -78,13 +82,12 @@ class VehiclesSearchFragment : Fragment() {
             isClicked -= 1
             descriptionTabCall()
         }
-
     }
 
     private fun setupSearch() {
         onTabSelectedVehiclesSearchListener = {
-            vehiclesList.clear()
             viewModel.filter = it
+            vehiclesList.clear()
         }
     }
 
@@ -136,6 +139,7 @@ class VehiclesSearchFragment : Fragment() {
     private fun setObserver() {
         viewModel.vehicleResponse.observe(viewLifecycleOwner) {
             it?.let {
+                vehiclesList.clear()
                 vehiclesList.addAll(it.results!!)
                 adapter.update(vehiclesList)
                 removeScrollListenerAdapter()

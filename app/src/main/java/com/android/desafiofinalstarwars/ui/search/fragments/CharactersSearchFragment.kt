@@ -77,7 +77,6 @@ class CharactersSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedCharactersSearchListener = {
             viewModel.filter = it
-            charactersList.clear()
         }
     }
 
@@ -147,6 +146,7 @@ class CharactersSearchFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.characterResponse.observe(viewLifecycleOwner) {
             it?.let {
+                charactersList.clear()
                 charactersList.addAll(it.results!!)
                 adapter.update(charactersList)
                 removeScrollListenerAdapter()

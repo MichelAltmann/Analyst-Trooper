@@ -88,7 +88,6 @@ class SpeciesSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedSpeciesSearchListener = {
             viewModel.filter = it
-//            speciesList.clear()
         }
     }
 

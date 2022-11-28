@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_movies"
-        android:icon="@drawable/ic_movie_videos_icon"
+        android:icon="@drawable/ic_movie_2802"
         android:title="@string/movies" />
     <item
         android:id="@+id/navigation_left"

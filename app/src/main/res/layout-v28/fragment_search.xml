@@ -6,22 +6,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.search.SearchFragment">
 
-    <EditText
-        android:layout_margin="8dp"
-        android:id="@+id/fragment_search_searchBar"
+<!--    <EditText-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:id="@+id/fragment_search_searchBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@android:color/transparent"-->
+<!--        android:textColorHint="@color/yellow"-->
+<!--        android:hint="Search for characters"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:drawableTint="@color/yellow"-->
+<!--        android:drawableLeft="@drawable/ic_baseline_search_24"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/fragment_search_tablayout"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        />-->
+
+    <androidx.appcompat.widget.SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/fragment_search_searchBar"
         android:backgroundTint="@android:color/transparent"
-        android:textColorHint="@color/yellow"
-        android:hint="Search for characters"
-        android:textColor="@color/white"
-        android:drawableTint="@color/yellow"
-        android:drawableLeft="@drawable/ic_baseline_search_24"
-        app:layout_constraintBottom_toTopOf="@id/fragment_search_tablayout"
+        app:queryHint="Search for characters"
+        android:foregroundTint="@color/yellow"
+        app:iconifiedByDefault="false"
+        android:theme="@style/AppSearchView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/fragment_search_tablayout"

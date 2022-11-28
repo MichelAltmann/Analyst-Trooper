@@ -64,7 +64,6 @@ class PlanetsSearchFragment : Fragment() {
 
     private fun setupSearch() {
         onTabSelectedPlanetsSearchListener = {
-            planetsList.clear()
             viewModel.filter = it
         }
     }
@@ -135,6 +134,7 @@ class PlanetsSearchFragment : Fragment() {
     private fun setObserver() {
         viewModel.planetResponse.observe(viewLifecycleOwner){
             it?.let {
+                planetsList.clear()
                 planetsList.addAll(it.results!!)
                 adapter.update(planetsList)
                 removeScrollListenerAdapter()

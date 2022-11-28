@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import com.android.desafiofinalstarwars.databinding.FragmentSearchBinding
 import com.android.desafiofinalstarwars.ui.search.adapters.SearchViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -48,35 +49,36 @@ class SearchFragment : Fragment() {
     }
 
     private fun searchSetup() {
-        binding.fragmentSearchSearchBar.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        binding.fragmentSearchSearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                binding.fragmentSearchSearchBar.clearFocus()
+                return false
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                val filter = binding.fragmentSearchSearchBar.text.toString()
-                when(binding.fragmentSearchTablayout.selectedTabPosition){
-                    0 -> {
-                        onTabSelectedCharactersSearchListener.invoke(filter)
-                    }
-                    1 -> {
-                        onTabSelectedSpeciesSearchListener.invoke(filter)
-                    }
-                    2 -> {
-                        onTabSelectedStarshipsSearchListener.invoke(filter)
-                    }
-                    3 -> {
-                        onTabSelectedVehiclesSearchListener.invoke(filter)
-                    }
-                    4 -> {
-                        onTabSelectedPlanetsSearchListener.invoke(filter)
+            override fun onQueryTextChange(filter: String?): Boolean {
+                if (!filter.isNullOrEmpty()){
+                    when(binding.fragmentSearchTablayout.selectedTabPosition){
+                        0 -> {
+                            onTabSelectedCharactersSearchListener.invoke(filter.orEmpty())
+                        }
+                        1 -> {
+                            onTabSelectedSpeciesSearchListener.invoke(filter.orEmpty())
+                        }
+                        2 -> {
+                            onTabSelectedStarshipsSearchListener.invoke(filter.orEmpty())
+                        }
+                        3 -> {
+                            onTabSelectedVehiclesSearchListener.invoke(filter.orEmpty())
+                        }
+                        4 -> {
+                            onTabSelectedPlanetsSearchListener.invoke(filter.orEmpty())
+                        }
                     }
                 }
+                return false
             }
-
         })
     }
 
@@ -86,25 +88,24 @@ class SearchFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position){
                     0 -> {
-                        binding.fragmentSearchSearchBar.hint = "Search for characters"
-                        binding.fragmentSearchSearchBar.text.clear()
+                        binding.fragmentSearchSearchBar.queryHint = "Search for characters"
+                        binding.fragmentSearchSearchBar.setQuery("", false)
                     }
                     1 -> {
-                        binding.fragmentSearchSearchBar.hint = "Search for species"
-                        binding.fragmentSearchSearchBar.text.clear()
+                        binding.fragmentSearchSearchBar.queryHint = "Search for species"
+                        binding.fragmentSearchSearchBar.setQuery("", false)
                     }
                     2 -> {
-                        binding.fragmentSearchSearchBar.hint = "Search for starships"
-                        binding.fragmentSearchSearchBar.text.clear()
+                        binding.fragmentSearchSearchBar.queryHint = "Search for starships"
+                        binding.fragmentSearchSearchBar.setQuery("", true)
                     }
                     3 -> {
-                        binding.fragmentSearchSearchBar.hint = "Search for vehicles"
-                        binding.fragmentSearchSearchBar.text.clear()
-
+                        binding.fragmentSearchSearchBar.queryHint = "Search for vehicles"
+                        binding.fragmentSearchSearchBar.setQuery("", false)
                     }
                     4 -> {
-                        binding.fragmentSearchSearchBar.hint = "Search for planets"
-                        binding.fragmentSearchSearchBar.text.clear()
+                        binding.fragmentSearchSearchBar.queryHint = "Search for planets"
+                        binding.fragmentSearchSearchBar.setQuery("", false)
                     }
                 }
             }
