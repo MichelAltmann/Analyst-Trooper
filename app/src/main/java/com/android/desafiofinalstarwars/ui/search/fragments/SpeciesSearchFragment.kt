@@ -16,10 +16,8 @@ import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentSearchSpeciesBinding
 import com.android.desafiofinalstarwars.model.Specie
 import com.android.desafiofinalstarwars.ui.DetailsView
-import com.android.desafiofinalstarwars.ui.home.HomeFragment
-import com.android.desafiofinalstarwars.ui.home.HomeFragment.Companion.onTabReselectedSpeciesListener
-import com.android.desafiofinalstarwars.ui.home.adapters.SpeciesAdapter
-import com.android.desafiofinalstarwars.ui.home.fragments.SpeciesFragment
+import com.android.desafiofinalstarwars.ui.characters.adapters.SpeciesAdapter
+import com.android.desafiofinalstarwars.ui.characters.fragments.SpeciesFragment
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedSpeciesSearchListener
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedSpeciesSearchListener
 import com.android.desafiofinalstarwars.ui.search.viewmodels.SpeciesSearchViewModel
@@ -90,7 +88,7 @@ class SpeciesSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedSpeciesSearchListener = {
             viewModel.filter = it
-            speciesList.clear()
+//            speciesList.clear()
         }
     }
 
@@ -142,6 +140,7 @@ class SpeciesSearchFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.specieResponse.observe(viewLifecycleOwner){
             it?.let {
+                speciesList.clear()
                 speciesList.addAll(it.results!!)
                 adapter.update(speciesList)
                 removeScrollListenerAdapter()

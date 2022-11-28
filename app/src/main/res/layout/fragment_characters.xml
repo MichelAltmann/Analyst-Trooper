@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     tools:background="@drawable/ic_background"
-    tools:context=".ui.home.fragments.CharactersFragment">
+    tools:context=".ui.characters.fragments.CharactersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_characters_recyclerview"

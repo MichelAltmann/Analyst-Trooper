@@ -1,8 +1,6 @@
 package com.android.desafiofinalstarwars.ui.search.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,22 +8,16 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentSearchStarshipsBinding
-import com.android.desafiofinalstarwars.databinding.FragmentStarshipsBinding
 import com.android.desafiofinalstarwars.model.Starship
 import com.android.desafiofinalstarwars.ui.DetailsView
-import com.android.desafiofinalstarwars.ui.left.LeftFragment
-import com.android.desafiofinalstarwars.ui.left.adapters.StarshipsAdapter
-import com.android.desafiofinalstarwars.ui.left.viewmodels.StarshipsViewModel
-import com.android.desafiofinalstarwars.ui.search.SearchFragment
+import com.android.desafiofinalstarwars.ui.vehicles.adapters.StarshipsAdapter
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedStarshipsSearchListener
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedStarshipsSearchListener
 import com.android.desafiofinalstarwars.ui.search.viewmodels.StarshipsSearchViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -152,9 +144,9 @@ class StarshipsSearchFragment : Fragment() {
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
         }
-        viewModel.starshipError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
-        }
+//        viewModel.starshipError.observe(viewLifecycleOwner){
+//            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     private fun handleProgressBar(state: StarshipsSearchViewModel.State?) {

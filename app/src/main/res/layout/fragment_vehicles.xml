@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     tools:background="@drawable/ic_background"
-    tools:context=".ui.left.fragments.VehiclesFragment">
+    tools:context=".ui.vehicles.fragments.VehiclesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_vehicles_recyclerview"

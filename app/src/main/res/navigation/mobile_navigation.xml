@@ -7,23 +7,29 @@
 
 
     <fragment
+        android:id="@+id/navigation_movies"
+        android:name="com.android.desafiofinalstarwars.ui.movies.MoviesMainFragment"
+        android:label="@string/movies"
+        tools:layout="@layout/fragment_movies" />
+
+    <fragment
         android:id="@+id/navigation_left"
-        android:name="com.android.desafiofinalstarwars.ui.left.LeftFragment"
+        android:name="com.android.desafiofinalstarwars.ui.vehicles.VehiclesMainFragment"
         android:label="@string/title_left"
-        tools:layout="@layout/fragment_left" />
+        tools:layout="@layout/fragment_main_vehicles" />
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.android.desafiofinalstarwars.ui.home.HomeFragment"
+        android:name="com.android.desafiofinalstarwars.ui.characters.CharactersMainFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_main_characters">
     </fragment>
 
     <fragment
         android:id="@+id/navigation_right"
-        android:name="com.android.desafiofinalstarwars.ui.right.RightFragment"
+        android:name="com.android.desafiofinalstarwars.ui.planets.PlanetsMainFragment"
         android:label="@string/title_right"
-        tools:layout="@layout/fragment_right" />
+        tools:layout="@layout/fragment_main_planets" />
 
     <fragment
         android:id="@+id/navigation_search"

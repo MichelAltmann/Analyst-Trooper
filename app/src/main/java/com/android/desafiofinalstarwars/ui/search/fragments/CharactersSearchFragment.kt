@@ -16,7 +16,7 @@ import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentSearchCharactersBinding
 import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.ui.DetailsView
-import com.android.desafiofinalstarwars.ui.home.adapters.CharactersAdapter
+import com.android.desafiofinalstarwars.ui.characters.adapters.CharactersAdapter
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedCharactersSearchListener
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedCharactersSearchListener
 import com.android.desafiofinalstarwars.ui.search.viewmodels.CharactersSearchViewModel

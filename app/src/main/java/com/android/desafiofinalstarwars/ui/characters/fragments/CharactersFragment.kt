@@ -1,72 +1,74 @@
-package com.android.desafiofinalstarwars.ui.search.fragments
+package com.android.desafiofinalstarwars.ui.characters.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentSearchPlanetsBinding
-import com.android.desafiofinalstarwars.model.Planet
+import com.android.desafiofinalstarwars.databinding.FragmentCharactersBinding
+import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.ui.DetailsView
-import com.android.desafiofinalstarwars.ui.planets.adapters.PlanetsAdapter
-import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedPlanetsSearchListener
-import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedPlanetsSearchListener
-import com.android.desafiofinalstarwars.ui.search.viewmodels.PlanetsSearchViewModel
+import com.android.desafiofinalstarwars.ui.characters.CharactersMainFragment
+import com.android.desafiofinalstarwars.ui.characters.viewmodels.CharactersViewModel
+import com.android.desafiofinalstarwars.ui.characters.adapters.CharactersAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PlanetsSearchFragment : Fragment() {
-    private var _binding: FragmentSearchPlanetsBinding? = null
+class CharactersFragment : Fragment() {
+
+    private var _binding: FragmentCharactersBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel by viewModel<PlanetsSearchViewModel>()
+    private val charactersList: ArrayList<Character> = arrayListOf()
 
-    private val planetsList : ArrayList<Planet> = ArrayList()
-
-    private val adapter by lazy {
-        PlanetsAdapter()
-    }
-
-    private val recyclerView by lazy {
-        binding.fragmentPlanetsSearchRecyclerview
-    }
-
-    private lateinit var scrollListener : RecyclerView.OnScrollListener
+    private val viewModel by viewModel<CharactersViewModel>()
 
     private var isClicked = 0
 
-    private val fromVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fromvisible)}
-    private val toVisible : Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.tovisible)}
+    private lateinit var scrollListener: RecyclerView.OnScrollListener
+
+    private val adapter by lazy {
+        CharactersAdapter()
+    }
+
+    private val recyclerView by lazy {
+        binding.fragmentCharactersRecyclerview
+    }
+
+    private val fromVisible: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fromvisible
+        )
+    }
+    private val toVisible: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.tovisible
+        )
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchPlanetsBinding.inflate(inflater, container, false)
+        _binding = FragmentCharactersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
-
-        setupSearch()
-    }
-
-    private fun setupSearch() {
-        onTabSelectedPlanetsSearchListener = {
-            planetsList.clear()
-            viewModel.filter = it
-        }
     }
 
     private fun setupRecycler() {
@@ -74,13 +76,14 @@ class PlanetsSearchFragment : Fragment() {
 
         setObserver()
 
-        viewModel.getApiPlanetsSearch()
+        viewModel.getApiCharacters()
 
         adapter.itemClickListener = {
             isClicked = 1
             descriptionTabCall(it)
         }
-        onTabReselectedPlanetsSearchListener = {
+
+        CharactersMainFragment.onTabReselectedCharactersListener = {
             isClicked -= 1
             descriptionTabCall()
         }
@@ -98,7 +101,7 @@ class PlanetsSearchFragment : Fragment() {
                     val totalItemCount = layoutManager.itemCount
                     if (totalItemVisble >= totalItemCount && isLastPage != null) {
                         removeScrollListenerAdapter()
-                        viewModel.getApiPlanetsSearch()
+                        viewModel.getApiCharacters()
                     } else if (totalItemVisble >= totalItemCount && isLastPage == null){
                         Toast.makeText(context, "List end reached.", Toast.LENGTH_SHORT).show()
                     }
@@ -114,15 +117,14 @@ class PlanetsSearchFragment : Fragment() {
         }
     }
 
-
-    private fun descriptionTabCall(planet: Planet? = null) {
+    private fun descriptionTabCall(character: Character? = null) {
         val viewDetails = binding.fragmentViewDetails.root
-        if (isClicked == 1){
+        if (isClicked == 1) {
             recyclerView.startAnimation(fromVisible)
             recyclerView.visibility = View.GONE
             viewDetails.startAnimation(toVisible)
             viewDetails.visibility = View.VISIBLE
-            DetailsView(binding.fragmentViewDetails).bind(planet!!)
+            DetailsView(binding.fragmentViewDetails).bind(character!!)
         } else if (isClicked == 0) {
             recyclerView.startAnimation(toVisible)
             recyclerView.visibility = View.VISIBLE
@@ -131,34 +133,31 @@ class PlanetsSearchFragment : Fragment() {
         }
     }
 
-
     private fun setObserver() {
-        viewModel.planetResponse.observe(viewLifecycleOwner){
+        Log.i(TAG, "setObserver: ")
+        viewModel.characterResponse.observe(viewLifecycleOwner) {
             it?.let {
-                planetsList.addAll(it.results!!)
-                adapter.update(planetsList)
+                charactersList.addAll(it.results!!)
+                adapter.update(charactersList)
                 removeScrollListenerAdapter()
                 addScrollListenerAdapter(it.next)
             }
         }
-        viewModel.loadStateLiveData.observe(viewLifecycleOwner){
+        viewModel.loadStateLiveData.observe(viewLifecycleOwner) {
             handleProgressBar(it)
         }
-        viewModel.planetError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
+        viewModel.characterError.observe(viewLifecycleOwner) {
+            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun handleProgressBar(state: PlanetsSearchViewModel.State) {
-        when(state){
-            PlanetsSearchViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            PlanetsSearchViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+    private fun handleProgressBar(state: CharactersViewModel.State?) {
+        when (state) {
+            CharactersViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            CharactersViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility =
+                View.GONE
             else -> {}
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

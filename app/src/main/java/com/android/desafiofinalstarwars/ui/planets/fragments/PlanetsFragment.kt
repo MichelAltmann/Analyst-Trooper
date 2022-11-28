@@ -1,4 +1,4 @@
-package com.android.desafiofinalstarwars.ui.search.fragments
+package com.android.desafiofinalstarwars.ui.planets.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,23 +11,23 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.desafiofinalstarwars.R
-import com.android.desafiofinalstarwars.databinding.FragmentSearchPlanetsBinding
+import com.android.desafiofinalstarwars.databinding.FragmentPlanetsBinding
 import com.android.desafiofinalstarwars.model.Planet
 import com.android.desafiofinalstarwars.ui.DetailsView
+import com.android.desafiofinalstarwars.ui.planets.viewmodel.PlanetsViewModel
+import com.android.desafiofinalstarwars.ui.planets.PlanetsMainFragment.Companion.onTabReselectedPlanetsListener
 import com.android.desafiofinalstarwars.ui.planets.adapters.PlanetsAdapter
-import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedPlanetsSearchListener
-import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedPlanetsSearchListener
-import com.android.desafiofinalstarwars.ui.search.viewmodels.PlanetsSearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PlanetsSearchFragment : Fragment() {
-    private var _binding: FragmentSearchPlanetsBinding? = null
+class PlanetsFragment : Fragment() {
+
+    private var _binding: FragmentPlanetsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel by viewModel<PlanetsSearchViewModel>()
+    private val viewModel by viewModel<PlanetsViewModel>()
 
     private val planetsList : ArrayList<Planet> = ArrayList()
 
@@ -36,7 +36,7 @@ class PlanetsSearchFragment : Fragment() {
     }
 
     private val recyclerView by lazy {
-        binding.fragmentPlanetsSearchRecyclerview
+        binding.fragmentPlanetsRecyclerview
     }
 
     private lateinit var scrollListener : RecyclerView.OnScrollListener
@@ -51,39 +51,27 @@ class PlanetsSearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchPlanetsBinding.inflate(inflater, container, false)
+        _binding = FragmentPlanetsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecycler()
-
-        setupSearch()
-    }
-
-    private fun setupSearch() {
-        onTabSelectedPlanetsSearchListener = {
-            planetsList.clear()
-            viewModel.filter = it
-        }
-    }
-
-    private fun setupRecycler() {
         recyclerView.adapter = adapter
 
         setObserver()
 
-        viewModel.getApiPlanetsSearch()
+        viewModel.getApiPlanets()
 
         adapter.itemClickListener = {
             isClicked = 1
             descriptionTabCall(it)
         }
-        onTabReselectedPlanetsSearchListener = {
+        onTabReselectedPlanetsListener = {
             isClicked -= 1
             descriptionTabCall()
         }
+
     }
 
     private fun addScrollListenerAdapter(isLastPage : String?) {
@@ -98,7 +86,7 @@ class PlanetsSearchFragment : Fragment() {
                     val totalItemCount = layoutManager.itemCount
                     if (totalItemVisble >= totalItemCount && isLastPage != null) {
                         removeScrollListenerAdapter()
-                        viewModel.getApiPlanetsSearch()
+                        viewModel.getApiPlanets()
                     } else if (totalItemVisble >= totalItemCount && isLastPage == null){
                         Toast.makeText(context, "List end reached.", Toast.LENGTH_SHORT).show()
                     }
@@ -149,10 +137,10 @@ class PlanetsSearchFragment : Fragment() {
         }
     }
 
-    private fun handleProgressBar(state: PlanetsSearchViewModel.State) {
+    private fun handleProgressBar(state: PlanetsViewModel.State) {
         when(state){
-            PlanetsSearchViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
-            PlanetsSearchViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
+            PlanetsViewModel.State.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+            PlanetsViewModel.State.LOADING_FINISHED -> binding.progressCircular.visibility = View.GONE
             else -> {}
         }
     }

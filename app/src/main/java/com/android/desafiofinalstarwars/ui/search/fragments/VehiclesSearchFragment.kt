@@ -14,7 +14,7 @@ import com.android.desafiofinalstarwars.R
 import com.android.desafiofinalstarwars.databinding.FragmentSearchVehiclesBinding
 import com.android.desafiofinalstarwars.model.Vehicle
 import com.android.desafiofinalstarwars.ui.DetailsView
-import com.android.desafiofinalstarwars.ui.left.adapters.VehiclesAdapter
+import com.android.desafiofinalstarwars.ui.vehicles.adapters.VehiclesAdapter
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabReselectedVehiclesSearchListener
 import com.android.desafiofinalstarwars.ui.search.SearchFragment.Companion.onTabSelectedVehiclesSearchListener
 import com.android.desafiofinalstarwars.ui.search.viewmodels.VehiclesSearchViewModel

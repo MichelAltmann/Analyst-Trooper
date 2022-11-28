@@ -44,7 +44,6 @@ class StarshipsSearchViewModel(private val repository: RepositoryInterface) : Vi
             }
             loadStateLiveData.value = State.LOADING_FINISHED
         }
-
     }
 
     enum class State {

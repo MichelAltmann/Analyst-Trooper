@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_movies"
+        android:icon="@drawable/ic_movie_videos_icon"
+        android:title="@string/movies" />
+    <item
         android:id="@+id/navigation_left"
         android:icon="@drawable/ic_starship"
         android:title="@string/starships" />
@@ -10,7 +14,6 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_stormtrooper"
         android:title="@string/title_home" />
-
 
     <item
         android:id="@+id/navigation_right"
