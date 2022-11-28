@@ -8,52 +8,59 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("people/")
     suspend fun getCharacters(
-        @Query("page") page : Int
-    ) : Response<CharacterResponse>
+        @Query("page") page: Int
+    ): Response<CharacterResponse>
 
     @GET("people/?search=")
     suspend fun getCharactersSearch(
         @Query("search") filter: String,
-        @Query("page") page : Int
-    ) : Response<CharacterResponse>
+        @Query("page") page: Int
+    ): Response<CharacterResponse>
 
     @GET("species/")
     suspend fun getSpecies(
-        @Query("page") page : Int
-    ) : Response<SpecieResponse>
+        @Query("page") page: Int
+    ): Response<SpecieResponse>
 
     @GET("species/?search=")
     suspend fun getSpeciesSearch(
         @Query("search") filter: String,
         @Query("page") page: Int
-    ) : Response<SpecieResponse>
+    ): Response<SpecieResponse>
 
     @GET("starships/")
     suspend fun getStarships(
-        @Query("page") page : Int
-    ) : Response<StarshipResponse>
+        @Query("page") page: Int
+    ): Response<StarshipResponse>
 
     @GET("starships/?search=")
     suspend fun getStarshipsSearch(
-        @Query("search") filter : String,
-        @Query("page") page : Int
-    ) : Response<StarshipResponse>
+        @Query("search") filter: String,
+        @Query("page") page: Int
+    ): Response<StarshipResponse>
 
     @GET("vehicles/")
     suspend fun getVehicles(
-        @Query("page") page : Int
-    ) : Response<VehicleResponse>
+        @Query("page") page: Int
+    ): Response<VehicleResponse>
+
     @GET("vehicles/?search=")
     suspend fun getVehiclesSearch(
-        @Query("search") filter : String,
-        @Query("page") page : Int
-    ) : Response<VehicleResponse>
+        @Query("search") filter: String,
+        @Query("page") page: Int
+    ): Response<VehicleResponse>
 
     @GET("planets/")
     suspend fun getPlanets(
-        @Query("page") page : Int
-    ) : Response<PlanetResponse>
+        @Query("page") page: Int
+    ): Response<PlanetResponse>
+
+    @GET("planets/?search=")
+    suspend fun getPlanetsSearch(
+        @Query("search") filter: String,
+        @Query("page") page: Int
+    ): Response<PlanetResponse>
 
     @GET("films/")
-    suspend fun getMovies() : Response<MovieResponse>
+    suspend fun getMovies(): Response<MovieResponse>
 }

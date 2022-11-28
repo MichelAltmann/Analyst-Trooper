@@ -72,7 +72,7 @@ class SearchFragment : Fragment() {
                         onTabSelectedVehiclesSearchListener.invoke(filter)
                     }
                     4 -> {
-//                        onTabSelectedPlanetsSearchListener.invoke(filter)
+                        onTabSelectedPlanetsSearchListener.invoke(filter)
                     }
                 }
             }
@@ -124,7 +124,7 @@ class SearchFragment : Fragment() {
                         onTabSelectedVehiclesSearchListener.invoke("")
                     }
                     4 -> {
-
+                        onTabSelectedPlanetsSearchListener.invoke("")
                     }
                 }
             }
@@ -135,7 +135,7 @@ class SearchFragment : Fragment() {
                     1 -> onTabReselectedSpeciesSearchListener.invoke()
                     2 -> onTabReselectedStarshipsSearchListener.invoke()
                     3 -> onTabReselectedVehiclesSearchListener.invoke()
-//                    4 ->
+                    4 -> onTabReselectedPlanetsSearchListener.invoke()
                 }
             }
 
