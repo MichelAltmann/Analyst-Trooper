@@ -8,6 +8,7 @@ import com.android.desafiofinalstarwars.model.Character
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.CharacterResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class CharactersSearchViewModel(private val repository: RepositoryInterface) : ViewModel() {
@@ -26,18 +27,23 @@ class CharactersSearchViewModel(private val repository: RepositoryInterface) : V
         }
 
 
+    private var searchCharacterJob : Job? = null
+
     fun getApiCharactersSearch() = viewModelScope.launch {
-        loadStateLiveData.value = State.LOADING
-        when (val response = repository.getCharactersSearch(filter, page)) {
-            is NetworkResponse.Success -> {
-                _characterResponse.value = response.data
-                page++
+        searchCharacterJob?.cancel()
+        searchCharacterJob = viewModelScope.launch {
+            loadStateLiveData.value = CharactersSearchViewModel.State.LOADING
+            when (val response = repository.getCharactersSearch(filter = filter, page = page)) {
+                is NetworkResponse.Success -> {
+                    _characterResponse.value = response.data
+                    page++
+                }
+                is NetworkResponse.Failed -> {
+                    _characterError.value = Unit
+                }
             }
-            is NetworkResponse.Failed -> {
-                _characterError.value = Unit
-            }
+            loadStateLiveData.value = CharactersSearchViewModel.State.LOADING_FINISHED
         }
-        loadStateLiveData.value = State.LOADING_FINISHED
     }
 
     enum class State {

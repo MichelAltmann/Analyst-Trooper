@@ -65,6 +65,7 @@ class PlanetsSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedPlanetsSearchListener = {
             viewModel.filter = it
+            planetsList.clear()
         }
     }
 
@@ -134,7 +135,6 @@ class PlanetsSearchFragment : Fragment() {
     private fun setObserver() {
         viewModel.planetResponse.observe(viewLifecycleOwner){
             it?.let {
-                planetsList.clear()
                 planetsList.addAll(it.results!!)
                 adapter.update(planetsList)
                 removeScrollListenerAdapter()
@@ -143,9 +143,6 @@ class PlanetsSearchFragment : Fragment() {
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
-        }
-        viewModel.planetError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api Error.", Toast.LENGTH_SHORT).show()
         }
     }
 

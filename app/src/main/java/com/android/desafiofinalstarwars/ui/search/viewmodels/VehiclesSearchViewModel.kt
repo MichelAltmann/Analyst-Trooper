@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.VehicleResponse
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class VehiclesSearchViewModel(private val repository: RepositoryInterface) : ViewModel() {
@@ -25,14 +26,23 @@ class VehiclesSearchViewModel(private val repository: RepositoryInterface) : Vie
 
     private var page = 1
 
+    private var searchVehiclesJob : Job? = null
+
     fun getApiVehiclesSearch() = viewModelScope.launch {
-        loadStateLiveData.value = State.LOADING
-        when (val response = repository.getVehiclesSearch(filter = filter, page = page)) {
-            is NetworkResponse.Success -> { _vehicleResponse.value = response.data
-                page++}
-            is NetworkResponse.Failed -> { _vehicleError.value = Unit }
+        searchVehiclesJob?.cancel()
+        searchVehiclesJob = viewModelScope.launch {
+            loadStateLiveData.value = VehiclesSearchViewModel.State.LOADING
+            when (val response = repository.getVehiclesSearch(filter = filter, page = page)) {
+                is NetworkResponse.Success -> {
+                    _vehicleResponse.value = response.data
+                    page++
+                }
+                is NetworkResponse.Failed -> {
+                    _vehicleError.value = Unit
+                }
+            }
+            loadStateLiveData.value = VehiclesSearchViewModel.State.LOADING_FINISHED
         }
-        loadStateLiveData.value = State.LOADING_FINISHED
     }
 
     enum class State {

@@ -88,6 +88,7 @@ class SpeciesSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedSpeciesSearchListener = {
             viewModel.filter = it
+            speciesList.clear()
         }
     }
 
@@ -139,7 +140,6 @@ class SpeciesSearchFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.specieResponse.observe(viewLifecycleOwner){
             it?.let {
-                speciesList.clear()
                 speciesList.addAll(it.results!!)
                 adapter.update(speciesList)
                 removeScrollListenerAdapter()
@@ -148,9 +148,6 @@ class SpeciesSearchFragment : Fragment() {
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
-        }
-        viewModel.specieError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
         }
     }
 

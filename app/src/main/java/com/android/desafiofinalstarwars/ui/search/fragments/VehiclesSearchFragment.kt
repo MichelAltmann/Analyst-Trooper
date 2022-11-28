@@ -149,9 +149,6 @@ class VehiclesSearchFragment : Fragment() {
         viewModel.loadStateLiveData.observe(viewLifecycleOwner) {
             handleProgressBar(it)
         }
-        viewModel.vehicleError.observe(viewLifecycleOwner) {
-            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun handleProgressBar(state: VehiclesSearchViewModel.State) {

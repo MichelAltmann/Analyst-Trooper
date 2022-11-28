@@ -84,6 +84,7 @@ class StarshipsSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedStarshipsSearchListener = {
             viewModel.filter = it
+            starshipsList.clear()
         }
     }
 
@@ -142,9 +143,6 @@ class StarshipsSearchFragment : Fragment() {
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner){
             handleProgressBar(it)
-        }
-        viewModel.starshipError.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.RepositoryInterface
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.PlanetResponse
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class PlanetsSearchViewModel(private val repository: RepositoryInterface) : ViewModel() {
@@ -25,14 +26,23 @@ class PlanetsSearchViewModel(private val repository: RepositoryInterface) : View
             getApiPlanetsSearch()
         }
 
+    private var searchPlanetsJob : Job? = null
+
     fun getApiPlanetsSearch() = viewModelScope.launch {
-        loadStateLiveData.value = State.LOADING
-        when (val response = repository.getPlanetsSearch(filter = filter, page = page)) {
-            is NetworkResponse.Success -> { _planetResponse.value = response.data
-                page++}
-            is NetworkResponse.Failed -> { _planetError.value = Unit }
+        searchPlanetsJob?.cancel()
+        searchPlanetsJob = viewModelScope.launch {
+            loadStateLiveData.value = PlanetsSearchViewModel.State.LOADING
+            when (val response = repository.getPlanetsSearch(filter = filter, page = page)) {
+                is NetworkResponse.Success -> {
+                    _planetResponse.value = response.data
+                    page++
+                }
+                is NetworkResponse.Failed -> {
+                    _planetError.value = Unit
+                }
+            }
+            loadStateLiveData.value = PlanetsSearchViewModel.State.LOADING_FINISHED
         }
-        loadStateLiveData.value = State.LOADING_FINISHED
     }
 
     enum class State {

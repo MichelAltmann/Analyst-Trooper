@@ -147,7 +147,6 @@ class CharactersSearchFragment : Fragment() {
         Log.i(ContentValues.TAG, "setObserver: ")
         viewModel.characterResponse.observe(viewLifecycleOwner) {
             it?.let {
-                charactersList.clear()
                 charactersList.addAll(it.results!!)
                 adapter.update(charactersList)
                 removeScrollListenerAdapter()
@@ -156,9 +155,6 @@ class CharactersSearchFragment : Fragment() {
         }
         viewModel.loadStateLiveData.observe(viewLifecycleOwner) {
             handleProgressBar(it)
-        }
-        viewModel.characterError.observe(viewLifecycleOwner) {
-            Toast.makeText(context, "Api error.", Toast.LENGTH_SHORT).show()
         }
     }
 

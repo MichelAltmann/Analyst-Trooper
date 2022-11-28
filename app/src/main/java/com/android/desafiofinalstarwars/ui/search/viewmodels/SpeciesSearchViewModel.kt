@@ -8,6 +8,7 @@ import com.android.desafiofinalstarwars.retrofit.webclient.personagens.Repositor
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.CharacterResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.NetworkResponse
 import com.android.desafiofinalstarwars.retrofit.webclient.personagens.model.SpecieResponse
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SpeciesSearchViewModel(private val repository: RepositoryInterface) : ViewModel() {
@@ -27,15 +28,23 @@ class SpeciesSearchViewModel(private val repository: RepositoryInterface) : View
         }
 
 
+    private var searchSpeciesJob : Job? = null
+
     fun getApiSpeciesSearch() = viewModelScope.launch {
-        loadStateLiveData.value = State.LOADING
-        when (val response = repository.getSpeciesSearch(filter, page)) {
-            is NetworkResponse.Success -> {
-                _specieResponse.value = response.data
-                page++}
-            is NetworkResponse.Failed -> { _specieError.value = Unit }
+        searchSpeciesJob?.cancel()
+        searchSpeciesJob = viewModelScope.launch {
+            loadStateLiveData.value = SpeciesSearchViewModel.State.LOADING
+            when (val response = repository.getSpeciesSearch(filter = filter, page = page)) {
+                is NetworkResponse.Success -> {
+                    _specieResponse.value = response.data
+                    page++
+                }
+                is NetworkResponse.Failed -> {
+                    _specieError.value = Unit
+                }
+            }
+            loadStateLiveData.value = SpeciesSearchViewModel.State.LOADING_FINISHED
         }
-        loadStateLiveData.value = State.LOADING_FINISHED
     }
 
     enum class State {
