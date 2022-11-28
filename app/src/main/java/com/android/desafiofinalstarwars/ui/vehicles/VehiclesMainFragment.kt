@@ -21,7 +21,7 @@ class VehiclesMainFragment : Fragment() {
         LeftViewPagerAdapter(requireActivity())
     }
 
-    private val labels = arrayOf("Starships", "Vehicles")
+    private val labels = arrayOf("Vehicles","Starships")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,9 +57,9 @@ class VehiclesMainFragment : Fragment() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 if (binding.fragmentLeftViewpagerTablayout.currentItem == 0){
-                    onTabReselectedStarshipsListener.invoke()
-                } else {
                     onTabReselectedVehiclesListener.invoke()
+                } else {
+                    onTabReselectedStarshipsListener.invoke()
                 }
             }
 

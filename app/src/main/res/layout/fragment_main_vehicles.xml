@@ -23,12 +23,13 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/starships" />
+            android:text="@string/vehicles" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/vehicles" />
+            android:text="@string/starships" />
+
 
     </com.google.android.material.tabs.TabLayout>
 

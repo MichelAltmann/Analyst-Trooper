@@ -8,7 +8,7 @@
     <item
         android:id="@+id/navigation_left"
         android:icon="@drawable/ic_starship"
-        android:title="@string/starships" />
+        android:title="@string/vehicles" />
 
     <item
         android:id="@+id/navigation_home"

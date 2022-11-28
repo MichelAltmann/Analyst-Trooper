@@ -13,8 +13,8 @@ class LeftViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAd
 
     override fun createFragment(position: Int): Fragment {
         when (position){
-            0 -> return StarshipsFragment()
-            1 -> return VehiclesFragment()
+            0 -> return VehiclesFragment()
+            1 -> return StarshipsFragment()
         }
         return StarshipsFragment()
     }

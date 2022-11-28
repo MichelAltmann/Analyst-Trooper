@@ -77,6 +77,7 @@ class CharactersSearchFragment : Fragment() {
     private fun setupSearch() {
         onTabSelectedCharactersSearchListener = {
             viewModel.filter = it
+            charactersList.clear()
         }
     }
 
